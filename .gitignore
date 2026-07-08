@@ -7,3 +7,12 @@ local/
 
 # OS
 .DS_Store
+
+# Browser/tool artifacts
+.playwright-mcp/
+
+# Generated skill evaluation workspace
+find-unknowns-workspace/
+
+# Review artifacts
+/full3.png

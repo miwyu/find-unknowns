@@ -1,0 +1,74 @@
+commit 8f3ce21 — refunds: move provider call behind ledger + queue (Dana)
+
+diff --git a/src/refunds.js b/src/refunds.js
+--- a/src/refunds.js
++++ b/src/refunds.js
+@@ -1,18 +1,29 @@
+ const { refundCharge } = require('./gateway');
++const { enqueue } = require('./queue');
++const ledger = require('./ledger');
+
+-// POST /refunds handler. Calls the provider and returns the outcome.
+-async function requestRefund({ chargeId, amountCents }) {
+-  const result = await refundCharge(chargeId, amountCents);
+-  return {
+-    status: result.status, // 'succeeded' straight from the provider
+-    providerRefundId: result.providerRefundId,
+-    chargeId,
+-    amountCents,
+-  };
++// POST /refunds handler. Since the ledger change, this no longer waits for
++// the provider: it records intent and settles in the background.
++async function requestRefund({ chargeId, amountCents, requestId }) {
++  const idempotencyKey = `refund:${chargeId}:${requestId}`;
++
++  const { entry, duplicate } = ledger.record(idempotencyKey, {
++    chargeId,
++    amountCents,
++  });
++  if (duplicate) {
++    return { status: entry.state, chargeId, amountCents: entry.amountCents };
++  }
++
++  // Fire and forget: provider call happens in the queue with retries.
++  enqueue('refund', { chargeId, amountCents }, async (job) => {
++    const result = await refundCharge(job.chargeId, job.amountCents);
++    ledger.settle(idempotencyKey, result.providerRefundId);
++    return result;
++  });
++
++  return { status: 'pending', chargeId, amountCents };
+ }
+
+ module.exports = { requestRefund };
+
+diff --git a/src/server.js b/src/server.js
+--- a/src/server.js
++++ b/src/server.js
+@@ -8,12 +8,13 @@ app.post('/refunds', async (req, res) => {
+   try {
+     const result = await requestRefund({
+       chargeId: req.body.chargeId,
+       amountCents: req.body.amountCents,
++      requestId: req.get('X-Request-Id') || `${Date.now()}`,
+     });
+-    res.status(200).json(result);
++    res.status(202).json(result);
+   } catch (err) {
+     res.status(400).json({ error: err.message });
+   }
+ });
+
+diff --git a/src/ledger.js b/src/ledger.js
+new file mode 100644
+--- /dev/null
++++ b/src/ledger.js
+@@ -0,0 +1,26 @@
++(new file — see src/ledger.js)
+
+diff --git a/src/queue.js b/src/queue.js
+new file mode 100644
+--- /dev/null
++++ b/src/queue.js
+@@ -0,0 +1,21 @@
++(new file — see src/queue.js)

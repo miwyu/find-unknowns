@@ -1,0 +1,75 @@
+{
+  "skill_name": "find-unknowns",
+  "evals": [
+    {
+      "id": 0,
+      "name": "blind-spot-pass-rate-limiting",
+      "prompt": "I just joined this team and I need to add rate limiting to our Express API. I've never touched this codebase before and honestly I've never implemented rate limiting either. Where should I start?",
+      "expected_output": "Runs a blind spot pass unprompted: grounds it in the actual codebase (Redis client, enterprise no-throttle contract, webhook route), ranks at most ~5 required decisions with extras deferred, writes no code, ends with an actionable rewritten prompt or next step.",
+      "files": ["evals/files/sample-api"],
+      "assertions": [
+        "Does not write rate-limiting code in the first turn: the response surfaces what needs deciding before implementation rather than delivering an implementation or a tutorial walkthrough",
+        "Grounds the response in the actual codebase: mentions the existing Redis client (src/redis.js) as available infrastructure for a rate limiter",
+        "Surfaces the enterprise 'no throttling below 1000 req/min' contract in auth.js and/or per-tier API keys as a design constraint",
+        "Flags the unauthenticated /webhooks/github route as needing different rate-limiting treatment than partner traffic",
+        "Ranks instead of dumps: the required decisions/questions posed to the user number 5 or fewer; any additional items are explicitly marked optional or deferred",
+        "Ends with an actionable artifact the user can act on now: a rewritten/improved prompt or a clearly stated next step (a blank fill-in template alone does not count)"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "design-directions-loopkit",
+      "prompt": "I need a landing page for my side project Loopkit — it's a webhook debugging tool for developers. I've tried making one myself three times and hated every attempt, but I can't put into words what's wrong with them. Can you help?",
+      "expected_output": "Diagnoses an unknown-knowns (know-it-when-I-see-it) situation without being told the workflow, and produces several genuinely distinct cheap HTML directions with identical placeholder content for the user to react to, rather than building one page or asking the user to articulate taste they said they can't articulate.",
+      "files": [],
+      "assertions": [
+        "Diagnoses the situation and produces 3 or more genuinely distinct design directions for the user to react to, rather than building a single page",
+        "Directions are cheap single-page HTML mocks with placeholder content, and the content is held identical (or near-identical) across directions so the user's reaction isolates design taste",
+        "Explicitly invites reactions and explains that reactions (including rejections) become requirements for the real page",
+        "Does not make an abstract taste questionnaire ('what colors do you like?', 'modern or classic?') the required first step — the user already said they can't articulate what they want"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "vague-notification-system",
+      "prompt": "I want to add a notification system to my app. Users should get notified when stuff happens. Can you build that?",
+      "expected_output": "Does not build. Asks exactly one required architecture-shaping question, offers repo access as an optional shortcut, previews at most 5 further decisions, no fill-in template.",
+      "files": [],
+      "assertions": [
+        "Does not start implementing: writes no notification-system code before the requirements are clarified",
+        "Recognizes the request as underspecified and responds by eliciting requirements rather than assuming a design and building it",
+        "The first/primary question posed is architecture-changing (e.g. delivery channels, triggering events, real-time vs digest), not cosmetic",
+        "Leads with exactly one required question. A request for context (repo access, tech stack) does NOT count as a second question when framed as optional or as an alternative path; a mandatory 'also tell me your stack' does count. Does not pose a battery of additional required questions in the same turn",
+        "Keeps the first turn light: any supplementary list of decisions/considerations has 5 or fewer items (briefly name-dropping topics that are explicitly deferred does not count toward the cap), and no fill-in spec template is included unless the user asked for one (offering one for later is fine)"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "implementation-notes-metrics",
+      "prompt": "Here's the implementation plan we agreed on last session — it's plan.md in the repo root. Go ahead and implement it. I'm heads-down on something else today, so if things don't go exactly according to plan, use your judgment and I'll catch up with you after.",
+      "expected_output": "Implements the metrics feature, discovers the three planted plan-reality mismatches (src/statsd.js doesn't exist, src/middleware/requestLog.js doesn't exist, there is no 'admin' tier), deviates conservatively, and keeps a persistent deviation log file (implementation-notes.md or similar) the user can read afterward.",
+      "files": ["evals/files/sample-api"],
+      "assertions": [
+        "Actually implements the feature: working code for per-client request counting and a metrics endpoint exists in the repo (not just prose about what would be done)",
+        "Discovers the plan-reality mismatches (the plan's src/statsd.js and src/middleware/requestLog.js don't exist, and there is no 'admin' tier in auth.js) instead of hallucinating the missing pieces or silently writing code that references them",
+        "Keeps a persistent deviation/decision log as a file in the repo or outputs (e.g. implementation-notes.md) recording each deviation from the plan with its reason — a mention buried in the chat response alone does not count",
+        "Deviations pick the conservative option and keep going: reuses existing infrastructure (Redis client or in-memory counters) rather than adding a StatsD dependency, and restricts the endpoint using the existing tier system rather than inventing a new auth concept",
+        "The final response directs the user to the logged deviations as input for the next planning round, rather than presenting the work as if the plan had been followed exactly"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "quiz-refund-change",
+      "prompt": "I was on vacation and my teammate landed a change to our refund flow — it's recent-change.diff in the repo, already merged into the code. I have to sign off on shipping this in tomorrow's release, and honestly, reading the diff isn't giving me confidence that I actually understand what changes for users. Help me out.",
+      "expected_output": "Explains the change in terms of runtime behavior (refunds now async/pending with 202, duplicate requests deduped via idempotency key, failures retried then dead-lettered silently), then gates sign-off behind a comprehension quiz targeting reviewer-relevant consequences.",
+      "files": ["evals/files/billing-service"],
+      "assertions": [
+        "Explains the change in terms of runtime behavior and interaction with existing code paths, not a hunk-by-hunk restatement of the diff",
+        "Identifies the key user-facing behavioral change: refunds are no longer synchronous — callers now get a 'pending' status (HTTP 202) instead of a completed refund",
+        "Surfaces at least one non-obvious consequence: duplicate refund requests are now deduplicated via the idempotency key, and/or exhausted retries dead-letter silently with no error reported to the caller",
+        "Includes a comprehension check the user should pass before signing off: quiz-style questions framed as a gate for the merge/release decision, not optional trivia",
+        "The quiz questions target behavioral consequences a reviewer would care about (what users experience, failure modes, edge cases), not surface trivia like file or variable names"
+      ]
+    }
+  ]
+}

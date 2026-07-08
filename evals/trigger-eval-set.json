@@ -1,0 +1,22 @@
+[
+  {"query": "before I start: I'm adding SAML SSO to our Rails app and I've never touched the auth code in this repo. can you do a blind spot pass so I know what I'm walking into?", "should_trigger": true},
+  {"query": "ok i need to move our cron jobs to some kind of background queue system (sidekiq? celery? bullmq? no idea) — never done async job stuff before. where do i even start", "should_trigger": true},
+  {"query": "I want to add multiplayer to my game. players should see each other moving around in real time. can you build that?", "should_trigger": true},
+  {"query": "need a landing page for my SaaS. i'm a data engineer, i can't describe what i want visually, but i'll know it when i see it", "should_trigger": true},
+  {"query": "interview me about this feature before you build anything — it's a billing settings page for our Stripe subscriptions and I haven't thought through the details yet", "should_trigger": true},
+  {"query": "every time I ask you for changes to this dashboard I get something I don't want and I can't tell what I'm failing to specify. help me prompt better", "should_trigger": true},
+  {"query": "I have to color grade this promo video for work and I genuinely don't know what color grading even is. teach me enough to direct you properly", "should_trigger": true},
+  {"query": "my boss wants 'analytics' added to our internal tool (flask app in ~/work/insights). that's literally the whole spec lol. what do we do", "should_trigger": true},
+  {"query": "you just rewrote a big chunk of the payments flow — before I merge this I want to be sure I actually understand what changed and why. quiz me or something", "should_trigger": true},
+  {"query": "we're losing users somewhere in onboarding and I'm not sure what the right fix even looks like. can you poke around the codebase and brainstorm intervention points with me?", "should_trigger": true},
+  {"query": "add a rate limiter to src/middleware/: 100 req/min per API key, redis store (use the client in src/redis.js), fail open on redis errors, 429 with Retry-After. use rate-limiter-flexible", "should_trigger": false},
+  {"query": "what's the difference between token bucket and sliding window rate limiting? which does nginx use?", "should_trigger": false},
+  {"query": "tests are failing with ECONNREFUSED 127.0.0.1:6379, redis is definitely running in docker. figure out why and fix it", "should_trigger": false},
+  {"query": "some rows in the users table have the string 'unknown' in the country column — find all the unknown values and replace them with NULL, there's a migration folder in db/", "should_trigger": false},
+  {"query": "write me interview questions for next week's user research sessions about our onboarding flow, ~30 min sessions, 6 participants", "should_trigger": false},
+  {"query": "rename parseDataAndValidateStuff in utils/parser.ts to something better and update the call sites", "should_trigger": false},
+  {"query": "our driving assistance app needs a blind spot detection feature using the rear camera feed — opencv is already in the project", "should_trigger": false},
+  {"query": "here's the spec we already agreed on (docs/spec.md) — implement phase 1 exactly as written please, no need to re-litigate the decisions, I'm in a hurry", "should_trigger": false},
+  {"query": "add unit tests for utils/date.ts, make sure DST edge cases and leap years are covered", "should_trigger": false},
+  {"query": "i don't know why prettier and eslint keep fighting over semicolons in this repo, just make them agree with each other", "should_trigger": false}
+]
