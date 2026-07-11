@@ -25,14 +25,18 @@ The skill is deliberately light-touch: one required question per turn, at most 3
 
 ```text
 find-unknowns/
-├── SKILL.md        # routing only: when to trigger, the four quadrants,
-│                   # the selection table, priority rules, shared guardrails
+├── SKILL.md        # a deterministic six-step router: non-apply check → lifecycle
+│                   # stage check → pattern selection (first match wins) →
+│                   # reference load → execute (countable guardrails) → binary self-check
 ├── references/     # one file per pattern; Claude reads only the one it selects
-│                   # (each: when to apply, procedure, output contract,
-│                   #  a good/bad example pair, a pre-send self-check)
+│                   # (each: when to apply, inputs, procedure, first-turn contract,
+│                   #  deliverable, stop conditions, a good/bad example pair,
+│                   #  a binary self-check)
 └── assets/
     └── implementation-notes-template.md   # copied into your repo by the implementation-notes pattern
 ```
+
+The router and references are written so the caps are countable (one required question, 3–5 surfaced decisions, 3–7 extracted properties, 4–7 quiz questions, …) rather than judgment calls — this is what lets smaller models run the skill with the same discipline as frontier ones.
 
 ## When to use it
 
@@ -59,4 +63,4 @@ Ask for it explicitly — that's the reliable path:
 
 ## Validation
 
-The skill was developed against a benchmark suite of five graded scenarios (blind spot pass, design directions, vague feature request, mid-implementation deviations, pre-merge quiz), evaluated with-skill vs. without-skill. The eval definitions and fixtures are in [`evals/`](evals/) if you want to run or extend them.
+The skill was developed against a benchmark suite of eight graded scenarios (blind spot pass, design directions, vague feature request, mid-implementation deviations, pre-merge quiz, reference hunting, implementation plan, pitch), evaluated with-skill vs. without-skill and across models. In the latest matrix (Claude Fable 5 and Claude Sonnet 5, each on the previous and the current skill revision), the current revision passes 41/41 assertions on both models — the revision closed the routing ambiguity that cost the previous version 3 assertions and brought Sonnet to parity with Fable. The eval definitions and fixtures are in [`evals/`](evals/) if you want to run or extend them.
