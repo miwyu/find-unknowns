@@ -1,32 +1,47 @@
 # Implementation plan
 
-Write the plan to surface decisions, not to demonstrate thoroughness. The user reviewing the plan is the point: order it so their attention lands where their input matters.
+Write the plan to surface decisions, not to demonstrate thoroughness. The user reviewing the plan is the point: order it so their attention lands where their input matters — they can only veto what they can see.
 
 ## When to apply
 
-- Discovery is done (or was never needed) and the user is ready to build, but wants decisions surfaced before code is written.
-- The remaining ambiguities wouldn't change the architecture — if they would, interview first; the plan is the exit from discovery, not the entry.
+- Discovery is done (or was never needed), requirements are settled, and the user wants decisions surfaced before code is written.
 - The user asks for a plan, or for "what should I review before you start".
+
+Redirects: if remaining ambiguities would change the architecture → interview first; the plan is the exit from discovery, not the entry. Settled requirements are inputs — do not re-open them with required questions.
+
+## Inputs
+
+- The confirmed spec or stated requirements, plus artifacts from earlier patterns (prototypes, reference property lists, blind-spot findings).
+- The code the plan will touch — read it before writing the plan; every decision should name the real files and infrastructure it lands on.
 
 ## Procedure
 
-1. Gather the inputs: the confirmed spec, any prototypes or references, and what the blind spot pass or interview surfaced. Read the code the plan will touch.
-2. Sort the plan by **likelihood the user will change it under review**: data model changes, new type interfaces, and anything user-facing at the top; mechanical refactoring at the bottom ("I trust you on that part" material).
-3. For each decision-bearing item, state the decision you've made and the alternative you rejected, in one line each — the user can only veto what they can see.
-4. Flag remaining unknowns that will only resolve during implementation, and say how the builder should handle them (this is where the implementation-notes pattern gets set up).
-5. Suggest starting implementation in a **fresh session** with the plan and any prototypes passed in as artifacts, so the builder gets clean context plus everything planning uncovered.
+1. Read the code the plan touches and check each requirement against what's actually there; a requirement that collides with the territory (a config, a contract comment, a missing file) becomes a decision item, not a silent assumption.
+2. Sort all planned work by **likelihood the user changes it under review**: data-model changes, new interfaces, user-facing behavior at the top; mechanical refactoring at the bottom.
+3. For each of the top items, write one line each: what you chose, the alternative you rejected, why.
+4. List the unknowns that will only resolve during implementation, and instruct the builder to keep implementation notes (point at `assets/implementation-notes-template.md`).
+5. Close by suggesting implementation in a **fresh session** with this plan (and any prototypes) passed in as artifacts.
 
-## Output contract
+## First-turn contract
 
-A single plan document (markdown in chat, or a file if asked) with this shape:
+Deliver the plan document itself (markdown in chat, or a file if asked) in this exact section order:
 
-1. **Decisions for your review** — the 3–5 items most likely to change: data model, interfaces, user-facing behavior. Each: what I chose, what I rejected, why.
-2. **Sequence** — the build order, brief.
-3. **Mechanical work** — the refactoring and plumbing, compressed to a few lines at the bottom.
-4. **Known residual unknowns** — what will only surface mid-build, and the instruction to keep implementation notes (point at `assets/implementation-notes-template.md`).
-5. A closing suggestion to implement in a fresh session with this plan as the artifact.
+1. **Decisions for your review** — **3–5 items**, each: what I chose / what I rejected / why, grounded in the actual code.
+2. **Sequence** — the build order, one line per step.
+3. **Mechanical work** — compressed to **at most 6 lines**, at the bottom.
+4. **Known residual unknowns** — what will only surface mid-build + the implementation-notes instruction.
+5. One closing line suggesting the fresh-session handoff with this plan as the artifact.
 
-The plan is for review, not for archival: if the user would scroll past a section, cut it.
+No required questions before the plan, and no implementation code — short illustrative interface or config sketches inside the plan are fine; files written to the repo are not.
+
+## Deliverable
+
+The plan document, ready for the user to veto line by line. If they'd scroll past a section, cut it.
+
+## Stop conditions
+
+- Stop at the delivered plan; do not start implementing in the same turn, even if the plan feels obvious.
+- If reading the code reveals an ambiguity that would change the architecture, stop and ask that one question instead of shipping a plan built on a guess.
 
 ## Good vs. bad example
 
@@ -47,12 +62,13 @@ The plan is for review, not for archival: if the user would scroll past a sectio
 > ## Phase 2: Implementation
 > 2.1 Update models... [40 more numbered steps in chronological order, with the data-model decision buried as step 2.3 and described only as "update schema as needed"]
 
-The bad version is ordered by execution chronology, so the reviewable decisions are buried mid-list and phrased as tasks, not choices. The user reads three phases of ceremony before hitting anything they could veto — and "update schema as needed" hides the one decision that most needed their eyes.
+The bad version is ordered by execution chronology, so the reviewable decisions are buried mid-list and phrased as tasks, not choices — and "update schema as needed" hides the one decision that most needed the user's eyes.
 
-## Pre-send self-check
+## Self-check
 
-- Is the first section the one the user is most likely to change — not "Phase 1: Setup"?
-- Is every decision phrased as *chose X over Y because Z*, so it can be vetoed?
-- Is mechanical work compressed at the bottom rather than inflating the plan?
-- Did I flag the residual unknowns and set up implementation notes for the build?
-- Did I suggest the fresh-session handoff with the plan as artifact?
+- Is the first section "Decisions for your review" with 3–5 chose-X-over-Y items — not "Phase 1: Setup"?
+- Is every decision grounded in something real in the code (file, config, contract), not invented infrastructure?
+- Is mechanical work ≤6 lines, at the bottom?
+- Did I flag residual unknowns and point at the implementation-notes template?
+- Did I suggest the fresh-session handoff?
+- Did I avoid re-opening settled requirements and avoid writing implementation code to the repo?

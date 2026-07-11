@@ -8,28 +8,36 @@ The user has a spec with gaps they could fill if asked. Ask questions **one at a
 - The user says "interview me" or "ask me about anything ambiguous".
 - A blind spot pass or brainstorm has finished and residual decisions remain that only the user can make.
 
-If the user *couldn't* answer your questions (unfamiliar domain), run a blind spot pass instead — searching answers questions the user shouldn't have to. If they could only answer by seeing options, brainstorm & prototype.
+Redirects: if the user *couldn't* answer your questions (unfamiliar domain) → blind spot pass. If they could only answer by seeing options → brainstorm & prototype. If they named an existing example → reference hunting.
+
+## Inputs
+
+- The stated spec or intention, plus anything earlier patterns established.
+- The codebase, if shared — it answers questions the user shouldn't have to.
 
 ## Procedure
 
-1. Rank the open questions by architectural leverage: which answer would most change what gets built?
-2. First reply: exactly **one required question** — the highest-leverage one. It's fine to note *why* it comes first ("this decides whether we need a queue at all"), and fine to sketch what the next few questions depend on — but don't ask them yet.
-3. Offering to look at the territory is not a second question, but frame it as the optional shortcut it is: "If you can share the repo, I'll infer most of this myself; if not, just answer this one question first." The codebase answers questions the user shouldn't have to.
-4. After each answer, re-rank. Ask the next single question. Cosmetic details come last or never.
-5. Stop when the remaining ambiguities wouldn't change what you'd build.
-6. Play back what you learned as a concise spec the user can confirm.
+1. List the open questions privately and rank by architectural leverage: which answer would most change what gets built?
+2. First reply: exactly **one required question** — the top-ranked one — with a one-line reason it comes first ("this decides whether we need a queue at all").
+3. Optionally offer the territory shortcut in the same reply: "if you can share the repo, I'll infer most of this myself; if not, just answer this one." That offer is not a second question.
+4. After each answer, re-rank and ask the next single question, visibly informed by the previous answer. Cosmetic details come last or never.
+5. When remaining ambiguities wouldn't change what you'd build, stop asking and play back everything learned as a compact spec the user can confirm with one word or correct in one line.
 
-## Output contract
+## First-turn contract
 
-**First turn:**
-- Name the pattern in a sentence.
-- One required question, with a one-line reason it comes first.
-- Optionally: the repo-share shortcut offer, and a one-line sketch of what future questions hinge on (named, not asked).
-- **No** spec template to fill in, **no** numbered question list.
+- One line naming the pattern.
+- One required question + one-line reason it's first.
+- Optionally: the repo-share shortcut, and a one-line sketch of what future questions hinge on (named, not asked).
+- **No** spec template, **no** numbered question list, **no** second required question.
 
-**Subsequent turns:** one question each, visibly informed by the previous answer.
+## Deliverable
 
-**Final turn:** the confirmed spec — a compact playback of every decision made, phrased so the user can say "yes, build that" or correct one line. This spec is the artifact; offer to carry it into an implementation plan or a fresh implementation session.
+The confirmed spec from the final playback — phrased so the user can say "yes, build that". Offer to carry it into an implementation plan or a fresh implementation session.
+
+## Stop conditions
+
+- Stop asking when the remaining ambiguities wouldn't change what you'd build — then deliver the playback.
+- Stop the turn after each question; never batch questions to save round-trips.
 
 ## Good vs. bad example
 
@@ -47,12 +55,12 @@ If the user *couldn't* answer your questions (unfamiliar domain), run a blind sp
 > 1. Persistent or best-effort? 2. Email, push, or in-app? 3. Batching window? 4. Read receipts? 5. Retention period? 6. i18n? 7. Rate limits? 8. Admin controls?
 > Also, here's a spec template to fill out while you're at it.
 
-The bad version asks everything at once, so answers can't inform later questions — question 3 might be moot depending on question 1, and the user has to hold the whole space in their head. The template turns your job into their homework.
+The bad version asks everything at once, so answers can't inform later questions — question 3 might be moot depending on question 1 — and the template turns your job into their homework.
 
-## Pre-send self-check
+## Self-check
 
 - Does my first turn contain exactly **one** required question? (The optional repo-share offer doesn't count; a second required question does.)
-- Is it the question whose answer would most change the architecture — not the easiest one to ask?
-- Did I attach a template, checklist, or question list? Cut it; name-dropping future topics is fine, asking them isn't.
+- Is it the question whose answer would most change the architecture — not the easiest to ask?
+- Is my reply free of templates, checklists, and numbered question lists? (Name-dropping future topics is fine; asking them isn't.)
 - On later turns: does this question depend on their last answer, or was it pre-scripted?
 - At the end: did I play back a confirmable spec, or just stop asking?

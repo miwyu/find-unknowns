@@ -5,73 +5,76 @@ description: Help the user discover the unknowns in their task — blind spots, 
 
 # Find Unknowns
 
-The quality of agentic work is bottlenecked by unknowns: the gap between what the user asked for (the map) and what the work actually requires (the territory). Every unknown you resolve cheaply now — with a question, a prototype, a quick teaching pass — is a wrong guess you don't have to unwind expensively later. Your job with this skill is to be a facilitator: diagnose which unknowns dominate, pick the right pattern, and actively run it. Don't just describe the framework or list options.
+The quality of agentic work is bottlenecked by unknowns: the gap between what the user asked for and what the work actually requires. Every unknown resolved cheaply now — with a question, a prototype, a quick teaching pass — is a wrong guess you don't have to unwind expensively later. Your job is to facilitate: run the six steps below in order, pick exactly one pattern (two at most), and actively run it. Don't describe the framework or list options.
 
-## When to run this skill
+## Step 0 — Non-apply check
 
-- The user asks for it by name: "blind spot pass", "unknown unknowns", "find my unknowns", "interview me", "help me prompt better".
-- The user says they're unfamiliar with the domain, library, or part of the codebase.
-- The task is large, vague, or underspecified enough that diving straight into implementation would mean guessing at requirements — even if the user never names this process.
+Answer the user directly, with no pattern and no extra process, when the work is routine: debugging a clear error, a small well-scoped edit, a factual question. And never re-open a decision the user has closed: an agreed spec is settled input to the later patterns, not something to re-interview. (Building from a plan and reviewing finished work still have patterns — see the table — so a closed decision routes you forward in the lifecycle, never backward.)
 
-## When NOT to run this skill
+## Step 1 — Stage check
 
-- The task is already fully specified.
-- The user asked you to implement an agreed spec without revisiting decisions.
-- The work is routine: debugging a clear error, a small well-scoped edit. A user who is ready to implement should not be pulled back into discovery.
+Classify where the work is in its lifecycle. This is the first routing decision and it is decisive:
 
-## The four quadrants
+- **Work is done** (merged, built, finished) → post-implementation patterns only. Audience is other people who need convincing → **pitch / explainer**. Audience is the user, who needs to understand it → **quiz**. Never pull finished work back into discovery.
+- **Mid-implementation**, or the user asks you to implement an existing plan/spec → **implementation notes** (build, log deviations conservatively).
+- **Before implementation** (deciding what to build) → go to Step 2.
 
-Classify what's going on before picking a tool:
+## Step 2 — Pattern selection (pre-implementation only)
 
-- **Known knowns** — what the user told you. The prompt itself.
-- **Known unknowns** — things the user knows they haven't decided yet. They can answer if asked. → *Interview them.*
-- **Unknown knowns** — taste and requirements the user can't articulate but would recognize on sight ("I'll know it when I see it"). → *Show them options: brainstorms, prototypes, variations.*
-- **Unknown unknowns** — questions the user doesn't know to ask; domain knowledge they don't have; how good the result could even be. → *Blind spot pass: search, then teach.*
+Apply these rules **in order; first match wins**:
 
-The same task usually has all four; what matters is which one is the current bottleneck.
+1. **Explicit ask wins.** The user names a pattern or its artifact — "interview me", "blind spot pass", "write me a plan", "quiz me", "pitch this" → that pattern.
+2. **A named example** — the user points at something that already exists ("like Stripe's errors", "like that crate", "like our search feature") → **reference hunting**. Reading one example beats generating many.
+3. **Unarticulable taste** — the user says some form of "I'll know it when I see it", or has attempts they rejected but can't explain (visual design, UX, naming, tone) → **brainstorm & prototype**. They already told you they can't describe it, so don't make them; generate directions to react to. (Asking whether they have examples they *like* is allowed only as an optional aside in the same reply.)
+4. **Unfamiliar territory** — the user is new to the domain, library, or this part of the codebase → **blind spot pass**. Search before asking: the territory answers questions the user shouldn't have to.
+5. **A spec with answerable gaps** — firm intention, but open decisions the user could settle if asked → **interview**.
+6. **Requirements settled, decisions need review before code** → **implementation plan**. The plan is the exit from discovery: if remaining ambiguities would change the architecture, that's rule 5, not this one.
 
-## Choosing a pattern
+If the user's starting point is unclear (lifecycle stage, familiarity, firmness of intent), ask in one short message — not a form. If a codebase is available, look at it during diagnosis; what you find outranks guesses.
 
-First establish the user's starting point. If they haven't told you, ask briefly (one short message, not a form): where they are in the lifecycle (about to start / mid-build / done), their experience with this domain and this part of the codebase, and where they are in their thought process (half-formed idea vs. firm spec with gaps). If the codebase is available, spend a little time in it during diagnosis — the territory tells you which of the user's assumptions are already wrong, and that's worth more than any question you could ask.
+Run **one** pattern. Add a second only when the chosen reference file itself redirects you (its "When to apply" section names the handoffs). Name the pattern you're running in one line, so the user learns the vocabulary.
 
-Then pick from the table and read that pattern's reference file:
+## Step 3 — Read the reference
 
-| Situation | Pattern | Read |
-|---|---|---|
-| Unfamiliar domain or unfamiliar part of the codebase | Blind spot pass | `references/blind-spot-pass.md` |
-| "I'll know it when I see it" — visual design, UX, naming, tone | Brainstorm & prototype | `references/brainstorm-prototype.md` |
-| Spec exists but has gaps the user could fill if asked | Interview | `references/interview.md` |
-| User can't describe what they want, but an example exists | Reference hunting | `references/reference-hunting.md` |
-| Ready to build; want to surface decisions before code is written | Implementation plan | `references/implementation-plan.md` |
-| Currently building; plan is meeting reality | Implementation notes | `references/implementation-notes.md` |
-| Work done; needs buy-in from others | Pitch / explainer | `references/pitch-explainer.md` |
-| Work done; user needs to actually understand it before merging | Quiz | `references/quiz.md` |
+Read `references/<pattern>.md` for the chosen pattern only — never all eight:
 
-## When several patterns apply
+| Pattern | File |
+|---|---|
+| Blind spot pass | `references/blind-spot-pass.md` |
+| Brainstorm & prototype | `references/brainstorm-prototype.md` |
+| Interview | `references/interview.md` |
+| Reference hunting | `references/reference-hunting.md` |
+| Implementation plan | `references/implementation-plan.md` |
+| Implementation notes | `references/implementation-notes.md` |
+| Pitch / explainer | `references/pitch-explainer.md` |
+| Quiz | `references/quiz.md` |
 
-1. **Lifecycle wins first.** If the work is already done, choose a post-implementation pattern (pitch or quiz) — never pull a finished task back into discovery. If the user is mid-build, implementation notes.
-2. **Territory before questions.** When both a blind spot pass and an interview fit (unfamiliar domain *and* spec gaps), run the blind spot pass first: searching answers questions the user shouldn't have to, and what you find reshapes which questions are worth asking.
-3. **An existing example beats generated options.** When the user can't articulate what they want, ask whether a reference exists before brainstorming — reading one is cheaper than generating many. Fall back to brainstorm & prototype only when no example exists.
-4. **The plan is the exit, not the entry.** Reach for an implementation plan only when the remaining ambiguities wouldn't change the architecture; if they would, interview first.
-5. **Run one or two patterns, not all eight.** The framework is a diagnostic, not a checklist. Finish the pattern, deliver its artifact, and let the user's response determine what comes next.
+Each file has the same sections: When to apply / Inputs / Procedure / First-turn contract / Deliverable / Stop conditions / Good vs. bad example / Self-check. Chat-reply skeletons live in these files. The only file ever copied into the user's repo is `assets/implementation-notes-template.md` (implementation-notes pattern).
 
-Name the pattern you're running and why, so the user learns the vocabulary for next time.
+## Step 4 — Execute
 
-## Guardrails (all patterns)
+Follow the reference's Procedure and First-turn contract. These guardrails bind every pattern, and they are countable:
 
-- **Keep the first turn light.** These patterns fail when they land as homework: the user came in not knowing what to ask, and if your reply is sixteen question-shaped items they still don't know where to start, just with more reading. The discipline is rank, cap, and defer: ask **one required question**, surface at most a **handful (3–5) of the highest-leverage decisions**, and hold everything else back. Offer depth instead of delivering it ("want the full decision list / a fill-in spec?") — templates and exhaustive inventories come after the first answer or when asked. This works because the process is iterative anyway: each answer changes what's worth asking next, so front-loading the whole inventory buys nothing.
-- **Scale the ceremony to the stakes.** A one-file bugfix doesn't need an interview. Reserve the full treatment for work that is large, ambiguous, or in unfamiliar territory; otherwise a single clarifying question may be the whole pattern.
-- **Always end with an artifact the user can act on**: a rewritten prompt, a confirmed spec, a plan, a short set of decisions. "Here are your unknowns" without "here's what to do about them" leaves the user where they started. But an artifact is something the user can act on *now* — a blank template they must fill in before anything happens is more homework, not an artifact; save templates for when they're requested or the interview is done.
-- **Balance specificity.** The failure modes are symmetric: too-specific instructions make Claude follow a bad plan off a cliff; too-vague ones make it substitute generic best practices for the user's actual intent. The goal of every pattern here is to land the user's next prompt between those two.
+- **At most 1 required question per turn.** An optional context offer ("if you can share the repo, I'll infer this myself") is not a question. A second mandatory question is.
+- **At most 5 surfaced decisions/items per turn.** Everything past 5 is deferred with a one-line offer ("there are smaller ones — want them?"). Naming a deferred topic doesn't count against the 5; explaining it does.
+- **No fill-in templates or exhaustive checklists unless the user asked.** Offering one for later is fine; attaching one is not.
+- **End every turn with something the user can act on now**: a decision list, a question, a mock, a plan, a rewritten prompt — not "here are your unknowns" with no next move.
+- **When reality contradicts the plan mid-build, pick the cheapest-to-reverse option, log it, keep going.**
+- **Scale ceremony to stakes.** For a small task, one clarifying question may be the whole pattern.
 
-## How to use the reference files
+These exist because the patterns fail when they land as homework: the user came in not knowing what to ask, and sixteen question-shaped items leave them not knowing where to start, just with more reading. Each answer changes what's worth asking next, so front-loading an inventory buys nothing.
 
-Read **only** the file for the pattern you chose (two files at most, per the priority rules) — never all eight. Every reference file has the same five sections:
+## Step 5 — Self-check before sending
 
-1. **When to apply** — confirm your diagnosis before committing.
-2. **Procedure** — the steps to run.
-3. **Output contract** — the shape your reply must take.
-4. **Good vs. bad example** — one contrasting pair showing the difference.
-5. **Pre-send self-check** — run it against your draft reply before sending.
+Run the chosen reference's Self-check against your draft reply. Every item is yes/no. Fix every "no" before sending — do not send with a known "no".
 
-Chat-reply skeletons and finished-artifact outlines live inside the reference files. The only file meant to be copied into the user's repository is `assets/implementation-notes-template.md`, used by the implementation-notes pattern.
+## Background: the four quadrants
+
+The vocabulary behind the table, useful when diagnosing out loud:
+
+- **Known knowns** — what the user told you: the prompt itself.
+- **Known unknowns** — gaps the user could answer if asked → interview.
+- **Unknown knowns** — taste they'd recognize but can't articulate → show options (brainstorm/prototype) or find an existing example (reference hunting).
+- **Unknown unknowns** — questions they don't know to ask → blind spot pass: search, then teach.
+
+The same task usually has all four; the current bottleneck picks the pattern.

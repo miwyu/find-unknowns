@@ -1,33 +1,48 @@
 # Pitch / explainer (post-implementation)
 
-Reviewers start with the same unknowns the user had. A good pitch document retraces that path: lead with the demo or result, then the decisions made and the failure points accounted for — the things an expert reviewer would probe. The goal is buy-in and approvals, faster.
+Reviewers start with the same unknowns the user had. A good pitch retraces that path: lead with the result, then the decisions made and the failure points accounted for — the things an expert reviewer would probe. The goal is buy-in and approvals, faster.
 
 ## When to apply
 
 - Work is done and needs buy-in from others: a PR description, a Slack pitch, a design-review doc.
 - The user asks to "package this up" for reviewers, stakeholders, or approvers.
-- Artifacts from earlier patterns exist (prototype, spec, implementation notes) and need to become one shareable document.
+- Artifacts from earlier patterns (prototype, spec, implementation notes) need to become one shareable document.
 
-If the audience is the *user themselves* needing to understand the change before merging, run the quiz pattern instead — this pattern is for convincing others.
+Redirects: if the audience is the *user themselves* needing to understand the change before merging → quiz. This pattern is for convincing others.
+
+## Inputs
+
+- The actual source of the change — read it, not just the diff or summary; if a diff stubs or elides files, read the real files behind it. Claims in the pitch must match what the code does.
+- Audience and venue. If not stated, that's this pattern's one allowed question, asked before drafting. If stated, deliver the pitch directly with no questions.
+- Any implementation notes: logged deviations are exactly the things a reviewer would have caught — mine them.
 
 ## Procedure
 
-1. Ask (once, briefly) who the audience is and where it will be posted, if not obvious — a Slack pitch to a PM and a PR description for a staff engineer probe different things.
-2. Lead with the result: the demo, GIF, screenshot, or before/after numbers. Reviewers extend trust from evidence, not from prose.
-3. Retrace the unknowns-path compressed: what the hard decisions were and what was chosen — the 2–4 that a reviewer would push on, not all of them.
-4. Preempt the expert probes: the failure points someone experienced in this domain would ask about (races, rollbacks, limits, migration safety), each with one line on how it's handled. Mine the implementation notes' Deviations for these — a logged deviation is exactly the kind of thing a reviewer would have caught.
-5. Package prototype, spec, and implementation notes into (or link from) the single artifact. One document the user can drop into Slack or a PR description as-is.
+1. Confirm audience and venue (one question, only if not already stated).
+2. Read the change's source and identify: the user-visible result, the 2–4 load-bearing decisions, and the failure points an expert would probe (crashes mid-operation, duplicates, retries exhausted, restarts, migration safety).
+3. Lead with the result: demo, numbers, or the one-sentence behavioral change. Reviewers extend trust from evidence, not prose.
+4. Write the decisions as chose-X-over-Y, and the probes each with one line on how the code *actually* behaves — including honestly flagging gaps the code has, rather than asserting robustness it doesn't.
+5. Assemble one self-contained document with links to the artifacts (diff, spec, notes, prototype). It must be pasteable as-is.
 
-## Output contract
+## First-turn contract
 
-A single self-contained document, in this order:
+If audience/venue are known, the reply is the pitch document itself, in this order:
 
-1. **The result** — demo link/GIF/screenshot/numbers, plus one sentence of what shipped.
-2. **Decisions** — the 2–4 load-bearing choices, each: what was chosen, what was rejected, why.
-3. **What could go wrong, and what we did about it** — the expert-probe list with one-line answers.
-4. **Links** — prototype, spec, implementation notes, the diff.
+1. **The result** — demo/numbers/one sentence of what shipped, first.
+2. **Decisions** — 2–4 load-bearing choices, each: chosen / rejected / why.
+3. **What could go wrong, and how it's handled** — at least 2 expert probes, one line each, faithful to the code (a known gap is stated as a known gap).
+4. **Links** — diff, spec, implementation notes, prototype, as available.
 
-Length: readable in under two minutes for the Slack form; a PR description can go somewhat longer. It must be pasteable as-is — no "[insert demo here]" placeholders unless the user has to record something you can't.
+No placeholders except media only the user can record. No required questions when the audience was already stated.
+
+## Deliverable
+
+The single pasteable document. Length is bounded by the venue: a Slack pitch's core is **at most ~300 words**; a PR description may run longer. If the target reader wouldn't finish it in the attention they'll actually give it, cut.
+
+## Stop conditions
+
+- Stop at the delivered pitch; don't redesign or refactor the change it describes (a discovered gap becomes a flagged risk in the pitch, not a code fix in this turn).
+- One clarifying question maximum, and only when audience/venue are missing.
 
 ## Good vs. bad example
 
@@ -45,12 +60,13 @@ Length: readable in under two minutes for the Slack form; a PR description can g
 
 > This PR refactors the refund flow. Changed files: `refund.js` (moved processing to a worker), `queue.js` (new), `api.js` (endpoint now returns 202)... [12 more files described] ...The processRefund function was split into three helpers. Let me know if you have questions.
 
-The bad version is a diff narration: it describes what changed instead of what a reviewer needs to trust it — no result up front, no decisions to agree or disagree with, no evidence the failure modes were considered. "Let me know if you have questions" outsources exactly the work the pitch was supposed to do.
+The bad version is a diff narration: no result up front, no decisions to agree or disagree with, no evidence the failure modes were considered. "Let me know if you have questions" outsources exactly the work the pitch was supposed to do.
 
-## Pre-send self-check
+## Self-check
 
-- Does the first thing the reader sees show the result working — not background or file lists?
-- Are decisions presented as *chose X over Y*, so a reviewer can engage rather than just nod?
-- Did I answer the 2–4 questions the most skeptical expert in the room would ask, including anything from the Deviations log?
-- Is it one pasteable artifact — not a summary in chat plus scattered links the user has to assemble?
-- Would the target reader get through it in the time they'd actually give it?
+- Is the first thing the reader sees the result — not background or file lists?
+- Are there 2–4 decisions, each phrased as chose-X-over-Y?
+- Are there ≥2 expert probes, each answered in one line that matches what the code actually does (gaps flagged as gaps)?
+- Is it one pasteable artifact with no unfilled placeholders (user-only media excepted)?
+- Is the core within the venue's length bound (~300 words for Slack)?
+- Did I read the real source behind any stubbed diff before making claims?

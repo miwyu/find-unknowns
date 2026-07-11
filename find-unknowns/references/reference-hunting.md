@@ -1,29 +1,41 @@
 # Reference hunting
 
-When the user struggles to describe what they want, an existing example — a library that does it right, a design they like, a similar feature elsewhere in the repo — says it better than they can. Your job is to find the reference, extract its transferable semantics, and confirm which properties actually matter.
+When the user struggles to describe what they want, an existing example — a library that does it right, a design they like, a similar feature elsewhere in the repo — says it better than they can. Find the reference, extract its transferable semantics, and confirm which properties actually matter.
 
 ## When to apply
 
-- The user can't articulate what they want in detail — missing vocabulary, or it would take too long to explain.
-- The user points at an example: "like this crate", "like Stripe's docs", "like the search feature we already have".
-- You suspect an example exists but the user hasn't thought to offer one — ask before brainstorming; reading one example is cheaper than generating many candidates.
+- The user points at an example: "like Stripe's errors", "like this crate", "like the search feature we already have".
+- The user can't articulate what they want in detail and you suspect a specific example exists that they haven't thought to offer.
 
-If no example exists anywhere, fall back to brainstorm & prototype.
+Redirects: if no example exists anywhere, or the missing piece is taste with no nameable exemplar → brainstorm & prototype. If the gaps are things the user could just answer → interview.
+
+## Inputs
+
+- The named or suspected reference: source code, docs, a product, a feature in this repo. Prefer **source code** over any other form — even in another language, code carries edge-case handling, state shapes, and ordering guarantees that screenshots and prose can't.
+- The user's context (their stack, the place the behavior will live), for separating transferable from incidental.
 
 ## Procedure
 
-1. Ask whether an example exists, suggesting where one might: a library that implements the behavior, a product whose design they like, a similar feature elsewhere in this repo. One question, with concrete candidate sources.
-2. Prefer **source code** over any other reference form — even in a different language. Code carries structure and semantics a screenshot or prose description can't: exact edge-case handling, state shapes, ordering guarantees.
-3. Read the reference. Separate the **transferable semantics** (the behavior, invariants, and structure worth reimplementing) from the incidental (language idioms, naming conventions, its own tech-stack constraints).
-4. Play the extraction back to the user as a short property list and confirm which properties matter to them — the reference is *their* proxy spec, so they arbitrate what's essential vs. coincidental.
-5. Carry the confirmed properties forward as the spec for implementation or planning.
+1. If no reference is named yet: ask **one question** — does an example exist? — and suggest 2–3 concrete places one might live (a library, a product they admire, a similar feature in this repo). Stop there; that's the whole turn.
+2. Once you have a reference, read it — the actual source or docs, not your memory of its reputation, whenever it's reachable.
+3. Extract the **transferable semantics**: the behaviors, invariants, and structure worth reimplementing. Set aside the incidental: language idioms, naming conventions, the reference's own tech-stack constraints.
+4. Play the extraction back as **3–7 properties, each phrased as behavior** ("retries use full jitter, capped at 30s"), not as a code tour.
+5. Ask the user which properties are essential vs. incidental — the reference is *their* proxy spec, so they arbitrate. Carry the confirmed list forward as the spec.
 
-## Output contract
+## First-turn contract
 
-1. Name the pattern; if you don't have a reference yet, your reply is one question ("does an example exist?") plus 2–3 concrete places one might live — nothing else.
-2. Once you've read a reference: a short list (3–7 items) of the transferable properties you extracted, each phrased as behavior ("retries use full jitter, capped at 30s"), not as code tour.
-3. A confirmation ask: "which of these are essential, and did I miss what you actually liked about it?"
-4. The confirmed list becomes the spec artifact — offer to proceed to a plan or implementation with it.
+- **No reference yet:** one line naming the pattern + the one question + 2–3 candidate places. Nothing else — no candidates generated from scratch, no implementation.
+- **Reference in hand:** one line naming the pattern; the 3–7 behavior-level properties; one confirmation ask ("which of these are essential, and did I miss what you actually liked?"); an offer to carry the confirmed list into a plan or implementation. A short illustrative example of the target shape is allowed; a rewrite of the user's system is not.
+
+## Deliverable
+
+The confirmed property list — the user's proxy spec made explicit. It feeds the implementation plan or the build directly.
+
+## Stop conditions
+
+- Stop extracting at 7 properties; if more seem essential, the extra ones go in a one-line deferral.
+- Stop the turn at the confirmation ask — don't implement against unconfirmed properties.
+- If the user says no example exists, switch to brainstorm & prototype instead of pressing for one.
 
 ## Good vs. bad example
 
@@ -44,9 +56,10 @@ If no example exists anywhere, fall back to brainstorm & prototype.
 
 The bad version transcribes instead of extracts — it preserves the incidental (module layout, struct shapes) alongside the essential, never asks which properties the user actually wanted, and buries the four behaviors that were the whole point.
 
-## Pre-send self-check
+## Self-check
 
-- Did I ask for an example before generating candidates from scratch?
-- If I read a reference: is my output a **behavior-level property list**, not a code tour or a mechanical translation?
-- Did I separate transferable semantics from the reference's incidental choices?
-- Did I ask the user to confirm which properties are essential, rather than assuming all of them are?
+- If I had no reference: is my reply exactly one question plus 2–3 candidate places?
+- If I read a reference: are there 3–7 properties, each phrased as behavior, with the incidental stripped out?
+- Did I ask the user to confirm which properties are essential, rather than assuming all of them?
+- Did I stop short of implementing against unconfirmed properties?
+- Did I offer the next step (plan or implementation) with the confirmed list as its input?

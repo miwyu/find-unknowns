@@ -1,29 +1,41 @@
 # Implementation notes (during implementation)
 
-No amount of planning eliminates unknown unknowns; some only surface mid-build. The notes file records where the territory disagreed with the plan, so the next planning round starts from a better map. The notes are the mechanism by which the *user's* map improves over time — write them for the human who will read them after the session, not as a scratchpad.
+No amount of planning eliminates unknown unknowns; some only surface mid-build. The notes file records where the territory disagreed with the plan, so the next planning round starts from a better map. Write it for the human who reads it after the session, not as a scratchpad.
 
 ## When to apply
 
-- Implementation is starting or underway from a plan (or spec) that may meet reality.
-- The user asks you to "keep implementation notes" or the plan you're executing tells you to.
-- Mid-build, you hit an edge case that forces a deviation — start the notes then if they don't exist yet.
+- Implementation is starting or underway from a plan or spec that may meet reality — including "here's the plan, go implement it" handoffs.
+- The user asks you to "keep implementation notes", or the plan you're executing tells you to.
+- Mid-build, an edge case forces a deviation — start the notes then if they don't exist yet.
 
-Not for post-hoc writeups (that's pitch/explainer) and not a build log — routine progress doesn't belong in it.
+Redirects: post-hoc writeups for others → pitch/explainer. Verifying the user's own understanding → quiz. This file is not a build log — routine progress doesn't belong in it.
+
+## Inputs
+
+- The plan or spec being executed, and the repo being changed.
+- `assets/implementation-notes-template.md` — the file to copy; do not improvise a different structure.
 
 ## Procedure
 
-1. At the start of implementation, copy `assets/implementation-notes-template.md` into the working repository as `implementation-notes.md` and fill in the **Context** section: the task, the plan artifact it came from, and the assumptions the plan is making.
-2. Build. When the territory contradicts the plan — an edge case, a missing file the plan referenced, an API that doesn't behave as assumed — **pick the conservative option, log it under Deviations with the reason, and keep going** rather than stalling. Conservative means: the choice that's cheapest to reverse if the user disagrees.
-3. Log questions that only the user can answer under **Open questions** instead of blocking on them, unless the answer changes something expensive to reverse — then stop and ask.
-4. A deviation entry records three things: what the plan said, what the territory actually showed, what you did and why. One entry per deviation, written when it happens — not reconstructed at the end.
-5. When the session ends, hand the notes back explicitly: they are input for the next planning round and raw material for the pitch/explainer.
+1. Before writing code, copy `assets/implementation-notes-template.md` into the working repo as `implementation-notes.md` and fill in **Context**: the task, the plan artifact it came from, and the plan's assumptions.
+2. Build. When the territory contradicts the plan — a missing file the plan referenced, an API that doesn't behave as assumed, an edge case — **pick the conservative option, log it, keep going**. Conservative means: cheapest to reverse if the user disagrees (reuse existing infrastructure over adding dependencies; extend existing concepts over inventing new ones).
+3. Log each deviation under **Deviations** at the moment it happens — not reconstructed at the end. One entry per deviation with exactly three parts: what the plan said / what the territory showed / what you did and why.
+4. Put questions only the user can answer under **Open questions** instead of blocking — unless the answer changes something expensive to reverse, in which case stop and ask.
+5. At session end, hand the notes back explicitly: summarize the deviations in 2–4 sentences in your reply and point at the file as input for the next planning round.
 
-## Output contract
+## First-turn contract
 
-- The artifact is the `implementation-notes.md` file in the user's repo, following the template's three required headings: **Context**, **Deviations**, **Open questions**.
-- Deviations are logged at the moment they happen, each with plan-said / territory-showed / what-I-did-and-why.
-- Your end-of-session reply summarizes the deviations in 2–4 sentences and points at the file — don't paste the whole file into chat.
-- If there were no deviations, the file says so explicitly under Deviations ("none — plan survived contact") rather than being silently empty.
+This pattern's "first turn" is the build itself. The reply that ends it must: state the work is done (or where it stopped), summarize deviations in 2–4 sentences, and point at `implementation-notes.md` — do not paste the whole file into chat.
+
+## Deliverable
+
+- The implemented change, plus `implementation-notes.md` in the user's repo with all three headings: **Context**, **Deviations**, **Open questions**.
+- If there were no deviations, the Deviations section says so explicitly ("none — plan survived contact") rather than being silently empty.
+
+## Stop conditions
+
+- Stop and ask the user only when a deviation is expensive to reverse (new dependency, schema change, external contract). Everything cheaper: log and keep going.
+- Never silently "fix" a plan-vs-reality mismatch by manufacturing the missing reality — that's the one failure this pattern exists to prevent.
 
 ## Good vs. bad example
 
@@ -38,12 +50,12 @@ Not for post-hoc writeups (that's pitch/explainer) and not a build log — routi
 
 > Note: statsd file was missing so I installed `node-statsd`, created src/statsd.js with a default config pointing at localhost:8125, and wired it up as the plan said. Also fixed a few unrelated lint errors while I was there.
 
-The bad version resolves a plan-vs-reality mismatch by *manufacturing the missing reality* — a new dependency and a config guess, expensive to reverse, silently deciding something the plan's author needs to know the plan got wrong. And the unrelated fixes contaminate the record of what the deviation actually was.
+The bad version resolves a plan-vs-reality mismatch by *manufacturing the missing reality* — a new dependency and a config guess, expensive to reverse, silently deciding something the plan's author needs to know the plan got wrong. The unrelated fixes contaminate the record of what the deviation actually was.
 
-## Pre-send self-check
+## Self-check
 
-- Does the notes file exist in the repo with Context filled in, Deviations, and Open questions — copied from the template, not improvised?
+- Does `implementation-notes.md` exist in the repo, copied from the template, with Context filled in and all three headings present?
 - Is every deviation logged with plan-said / territory-showed / did-and-why, written when it happened?
-- When I deviated, did I pick the option that's cheapest to reverse — and keep going instead of stalling?
-- Did anything the plan got wrong end up silently "fixed" instead of logged? That's the one failure this pattern exists to prevent.
-- Did I hand the notes back at the end as input for the next planning round?
+- Did every deviation pick the cheapest-to-reverse option — and did I keep going instead of stalling?
+- Did anything the plan got wrong end up silently "fixed" instead of logged?
+- Does my final reply summarize deviations in 2–4 sentences and point at the file as input for the next planning round?

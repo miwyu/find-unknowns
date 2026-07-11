@@ -1,34 +1,48 @@
 # Blind spot pass (unknown unknowns)
 
-Search the codebase and/or the web for what the user's task actually touches, then teach them what they didn't know to ask about. The output is not a report for its own sake — it's the set of questions and constraints that should reshape their prompt.
+Search the codebase and/or the web for what the user's task actually touches, then teach them what they didn't know to ask about. The output is not a report — it's the set of decisions that should reshape their prompt.
 
 ## When to apply
 
 - The user is entering an unfamiliar domain or an unfamiliar part of the codebase ("I've never touched the auth modules", "I don't know what color grading is").
-- The user explicitly asks for a "blind spot pass" or to find their "unknown unknowns".
+- The user explicitly asks for a "blind spot pass" or their "unknown unknowns".
 - The user asks for help prompting better about something they can't yet frame.
 
-Confirm the bottleneck really is unknown unknowns: if the user could answer your questions themselves, run an interview instead; if they'd recognize what they want on sight, brainstorm & prototype.
+Redirects: if the user could answer your questions themselves → interview. If they'd recognize what they want on sight → brainstorm & prototype. If they named an existing example → reference hunting.
+
+## Inputs
+
+- The user's task as stated, plus anything they said about what they already know or tried.
+- The codebase, if available — read it before replying. Web sources when the unknown is domain knowledge rather than repo knowledge.
 
 ## Procedure
 
-1. Ask (or infer) the user's starting point: what they already know, what they've tried, who they are relative to this domain. Skip this if they already told you.
-2. Search the territory before saying anything substantive. In a codebase: read the modules the task touches, their history, their tests, adjacent features. On the web: what "good" looks like in this domain, common failure modes, the vocabulary experts use.
-3. Structure the pass around four questions: What historical work exists here? What does "good" look like in this domain? What are the common failure modes and potholes? What questions would an expert ask that the user hasn't?
-4. Rank what you found. You will usually find more than five unknowns; ranking them is the value you add, because the user can't tell the load-bearing ones from the trivia yet.
-5. Deliver the top 3–5 as decisions, explicitly defer the rest, and offer a rewritten prompt (see the output contract).
+1. Establish the user's starting point from what they told you; if genuinely unknown, fold one short question about it into your reply rather than making it a separate round.
+2. Search the territory before saying anything substantive. In a codebase: the modules the task touches, their tests, adjacent features, load-bearing comments. On the web: what "good" looks like, common failure modes, expert vocabulary.
+3. Collect candidate unknowns against four questions: What prior work exists here? What does "good" look like? What are the common potholes? What would an expert ask that the user hasn't?
+4. Rank them by how much the answer changes what gets built. Ranking is the value you add — the user can't yet tell load-bearing from trivia.
+5. Write the reply per the first-turn contract: teach minimally, surface the top 3–5 as decisions, defer the rest.
 
-## Output contract
+## First-turn contract
 
-Your reply must contain, in this order:
+Your reply contains, in this order:
 
-1. A one-line naming of the pattern ("Running a blind spot pass on X — here's what the territory says").
-2. A short teaching section: the minimum domain context the user needs to understand the unknowns — intuition, not an encyclopedia entry.
-3. **The 3–5 highest-leverage unknowns, each phrased as a decision the user now needs to make** — not an observation, not a question dump. "You need to decide whether webhook bursts count against the tenant's rate limit" beats "webhooks exist".
-4. An explicit deferral of the remainder: "there are a few smaller ones — want them?" (Name-dropping deferred items does not count against the 3–5 cap; listing their details does.)
-5. An offer to rewrite their original prompt so it accounts for what you found — or the rewritten prompt itself if they already asked for one.
+1. One line naming the pattern ("Running a blind spot pass on X — here's what the territory says").
+2. A teaching section of **at most 5 sentences**: the minimum context needed to understand the decisions below — intuition, not an encyclopedia entry.
+3. **3–5 unknowns, each phrased as a decision the user now needs to make, each grounded in something specific you found** (a file, a comment, a documented failure mode). "You need to decide whether webhook bursts count against the tenant's rate limit" beats "webhooks exist".
+4. One line deferring the remainder: "there are a few smaller ones — want them?" (Name-dropping deferred items doesn't count against the 3–5 cap; explaining them does.)
+5. An offer to rewrite their original prompt with the findings baked in — or the rewritten prompt itself if they already asked for one.
 
-Do not attach a fill-in template or an exhaustive inventory unless the user asks.
+No fill-in template, no exhaustive inventory, no implementation code in this turn.
+
+## Deliverable
+
+The ranked decision list plus the (offered or delivered) rewritten prompt. That rewritten prompt is what the user carries into the next pattern or session.
+
+## Stop conditions
+
+- Stop searching once you hold 3–5 decisions each grounded in a specific finding — more search past that point delays the user without changing the reply.
+- Stop the turn after delivering the contract. Do not start implementing; wait for the user's answers or their pick of deferred items.
 
 ## Good vs. bad example
 
@@ -46,12 +60,13 @@ Do not attach a fill-in template or an exhaustive inventory unless the user asks
 
 > Rate limiting is a big topic! Here are 14 considerations: algorithms (token bucket, sliding window, fixed window...), storage options, distributed coordination, HTTP 429 semantics, Retry-After headers, ... Please fill in this requirements template so we can proceed: [20-row table].
 
-The bad version fails three ways: it teaches the domain generically instead of reading *this* codebase, it dumps an unranked inventory, and it hands back homework. The user still doesn't know which decisions are load-bearing.
+The bad version teaches the domain generically instead of reading *this* codebase, dumps an unranked inventory, and hands back homework.
 
-## Pre-send self-check
+## Self-check
 
-- Did I actually search the territory (codebase/web), or am I reciting generic domain knowledge?
-- Is every surfaced item phrased as a **decision the user must make**, grounded in something I found?
-- Are there at most 5 surfaced items, with the rest explicitly deferred and offered?
+- Did I search the territory (codebase/web), or am I reciting generic domain knowledge?
+- Is every surfaced item a decision the user must make, tied to a specific thing I found?
+- Are surfaced items ≤5, with the rest deferred in one line?
+- Is the teaching section ≤5 sentences?
 - Did I offer (or deliver, if asked) a rewritten prompt?
-- Is there any fill-in template or exhaustive checklist in my reply that nobody asked for? Remove it.
+- Is there zero implementation code and zero unrequested template in the reply?
