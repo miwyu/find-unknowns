@@ -4,14 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repository is
 
-This is a **skill-development project**, not an application. The deliverable is `find-unknowns/SKILL.md` — a Claude Code skill that facilitates discovery patterns: blind spot pass, brainstorm/prototype, interview, references, implementation plan, implementation notes, pitch, and quiz. Everything else in the repo exists to test and package that one file.
+This is a **skill-development project**, not an application. The deliverable is the `find-unknowns/` skill directory — a Claude Code skill that facilitates discovery patterns: blind spot pass, brainstorm/prototype, interview, references, implementation plan, implementation notes, pitch, and quiz. Everything else in the repo exists to test and package it.
 
 Iteration on the skill happens through the `skill-creator` plugin (`/skill-creator:skill-creator`), which runs with-skill vs. without-skill subagents against the eval suite, grades them, and benchmarks the delta.
 
 ## Layout
 
-- `find-unknowns/SKILL.md` — the skill. The only file that ships.
-- `find-unknowns.skill` — packaged zip of the above (regenerate after any SKILL.md change, see below).
+- `find-unknowns/` — the skill; the only directory that ships. `SKILL.md` holds routing only (trigger/non-trigger conditions, four quadrants, pattern-selection table, conflict-priority rules, shared guardrails, how to use the reference files). `references/` has one file per pattern, each with the same five sections (When to apply / Procedure / Output contract / Good vs. bad example / Pre-send self-check); runtime reads only the selected file. `assets/implementation-notes-template.md` is the sole copy-into-the-user's-repo asset (Context / Deviations / Open questions). Chat-reply skeletons live inside reference files, never in `assets/`. No `scripts/` unless a check needs determinism.
+- `find-unknowns.skill` — packaged zip of the above (regenerate after any change under `find-unknowns/`, see below).
 - `evals/evals.json` — 5 behavior evals with graded assertions; `evals/trigger-eval-set.json` — 20 should/shouldn't-trigger queries for description tuning.
 - `evals/files/` — pristine fixture repos copied into each run (see "Fixture traps" below).
 - `find-unknowns-workspace/` (gitignored, ~19MB) — all run history: `iteration-N/` results, `benchmark.json`, patched tooling, description-optimization logs.
@@ -74,8 +74,8 @@ The fixtures in `evals/files/` contain **deliberate landmines that the assertion
 - **Description tuning is a measured dead end**: 5 optimizer iterations (including "MANDATORY"-style phrasings) all scored identically — recall never exceeded ~17% in bare sessions while precision stayed 100%. Don't chase auto-triggering with wording changes; explicit invocation or a per-project CLAUDE.md nudge is the reliable path.
 - Assertions encode precise counting rules (optional context requests don't count as questions; explicitly deferred name-drops don't count toward the 5-item cap). When behavior and an assertion conflict on a borderline lightness call, ask the user which side to fix.
 
-Final benchmark for reference (iteration-4, 1 run/config): with-skill 25/25 assertions vs. baseline 16/25.
+Benchmarks for reference: iteration-4 (single-file skill, 1 run/config): with-skill 25/25 assertions vs. baseline 16/25. Iteration-6 (restructured SKILL.md + references/ + assets/, with-skill only, 1 run/eval): 25/25 — no regression from the split.
 
-## After changing SKILL.md
+## After changing the skill
 
-Re-run the affected evals (a targeted single-eval re-run is acceptable for small changes), re-aggregate, then re-package and replace `find-unknowns.skill` — the committed archive must match `find-unknowns/SKILL.md`.
+After any change under `find-unknowns/` (SKILL.md, references, assets): re-run the affected evals (a targeted single-eval re-run is acceptable for small changes), re-aggregate, then re-package and replace `find-unknowns.skill` — the committed archive must match the `find-unknowns/` directory.
