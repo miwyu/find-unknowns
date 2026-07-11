@@ -21,6 +21,19 @@ The quality of agentic coding is bottlenecked by _unknowns_: the gap between wha
 
 The skill is deliberately light-touch: one required question per turn, at most 3–5 surfaced decisions with the rest deferred, and no fill-in templates unless you ask. It always ends with something you can act on — typically a rewritten, sharper version of your original prompt.
 
+## How it's structured
+
+```text
+find-unknowns/
+├── SKILL.md        # routing only: when to trigger, the four quadrants,
+│                   # the selection table, priority rules, shared guardrails
+├── references/     # one file per pattern; Claude reads only the one it selects
+│                   # (each: when to apply, procedure, output contract,
+│                   #  a good/bad example pair, a pre-send self-check)
+└── assets/
+    └── implementation-notes-template.md   # copied into your repo by the implementation-notes pattern
+```
+
 ## When to use it
 
 - Large, vague, or underspecified tasks ("add notifications to my app")
@@ -33,26 +46,6 @@ The skill is deliberately light-touch: one required question per turn, at most 3
 - The task is already fully specified — just implement it
 - You have an agreed spec and don't want decisions re-litigated
 - Routine work: debugging a clear error, renames, small well-scoped edits
-
-## Installation
-
-**English version** — unzip the packaged skill into your skills directory:
-
-```bash
-# globally
-unzip find-unknowns.skill -d ~/.claude/skills/
-
-# or for a single project
-unzip find-unknowns.skill -d <your-project>/.claude/skills/
-```
-
-**Japanese version** — copy the folder from this repo:
-
-```bash
-cp -r jp/find-unknowns-jp ~/.claude/skills/
-```
-
-Both can be installed side by side; they have distinct names (`find-unknowns` / `find-unknowns-jp`).
 
 ## Usage
 
