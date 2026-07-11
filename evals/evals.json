@@ -70,6 +70,49 @@
         "Includes a comprehension check the user should pass before signing off: quiz-style questions framed as a gate for the merge/release decision, not optional trivia",
         "The quiz questions target behavioral consequences a reviewer would care about (what users experience, failure modes, edge cases), not surface trivia like file or variable names"
       ]
+    },
+    {
+      "id": 5,
+      "name": "reference-hunting-stripe-errors",
+      "prompt": "Our API's error responses are a mess — every endpoint returns something different. I want ours to feel like Stripe's API errors, that developer-friendly thing they do, but I honestly can't describe what makes theirs good. We're on Express. Can you help?",
+      "expected_output": "Treats Stripe's error design as the user's proxy spec: extracts 3-7 transferable behavior-level properties (stable machine-readable codes, consistent envelope, status mapping, message + docs link), asks the user to confirm which are essential, and does not rewrite the app's error handling in the first turn.",
+      "files": [],
+      "assertions": [
+        "Recognizes this as a reference-driven task: extracts properties from Stripe's error design as the proxy spec, rather than making the user articulate abstract preferences they said they can't describe",
+        "Presents between 3 and 7 transferable properties, each phrased as behavior/semantics (e.g. stable machine-readable error codes, consistent JSON envelope, correct HTTP status mapping, human message plus docs link) — not a code walkthrough",
+        "Asks the user to confirm which extracted properties are essential vs. incidental, rather than assuming all of them matter",
+        "Does not deliver the implementation in the first turn: no rewrite of the app's error handling before the properties are confirmed (a short illustrative example of the target response shape is acceptable)",
+        "Ends with an actionable path forward: offers to carry the confirmed properties into a plan or implementation"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "implementation-plan-rate-limiting",
+      "prompt": "We've settled the requirements for rate limiting in this repo: per-tenant token bucket stored in Redis, enterprise tenants guaranteed at least 1000 req/min per their contract, the GitHub webhook route gets its own separate bucket, and if Redis is down we fail open. Don't start coding yet — write me an implementation plan I can review first.",
+      "expected_output": "Produces a review-ordered plan: 3-5 vetoable decisions (chose X over Y) up top, grounded in the actual codebase (src/redis.js, middleware chain, enableOfflineQueue: false), mechanical work compressed at the bottom, residual unknowns flagged with implementation-notes setup, fresh-session handoff suggested. No code written, no reopening of the settled requirements.",
+      "files": ["evals/files/sample-api"],
+      "assertions": [
+        "Writes a plan, not code: no rate-limiting implementation code is added to the repo in this turn (short illustrative interface/config sketches inside the plan document are acceptable)",
+        "Leads with reviewable decisions: the first substantive section presents 3-5 decision items (not 'Phase 1: Setup' chronology), each stating what was chosen and a rejected alternative so the user can veto it",
+        "Grounded in the actual codebase: references the existing Redis client (src/redis.js) and/or the existing middleware chain rather than inventing infrastructure",
+        "Accounts for how fail-open interacts with the existing Redis client configuration (enableOfflineQueue: false makes commands reject when disconnected) as a decision or named risk, rather than assuming the client queues silently",
+        "Does not reopen the settled requirements: the four agreed constraints are taken as given, with no required re-interview questions before the plan is delivered",
+        "Sets up what comes next: mechanical work compressed toward the bottom, residual unknowns flagged with an instruction to keep implementation notes during the build, and a suggestion to implement in a fresh session with the plan as the handoff artifact"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "pitch-async-refunds",
+      "prompt": "The async refund change in this repo is already merged — recent-change.diff is the summary. I need sign-off from our staff engineer to ship it in tomorrow's release, and I want to post a pitch in our #eng-releases Slack channel that she can read cold. She's sharp and will push on anything hand-wavy. Write the post for me — I'll paste it as-is.",
+      "expected_output": "A single pasteable Slack pitch: result first (refunds now async, callers get 202/pending), 2-4 load-bearing decisions each with the rejected alternative, an expert-probe section covering failure modes (crash mid-job, duplicate submission, retry exhaustion) grounded in the actual source rather than the stub diff.",
+      "files": ["evals/files/billing-service"],
+      "assertions": [
+        "Leads with the result: the pitch opens with what changed in user-visible terms (refunds are now asynchronous — callers get a pending/202 response instead of a completed refund), before any background or file lists",
+        "Presents 2-4 load-bearing decisions, each with the chosen option and a visible rejected alternative — not a file-by-file diff narration",
+        "Includes a what-could-go-wrong / expert-probe section addressing at least two failure modes a sharp reviewer would raise (e.g. crash or restart mid-job, duplicate refund requests, retry exhaustion), each with one line on how the code actually behaves",
+        "Shows evidence of reading beyond the stub diff: describes behavior that only exists in the actual source (e.g. the idempotency-key handling in refunds.js, the retry/dead-letter path in queue.js) instead of asserting robustness the code doesn't have",
+        "Is a single pasteable artifact: self-contained, no unfilled placeholders (except media only the user can record), with the core pitch concise enough for a Slack post rather than a design doc"
+      ]
     }
   ]
 }
