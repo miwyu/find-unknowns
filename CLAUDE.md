@@ -4,14 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repository is
 
-This is a **skill-development project**, not an application. The deliverable is the `find-unknowns/` skill directory — a Claude Code skill that facilitates discovery patterns: blind spot pass, brainstorm/prototype, interview, references, implementation plan, implementation notes, pitch, and quiz. Everything else in the repo exists to test and package it.
+This is a **skill-development project**, not an application. The deliverable is the `find-unknowns/` skill directory — a Claude Code skill that facilitates discovery patterns: blind spot pass, brainstorm/prototype, interview, references, implementation plan, implementation notes, pitch, and quiz. Everything else in the repo exists to test it.
 
 Iteration on the skill happens through the `skill-creator` plugin (`/skill-creator:skill-creator`), which runs with-skill vs. without-skill subagents against the eval suite, grades them, and benchmarks the delta.
 
 ## Layout
 
 - `find-unknowns/` — the skill; the only directory that ships. `SKILL.md` holds routing only (trigger/non-trigger conditions, four quadrants, pattern-selection table, conflict-priority rules, shared guardrails, how to use the reference files). `references/` has one file per pattern, each with the same five sections (When to apply / Procedure / Output contract / Good vs. bad example / Pre-send self-check); runtime reads only the selected file. `assets/implementation-notes-template.md` is the sole copy-into-the-user's-repo asset (Context / Deviations / Open questions). Chat-reply skeletons live inside reference files, never in `assets/`. No `scripts/` unless a check needs determinism.
-- `find-unknowns.skill` — packaged zip of the above (regenerate after any change under `find-unknowns/`, see below).
+- `jp/find-unknowns/` — Japanese mirror of the skill (same structure; its SKILL.md `name` is also `find-unknowns`). Update it in the same commit as the English tree.
 - `evals/evals.json` — 5 behavior evals with graded assertions; `evals/trigger-eval-set.json` — 20 should/shouldn't-trigger queries for description tuning.
 - `evals/files/` — pristine fixture repos copied into each run (see "Fixture traps" below).
 - `find-unknowns-workspace/` (gitignored, ~19MB) — all run history: `iteration-N/` results, `benchmark.json`, patched tooling, description-optimization logs.
@@ -21,9 +21,6 @@ Iteration on the skill happens through the `skill-creator` plugin (`/skill-creat
 The skill-creator plugin lives at `~/.claude/plugins/cache/claude-plugins-official/skill-creator/unknown/skills/skill-creator/`.
 
 ```bash
-# Package the skill (run from the plugin dir; moves output afterward)
-cd <plugin-dir> && python3 -m scripts.package_skill <repo>/find-unknowns
-
 # Aggregate an iteration's grading into benchmark.json/md
 cd <plugin-dir> && python3 -m scripts.aggregate_benchmark <repo>/find-unknowns-workspace/iteration-N --skill-name find-unknowns
 
@@ -78,4 +75,4 @@ Benchmarks for reference: iteration-4 (single-file skill, 1 run/config): with-sk
 
 ## After changing the skill
 
-After any change under `find-unknowns/` (SKILL.md, references, assets): re-run the affected evals (a targeted single-eval re-run is acceptable for small changes), re-aggregate, then re-package and replace `find-unknowns.skill` — the committed archive must match the `find-unknowns/` directory.
+After any change under `find-unknowns/` (SKILL.md, references, assets): re-run the affected evals (a targeted single-eval re-run is acceptable for small changes), re-aggregate, and mirror the change in `jp/find-unknowns/` in the same commit.
