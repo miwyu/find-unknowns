@@ -71,7 +71,7 @@ The fixtures in `evals/files/` contain **deliberate landmines that the assertion
 - **Description tuning is a measured dead end**: 5 optimizer iterations (including "MANDATORY"-style phrasings) all scored identically — recall never exceeded ~17% in bare sessions while precision stayed 100%. Don't chase auto-triggering with wording changes; explicit invocation or a per-project CLAUDE.md nudge is the reliable path.
 - Assertions encode precise counting rules (optional context requests don't count as questions; explicitly deferred name-drops don't count toward the 5-item cap). When behavior and an assertion conflict on a borderline lightness call, ask the user which side to fix.
 
-Benchmarks for reference: iteration-4 (single-file skill, 1 run/config): with-skill 25/25 assertions vs. baseline 16/25. Iteration-6 (restructured SKILL.md + references/ + assets/, with-skill only, 1 run/eval): 25/25 — no regression from the split.
+Benchmarks for reference: iteration-4 (single-file skill, 1 run/config): with-skill 25/25 assertions vs. baseline 16/25. Iteration-6 (restructured SKILL.md + references/ + assets/, with-skill only, 1 run/eval): 25/25 — no regression from the split. Iteration-7 (v3 router, 8 evals): 41/41 on both Fable 5 and Sonnet 5. Iteration-8 (article-fidelity revision, 2026-09-02; 9 evals incl. new scope-brainstorm eval-8; targeted re-run of evals 0/1/2/6/8): Fable 30/30; Sonnet 20/22 where both misses were eval-1's identical-copy assertion before the mock-mode constancy rule was made countable, and 4/4 after.
 
 ## After changing the skill
 

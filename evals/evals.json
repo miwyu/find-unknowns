@@ -6,7 +6,9 @@
       "name": "blind-spot-pass-rate-limiting",
       "prompt": "I just joined this team and I need to add rate limiting to our Express API. I've never touched this codebase before and honestly I've never implemented rate limiting either. Where should I start?",
       "expected_output": "Runs a blind spot pass unprompted: grounds it in the actual codebase (Redis client, enterprise no-throttle contract, webhook route), ranks at most ~5 required decisions with extras deferred, writes no code, ends with an actionable rewritten prompt or next step.",
-      "files": ["evals/files/sample-api"],
+      "files": [
+        "evals/files/sample-api"
+      ],
       "assertions": [
         "Does not write rate-limiting code in the first turn: the response surfaces what needs deciding before implementation rather than delivering an implementation or a tutorial walkthrough",
         "Grounds the response in the actual codebase: mentions the existing Redis client (src/redis.js) as available infrastructure for a rate limiter",
@@ -48,7 +50,9 @@
       "name": "implementation-notes-metrics",
       "prompt": "Here's the implementation plan we agreed on last session — it's plan.md in the repo root. Go ahead and implement it. I'm heads-down on something else today, so if things don't go exactly according to plan, use your judgment and I'll catch up with you after.",
       "expected_output": "Implements the metrics feature, discovers the three planted plan-reality mismatches (src/statsd.js doesn't exist, src/middleware/requestLog.js doesn't exist, there is no 'admin' tier), deviates conservatively, and keeps a persistent deviation log file (implementation-notes.md or similar) the user can read afterward.",
-      "files": ["evals/files/sample-api"],
+      "files": [
+        "evals/files/sample-api"
+      ],
       "assertions": [
         "Actually implements the feature: working code for per-client request counting and a metrics endpoint exists in the repo (not just prose about what would be done)",
         "Discovers the plan-reality mismatches (the plan's src/statsd.js and src/middleware/requestLog.js don't exist, and there is no 'admin' tier in auth.js) instead of hallucinating the missing pieces or silently writing code that references them",
@@ -62,7 +66,9 @@
       "name": "quiz-refund-change",
       "prompt": "I was on vacation and my teammate landed a change to our refund flow — it's recent-change.diff in the repo, already merged into the code. I have to sign off on shipping this in tomorrow's release, and honestly, reading the diff isn't giving me confidence that I actually understand what changes for users. Help me out.",
       "expected_output": "Explains the change in terms of runtime behavior (refunds now async/pending with 202, duplicate requests deduped via idempotency key, failures retried then dead-lettered silently), then gates sign-off behind a comprehension quiz targeting reviewer-relevant consequences.",
-      "files": ["evals/files/billing-service"],
+      "files": [
+        "evals/files/billing-service"
+      ],
       "assertions": [
         "Explains the change in terms of runtime behavior and interaction with existing code paths, not a hunk-by-hunk restatement of the diff",
         "Identifies the key user-facing behavioral change: refunds are no longer synchronous — callers now get a 'pending' status (HTTP 202) instead of a completed refund",
@@ -90,7 +96,9 @@
       "name": "implementation-plan-rate-limiting",
       "prompt": "We've settled the requirements for rate limiting in this repo: per-tenant token bucket stored in Redis, enterprise tenants guaranteed at least 1000 req/min per their contract, the GitHub webhook route gets its own separate bucket, and if Redis is down we fail open. Don't start coding yet — write me an implementation plan I can review first.",
       "expected_output": "Produces a review-ordered plan: 3-5 vetoable decisions (chose X over Y) up top, grounded in the actual codebase (src/redis.js, middleware chain, enableOfflineQueue: false), mechanical work compressed at the bottom, residual unknowns flagged with implementation-notes setup, fresh-session handoff suggested. No code written, no reopening of the settled requirements.",
-      "files": ["evals/files/sample-api"],
+      "files": [
+        "evals/files/sample-api"
+      ],
       "assertions": [
         "Writes a plan, not code: no rate-limiting implementation code is added to the repo in this turn (short illustrative interface/config sketches inside the plan document are acceptable)",
         "Leads with reviewable decisions: the first substantive section presents 3-5 decision items (not 'Phase 1: Setup' chronology), each stating what was chosen and a rejected alternative so the user can veto it",
@@ -105,13 +113,31 @@
       "name": "pitch-async-refunds",
       "prompt": "The async refund change in this repo is already merged — recent-change.diff is the summary. I need sign-off from our staff engineer to ship it in tomorrow's release, and I want to post a pitch in our #eng-releases Slack channel that she can read cold. She's sharp and will push on anything hand-wavy. Write the post for me — I'll paste it as-is.",
       "expected_output": "A single pasteable Slack pitch: result first (refunds now async, callers get 202/pending), 2-4 load-bearing decisions each with the rejected alternative, an expert-probe section covering failure modes (crash mid-job, duplicate submission, retry exhaustion) grounded in the actual source rather than the stub diff.",
-      "files": ["evals/files/billing-service"],
+      "files": [
+        "evals/files/billing-service"
+      ],
       "assertions": [
         "Leads with the result: the pitch opens with what changed in user-visible terms (refunds are now asynchronous — callers get a pending/202 response instead of a completed refund), before any background or file lists",
         "Presents 2-4 load-bearing decisions, each with the chosen option and a visible rejected alternative — not a file-by-file diff narration",
         "Includes a what-could-go-wrong / expert-probe section addressing at least two failure modes a sharp reviewer would raise (e.g. crash or restart mid-job, duplicate refund requests, retry exhaustion), each with one line on how the code actually behaves",
         "Shows evidence of reading beyond the stub diff: describes behavior that only exists in the actual source (e.g. the idempotency-key handling in refunds.js, the retry/dead-letter path in queue.js) instead of asserting robustness the code doesn't have",
         "Is a single pasteable artifact: self-contained, no unfilled placeholders (except media only the user can record), with the core pitch concise enough for a Slack post rather than a design doc"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "scope-brainstorm-partner-dropoff",
+      "prompt": "Partners keep telling us that integrating with our API is painful, and a lot of them drop off before they ship anything. I don't have a specific fix in mind. Search the codebase and brainstorm the places we could intervene, from cheapest to most ambitious — I'll tell you which ones resonate.",
+      "expected_output": "Routes to brainstorm in list mode: 5-10 distinct intervention candidates ordered cheapest to most ambitious, each grounded in something real in the fixture repo, one line each, ending with a reaction ask — no code, no interview battery, no single built solution.",
+      "files": [
+        "evals/files/sample-api"
+      ],
+      "assertions": [
+        "Treats this as a scope brainstorm rather than building a fix or running an interview: the first turn delivers a ranked list of candidate interventions for the user to react to, and no code is written",
+        "Produces between 5 and 10 genuinely distinct candidates (different mechanisms, not variations on one idea), explicitly ordered from cheapest to most ambitious",
+        "Grounds candidates in the actual repo: at least three candidates cite a specific file, route, config, or comment that exists in the fixture (e.g. inconsistent error shapes in src/routes/*.js, the unauthenticated /webhooks/github route, plan tiers in src/middleware/auth.js, the Redis cache in src/redis.js, the broken npm test glob), rather than offering generic API-DX advice",
+        "Keeps each candidate cheap to read: one line to one short paragraph each, no implementation detail or code per candidate",
+        "Explicitly invites a reaction (pick / reject / mix), states that rejections narrow scope or become requirements, and poses at most one required question with no fill-in template"
       ]
     }
   ]

@@ -21,7 +21,7 @@ Redirects: post-hoc writeups for others → pitch/explainer. Verifying the user'
 2. Build. When the territory contradicts the plan — a missing file the plan referenced, an API that doesn't behave as assumed, an edge case — **pick the conservative option, log it, keep going**. Conservative means: cheapest to reverse if the user disagrees (reuse existing infrastructure over adding dependencies; extend existing concepts over inventing new ones).
 3. Log each deviation under **Deviations** at the moment it happens — not reconstructed at the end. One entry per deviation with exactly three parts: what the plan said / what the territory showed / what you did and why.
 4. Put questions only the user can answer under **Open questions** instead of blocking — unless the answer changes something expensive to reverse, in which case stop and ask.
-5. At session end, hand the notes back explicitly: summarize the deviations in 2–4 sentences in your reply and point at the file as input for the next planning round.
+5. At session end, hand the notes back explicitly: summarize the deviations in 2–4 sentences in your reply and point at the file as input for the next planning round. The file is temporary — once the next plan has absorbed it, the user can delete it; say so.
 
 ## First-turn contract
 

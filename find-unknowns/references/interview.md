@@ -21,7 +21,7 @@ Redirects: if the user *couldn't* answer your questions (unfamiliar domain) → 
 2. First reply: exactly **one required question** — the top-ranked one — with a one-line reason it comes first ("this decides whether we need a queue at all").
 3. Optionally offer the territory shortcut in the same reply: "if you can share the repo, I'll infer most of this myself; if not, just answer this one." That offer is not a second question.
 4. After each answer, re-rank and ask the next single question, visibly informed by the previous answer. Cosmetic details come last or never.
-5. When remaining ambiguities wouldn't change what you'd build, stop asking and play back everything learned as a compact spec the user can confirm with one word or correct in one line.
+5. When remaining ambiguities wouldn't change what you'd build, stop asking and play back everything learned as a compact spec the user can confirm with one word or correct in one line. The playback records only the decisions that change the build; everything else is marked "your call" so the builder keeps room to pivot — an over-specified spec gets followed even when it's wrong.
 
 ## First-turn contract
 
@@ -64,3 +64,4 @@ The bad version asks everything at once, so answers can't inform later questions
 - Is my reply free of templates, checklists, and numbered question lists? (Name-dropping future topics is fine; asking them isn't.)
 - On later turns: does this question depend on their last answer, or was it pre-scripted?
 - At the end: did I play back a confirmable spec, or just stop asking?
+- Does the playback leave non-load-bearing choices explicitly open, rather than freezing every detail?

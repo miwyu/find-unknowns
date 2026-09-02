@@ -28,7 +28,7 @@ Deliver the plan document itself (markdown in chat, or a file if asked) in this 
 
 1. **Decisions for your review** — **3–5 items**, each: what I chose / what I rejected / why, grounded in the actual code.
 2. **Sequence** — the build order, one line per step.
-3. **Mechanical work** — compressed to **at most 6 lines**, at the bottom.
+3. **Mechanical work** — compressed to **at most 6 lines**, at the bottom, phrased as outcomes ("extract the validation helper"), not step-by-step instructions: the builder is trusted here and needs room to pivot when the territory disagrees.
 4. **Known residual unknowns** — what will only surface mid-build + the implementation-notes instruction.
 5. One closing line suggesting the fresh-session handoff with this plan as the artifact.
 
@@ -68,7 +68,7 @@ The bad version is ordered by execution chronology, so the reviewable decisions 
 
 - Is the first section "Decisions for your review" with 3–5 chose-X-over-Y items — not "Phase 1: Setup"?
 - Is every decision grounded in something real in the code (file, config, contract), not invented infrastructure?
-- Is mechanical work ≤6 lines, at the bottom?
+- Is mechanical work ≤6 lines, at the bottom, phrased as outcomes rather than step-by-step instructions?
 - Did I flag residual unknowns and point at the implementation-notes template?
 - Did I suggest the fresh-session handoff?
 - Did I avoid re-opening settled requirements and avoid writing implementation code to the repo?

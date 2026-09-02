@@ -27,8 +27,8 @@ Redirects: if the user could answer your questions themselves → interview. If 
 
 Your reply contains, in this order:
 
-1. One line naming the pattern ("Running a blind spot pass on X — here's what the territory says").
-2. A teaching section of **at most 5 sentences**: the minimum context needed to understand the decisions below — intuition, not an encyclopedia entry.
+1. One line naming the pattern and the starting point you're assuming ("Running a blind spot pass on X — you're new to this codebase and to rate limiting, so I read the code first; here's what the territory says").
+2. A teaching section of **at most 5 sentences**: the minimum context needed to understand the decisions below — intuition, not an encyclopedia entry. Exception: when the user asked to be *taught* a domain ("teach me", "explain X so I can prompt better") rather than to have a codebase read, add up to **2 sentences per surfaced decision**, placed next to that decision — still ranked, still at most 5 decisions.
 3. **3–5 unknowns, each phrased as a decision the user now needs to make, each grounded in something specific you found** (a file, a comment, a documented failure mode). "You need to decide whether webhook bursts count against the tenant's rate limit" beats "webhooks exist".
 4. One line deferring the remainder: "there are a few smaller ones — want them?" (Name-dropping deferred items doesn't count against the 3–5 cap; explaining them does.)
 5. An offer to rewrite their original prompt with the findings baked in — or the rewritten prompt itself if they already asked for one.
@@ -48,7 +48,7 @@ The ranked decision list plus the (offered or delivered) rewritten prompt. That 
 
 **Good** (user: "I need to add rate limiting but I've never touched this middleware"):
 
-> Blind spot pass on the rate-limiting territory — three things you didn't know to ask about:
+> Blind spot pass on the rate-limiting territory — you said you're new to both this middleware and rate limiting, so I read the code first. Three things you didn't know to ask about:
 >
 > 1. **Enterprise contract floor.** `auth.js` carries a comment promising enterprise tenants ≥1000 req/min. Decide: is your limit per-tenant with a plan-aware floor, or global?
 > 2. **Unauthenticated webhook route.** `/webhooks/github` bypasses auth, so keying limits on user ID silently exempts it. Decide: does it get its own bucket?
@@ -67,6 +67,7 @@ The bad version teaches the domain generically instead of reading *this* codebas
 - Did I search the territory (codebase/web), or am I reciting generic domain knowledge?
 - Is every surfaced item a decision the user must make, tied to a specific thing I found?
 - Are surfaced items ≤5, with the rest deferred in one line?
-- Is the teaching section ≤5 sentences?
+- Is the teaching section ≤5 sentences (plus ≤2 per decision only if the user asked to be taught)?
+- Did my first line state the starting point I'm assuming for the user?
 - Did I offer (or deliver, if asked) a rewritten prompt?
 - Is there zero implementation code and zero unrequested template in the reply?

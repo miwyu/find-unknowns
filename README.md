@@ -11,7 +11,7 @@ The quality of agentic coding is bottlenecked by _unknowns_: the gap between wha
 | Your situation                                  | Pattern Claude runs                                                                                     |
 | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
 | New to the domain or this part of the codebase  | **Blind spot pass** — searches the territory, then teaches you what you didn't know to ask              |
-| "I'll know it when I see it" (design, UX, tone) | **Brainstorm & prototype** — several genuinely different cheap mocks to react to                        |
+| "I'll know it when I see it", or scope not yet chosen | **Brainstorm & prototype** — 3–5 cheap mocks to react to, or 5–10 one-line options cheapest-first      |
 | Spec has gaps you could fill if asked           | **Interview** — one question at a time, architecture-changing questions first                           |
 | You can't describe it, but an example exists    | **References** — reads the example and extracts what transfers                                          |
 | Ready to build                                  | **Implementation plan** — decisions first, mechanical work last                                         |
@@ -19,7 +19,7 @@ The quality of agentic coding is bottlenecked by _unknowns_: the gap between wha
 | Work done, needs buy-in                         | **Pitch / explainer** — one artifact retracing the decisions for reviewers                              |
 | Work done, about to merge                       | **Quiz** — a comprehension quiz you should pass before signing off                                      |
 
-The skill is deliberately light-touch: one required question per turn, at most 3–5 surfaced decisions with the rest deferred, and no fill-in templates unless you ask. It always ends with something you can act on — typically a rewritten, sharper version of your original prompt.
+The skill is deliberately light-touch: one required question per turn, at most 3–5 surfaced decisions with the rest deferred, and no fill-in templates unless you ask. It also states the starting point it read from your message, so a wrong read gets corrected before it costs anything. It always ends with something you can act on — typically a rewritten, sharper version of your original prompt.
 
 ## How it's structured
 
