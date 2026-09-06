@@ -42,7 +42,7 @@ Cross-host portability comes first. Existing examples and fixtures are predomina
 | --- | --- | --- |
 | 1 | Shared repository guidance, English/Japanese READMEs, provenance, honest compatibility and benchmark descriptions | Documentation prepared; no runtime changes |
 | 2 | Resolve runtime contradictions, add capability fallbacks, mirror English/Japanese behavior | Revised; static checks pass, behavior verification blocked by environment |
-| 3 | Reproducible host-separated execution with common evaluation definitions and additional cases | Pending |
+| 3 | Reproducible host-separated execution with common evaluation definitions and additional cases | Implemented; tooling checks pass, live model verification blocked |
 | 4 | Clean installation and behavioral verification in both hosts, versioned distribution and license | Pending |
 
 Stage 1 moves historical Claude tooling instructions to [legacy-claude-evaluation.md](legacy-claude-evaluation.md), without claiming to make those tools portable. README installation examples are documentation-based and still need clean-host validation.
@@ -59,12 +59,12 @@ Stage 1 moves historical Claude tooling instructions to [legacy-claude-evaluatio
 - Respect existing authorization and user-directed continuation or cancellation. Clarify plan-artifact writes, quiz stopping, and optional fresh-session handoffs.
 - Correct or clearly distinguish illustrative examples whose infrastructure and performance claims do not match evaluation fixtures.
 
-These changes are implemented in both language trees. Existing assertions were aligned for mock content, authorization semantics, quiz recommendations, and inferred pitch rationale. The suite remains nine cases / 46 assertions. See [validation evidence and limits](stage-2-validation.md); no model behavior pass is claimed.
+These changes are implemented in both language trees. Existing assertions were aligned for mock content, authorization semantics, quiz recommendations, and inferred pitch rationale. At the end of stage 2, the suite had nine cases / 46 assertions. See [validation evidence and limits](stage-2-validation.md); no model behavior pass is claimed.
 
-## Evaluation work queued for stage 3
+## Evaluation work implemented in stage 3
 
-Preserve the nine tracked cases and deliberate fixture defects. Review and promote the four local iteration-9 proposals: mid-build explicit brainstorm, post-merge explicit blind spot pass, empirical capacity uncertainty, and seven reference properties. Those attempted runs failed authentication; they are not evidence of behavior.
+The suite now has 21 bilingual cases / 87 assertions, preserving the nine earlier cases and deliberate fixture defects. The four local iteration-9 proposals are promoted, and cases cover multi-turn transcript replay, existing notes, unavailable evidence, authorized continuation, cancellation, tone comparison, summary scope, and unsaved notes. The 20 trigger queries also have Japanese versions.
 
-Add multi-turn and Japanese coverage, missing-capability and existing-notes cases, and scope/authorization boundaries. The stage 2 assertion changes cover mock-content constancy and the absent admin tier; verify them in the expanded suite and add regression cases for the remaining boundaries.
+The standard-library runner isolates fixture copies, separates host adapters and capability profiles, captures source/input/output provenance, and generates evidence-based grading templates. Infrastructure errors, unsupported capabilities, and ungraded runs never enter the behavior-score denominator. Native selection uses a separate observation template and confusion-matrix scorer; it is not inferred from explicit invocation.
 
-Separate discovery, explicit invocation, behavioral quality, and with/without-skill comparisons. Keep graders' expectations and this repository's fixture guidance out of evaluated agent inputs. Publish execution metadata and evidence sufficient to distinguish skill revisions, subsets, models, hosts, and infrastructure errors. Automate structural checks separately from model-based evaluation.
+Structural checks and runner tests are in CI. See [evaluation instructions](../evals/README.md) and [validation evidence](stage-3-validation.md). Live model behavior remains blocked by the local hosts. Network case 5, native installation/selection, and clean cross-host verification remain stage 4 work.

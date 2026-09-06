@@ -96,11 +96,11 @@ The description deliberately avoids interrupting fully specified or routine work
 
 For hosts without native skills, manually providing the instructions and necessary references is an alternative, not equivalent native support. File access, web access, and artifact rendering vary by host; the revised runtime describes capability fallbacks, whose behavior remains unverified.
 
-The tracked suite contains **nine behavior scenarios with 46 assertions**, plus **20 trigger queries** (ten positive, ten negative). Definitions and fixtures are in [evals/](evals/).
+The tracked suite contains **21 bilingual behavior scenarios with 87 assertions**, plus **20 bilingual trigger queries** (ten positive, ten negative). Definitions and fixtures are in [evals/](evals/).
 
 The often-cited **41/41** result belongs to iteration 7 (2026-07-11), on eight scenarios with one run per configuration, for the then-revised skill on Claude Fable 5 and Claude Sonnet 5. It is not a current-revision or Codex result. Later checks were partial; iteration 9 (2026-09-06) failed authentication on all eight targeted runs and produced no behavior results.
 
-Raw historical runs and patched tooling are local and ignored by Git. A fresh clone does not yet include a reproducible runner or auditable benchmark bundle. See [historical evaluation workflow](docs/legacy-claude-evaluation.md) for the recorded commands and limitations.
+A fresh clone includes a Python standard-library runner, evidence-based grading templates, and structural CI. See [evaluation instructions](evals/README.md) and [stage 3 validation](docs/stage-3-validation.md). Current model runs remain blocked by Claude authentication and a missing Codex executable; no new behavior score is claimed. Raw historical runs and patched tooling remain local and ignored; see the [historical workflow](docs/legacy-claude-evaluation.md).
 
 ## Origin and development
 

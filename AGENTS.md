@@ -20,8 +20,8 @@ the workflow by model or host.
   trees in the same commit whenever runtime instructions or assets change.
 - `assets/implementation-notes-template.md` inside each skill: the template for
   user-facing implementation notes. Reply examples belong in references.
-- `evals/evals.json`: nine behavior scenarios, 46 assertions.
-- `evals/trigger-eval-set.json`: 20 selection queries, ten positive and ten negative.
+- `evals/evals.json`: 21 bilingual behavior scenarios, 87 assertions.
+- `evals/trigger-eval-set.json`: 20 bilingual selection queries, ten positive and ten negative.
 - `evals/files/`: pristine fixtures; copy them into an isolated directory for each run.
 - `docs/`: provenance, migration status, and development documentation.
 - `find-unknowns-workspace/` and `local/`: ignored local history and personal files;
@@ -73,10 +73,12 @@ definitions. Format validation alone does not validate response quality. For
 documentation-only changes, check links, factual claims, and consistency; model
 runs are not required unless the change affects runtime instructions.
 
-The currently available evaluator is a historical Claude plugin workflow with
-untracked local patches. Its commands, constraints, and historical results are in
-`docs/legacy-claude-evaluation.md`. A portable runner and cross-host results are
-pending; no agent or plugin installation is required just to edit docs.
+The tracked Python standard-library runner is `tools/evaluate.py`; instructions
+are in `evals/README.md` and `evals/README.jp.md`. Run `python3 tools/evaluate.py
+validate` and `python3 -m unittest discover -s tests -v` for structural/tooling
+checks. Keep these checks separate from model behavior results. Native discovery
+observations are graded separately from explicit-file-path behavior runs.
+Historical plugin commands remain in `docs/legacy-claude-evaluation.md`.
 
 Keep eval definitions common across hosts and execution details separate. Record
 host/model versions, skill and eval revisions, invocation method, available tools,

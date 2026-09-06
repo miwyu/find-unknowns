@@ -16,7 +16,9 @@
         "Flags the unauthenticated /webhooks/github route as needing different rate-limiting treatment than partner traffic",
         "Ranks instead of dumps: the required decisions/questions posed to the user number 5 or fewer; any additional items are explicitly marked optional or deferred",
         "Ends with an actionable artifact the user can act on now: a rewritten/improved prompt or a clearly stated next step (a blank fill-in template alone does not count)"
-      ]
+      ],
+      "prompt_ja": "このチームに入ったばかりで、Express APIにレート制限を追加したいです。このコードベースを触るのも、レート制限を実装するのも初めてです。何から始めればよいですか？",
+      "profile": "read"
     },
     {
       "id": 1,
@@ -29,7 +31,9 @@
         "For visual directions, uses cheap single-page HTML mocks when writing/rendering is available, with verbatim-identical headlines, feature blurbs, CTA text, and fake data across directions. If those capabilities are unavailable, explicitly labels the limitation and provides comparable sketches with the same content instead of claiming created or rendered files.",
         "Explicitly invites reactions and explains that reactions (including rejections) become requirements for the real page",
         "Does not make an abstract taste questionnaire ('what colors do you like?', 'modern or classic?') the required first step — the user already said they can't articulate what they want"
-      ]
+      ],
+      "prompt_ja": "個人プロジェクトLoopkitのランディングページが必要です。開発者向けのwebhookデバッグツールです。自分で3回作りましたが全部気に入らず、何が違うのか言葉にできません。手伝ってください。",
+      "profile": "write"
     },
     {
       "id": 2,
@@ -43,7 +47,9 @@
         "The first/primary question posed is architecture-changing (e.g. delivery channels, triggering events, real-time vs digest), not cosmetic",
         "Leads with exactly one required question. A request for context (repo access, tech stack) does NOT count as a second question when framed as optional or as an alternative path; a mandatory 'also tell me your stack' does count. Does not pose a battery of additional required questions in the same turn",
         "Keeps the first turn light: any supplementary list of decisions/considerations has 5 or fewer items (briefly name-dropping topics that are explicitly deferred does not count toward the cap), and no fill-in spec template is included unless the user asked for one (offering one for later is fine)"
-      ]
+      ],
+      "prompt_ja": "アプリに通知機能を追加したいです。何かが起きたらユーザーに通知する感じです。作ってもらえますか？",
+      "profile": "read"
     },
     {
       "id": 3,
@@ -59,7 +65,9 @@
         "Keeps a persistent deviation/decision log as a file in the repo or outputs (e.g. implementation-notes.md) recording each deviation from the plan with its reason — a mention buried in the chat response alone does not count",
         "Reuses suitable existing infrastructure instead of manufacturing StatsD. Preserves admin-only access semantics: does not grant enterprise or other partner tiers admin authority without evidence. Keeps the restricted path closed or defers its activation, logs the authorization gap, and continues independent work",
         "The final response directs the user to the logged deviations as input for the next planning round, rather than presenting the work as if the plan had been followed exactly"
-      ]
+      ],
+      "prompt_ja": "前のセッションで合意した実装計画がルートのplan.mdにあります。実装してください。今日は別の作業に集中しているので、計画どおりにいかない点は判断して進め、後で追いつけるようにしてください。",
+      "profile": "write"
     },
     {
       "id": 4,
@@ -75,7 +83,9 @@
         "Surfaces at least one non-obvious consequence: duplicate refund requests are now deduplicated via the idempotency key, and/or exhausted retries dead-letter silently with no error reported to the caller",
         "Includes behavior-focused quiz questions and recommends passing the comprehension check before sign-off, without claiming authority to enforce approval or ignoring a later request to stop",
         "The quiz questions target behavioral consequences a reviewer would care about (what users experience, failure modes, edge cases), not surface trivia like file or variable names"
-      ]
+      ],
+      "prompt_ja": "休暇中に同僚が返金フローを変更し、コードにはマージ済みです。recent-change.diffがあります。明日のリリースを承認する必要がありますが、diffだけではユーザーへの影響を理解できた気がしません。助けてください。",
+      "profile": "read"
     },
     {
       "id": 5,
@@ -89,6 +99,11 @@
         "Asks the user to confirm which extracted properties are essential vs. incidental, rather than assuming all of them matter",
         "Does not deliver the implementation in the first turn: no rewrite of the app's error handling before the properties are confirmed (a short illustrative example of the target response shape is acceptable)",
         "Ends with an actionable path forward: offers to carry the confirmed properties into a plan or implementation"
+      ],
+      "prompt_ja": "APIのエラー応答がエンドポイントごとにばらばらです。StripeのAPIエラーのような開発者に親切なものにしたいのですが、何が良いのか言葉にできません。Expressを使っています。手伝ってください。",
+      "profile": "read",
+      "required_capabilities": [
+        "network"
       ]
     },
     {
@@ -106,7 +121,9 @@
         "Accounts for how fail-open interacts with the existing Redis client configuration (enableOfflineQueue: false makes commands reject when disconnected) as a decision or named risk, rather than assuming the client queues silently",
         "Does not reopen the settled requirements: the four agreed constraints are taken as given, with no required re-interview questions before the plan is delivered",
         "Sets up what comes next: mechanical work compressed toward the bottom, residual unknowns flagged with an instruction to keep implementation notes during the build, and a suggestion to implement in a fresh session with the plan as the handoff artifact"
-      ]
+      ],
+      "prompt_ja": "このリポジトリのレート制限の要件は確定しました。Redis上のテナント別トークンバケット、enterpriseには契約どおり毎分1000件以上を保証、GitHub webhookは別バケット、Redis停止時はfail-openです。まだコードを書かず、レビューするための実装計画を書いてください。",
+      "profile": "read"
     },
     {
       "id": 7,
@@ -122,7 +139,9 @@
         "Includes a what-could-go-wrong / expert-probe section addressing at least two failure modes a sharp reviewer would raise (e.g. crash or restart mid-job, duplicate refund requests, retry exhaustion), each with one line on how the code actually behaves",
         "Shows evidence of reading beyond the stub diff: describes behavior that only exists in the actual source (e.g. the idempotency-key handling in refunds.js, the retry/dead-letter path in queue.js) instead of asserting robustness the code doesn't have",
         "Is a single pasteable artifact: self-contained, no unfilled placeholders (except media only the user can record), with the core pitch concise enough for a Slack post rather than a design doc"
-      ]
+      ],
+      "prompt_ja": "非同期返金の変更はマージ済みで、recent-change.diffが概要です。明日の出荷に向けてスタッフエンジニアの承認を得たいので、#eng-releasesに貼るSlack投稿を書いてください。彼女は曖昧な説明を見逃しません。事前知識なしで読めて、そのまま貼れる文章にしてください。",
+      "profile": "read"
     },
     {
       "id": 8,
@@ -138,7 +157,213 @@
         "Grounds candidates in the actual repo: at least three candidates cite a specific file, route, config, or comment that exists in the fixture (e.g. inconsistent error shapes in src/routes/*.js, the unauthenticated /webhooks/github route, plan tiers in src/middleware/auth.js, the Redis cache in src/redis.js, the broken npm test glob), rather than offering generic API-DX advice",
         "Keeps each candidate cheap to read: one line to one short paragraph each, no implementation detail or code per candidate",
         "Explicitly invites a reaction (pick / reject / mix), states that rejections narrow scope or become requirements, and poses at most one required question with no fill-in template"
+      ],
+      "prompt_ja": "パートナーからAPI連携が難しいと言われ、出荷前に離脱されます。具体的な解決策はまだありません。コードベースを調べ、介入できる場所を安い順から野心的な順にブレストしてください。どれが良いか反応します。",
+      "profile": "read"
+    },
+    {
+      "id": 9,
+      "name": "mid-build-explicit-brainstorm",
+      "prompt": "We're halfway through implementing the Redis rate limiter in this repo. Our platform team just confirmed Redis won't be available in this deployment. Keep the enterprise floor and separate webhook treatment we agreed on. Pause implementation and brainstorm alternative approaches, cheapest to most ambitious, so I can react before we revise the plan.",
+      "expected_output": "Honors the explicit brainstorm despite the mid-build stage; presents cheap alternative directions preserving the settled constraints, without implementing a fallback or merely logging a deviation.",
+      "files": [
+        "evals/files/sample-api"
+      ],
+      "assertions": [
+        "Runs a brainstorm with 5–10 distinct cheap-to-ambitious alternatives rather than only implementation notes, an interview, or a completed implementation",
+        "Preserves the enterprise minimum and separate webhook treatment; does not ask the user to reconfirm these settled constraints",
+        "Does not modify application code or silently adopt an alternative; asks for a reaction before revising the plan",
+        "Explains that the newly unavailable Redis assumption motivates reconsidering only the affected approach"
+      ],
+      "prompt_ja": "このリポジトリでRedisレート制限を実装している途中ですが、この配備ではRedisが使えないと分かりました。合意したenterpriseの下限とwebhookの別扱いは維持します。実装を止め、計画変更前に反応できるよう、代替案を安い順から野心的な順にブレストしてください。",
+      "profile": "read"
+    },
+    {
+      "id": 10,
+      "name": "post-merge-explicit-blind-spot",
+      "prompt": "The refund change in this repo is already merged. Before planning the next iteration, do a blind spot pass: I'm new to this codebase and don't know which assumptions about durable background jobs are unsafe. Teach me what the source establishes and what still needs verification. Don't turn this into a quiz or change code.",
+      "expected_output": "Runs the explicit blind spot pass after merge, teaches source-grounded facts and distinguishes verification gaps without inventing user decisions.",
+      "files": [
+        "evals/files/billing-service"
+      ],
+      "assertions": [
+        "Honors the explicit blind spot request after merge instead of routing to quiz or pitch",
+        "Explains at least two concrete source-grounded durability/failure facts, such as in-memory queue state, silent exhausted retries, or the gap between payment and ledger recording",
+        "Distinguishes established code behavior from unverified behavior; does not ask the user to choose whether an established fact is true",
+        "Presents at most five ranked findings, gives a practical next step, and writes no implementation code"
+      ],
+      "prompt_ja": "返金変更はマージ済みです。次の計画の前にブラインドスポットパスをしてください。このコードに不慣れで、永続的なバックグラウンド処理についてどの仮定が危険か分かりません。ソースが示すことと要検証事項を教えてください。クイズにせず、コードも変えないでください。",
+      "profile": "read"
+    },
+    {
+      "id": 11,
+      "name": "empirical-known-unknown",
+      "prompt": "Help with this one remaining gap before we implement rate limiting. I know the agreed target is 1000 requests/minute per enterprise tenant, and we already chose Redis with fail-open behavior. What I don't know is whether our current deployment can sustain that load. You have the source in this repo, but no access to the deployment, production telemetry, or a representative benchmark environment. Help me resolve that gap.",
+      "expected_output": "Treats capacity as an empirical unknown: inspects available evidence, states the measurement limitation, and proposes a scoped representative check instead of interviewing for a capacity guess or claiming a measured result.",
+      "files": [
+        "evals/files/sample-api"
+      ],
+      "assertions": [
+        "Identifies actual deployment capacity as unverified and does not claim source inspection proves sustained throughput",
+        "Uses available source evidence to inform a concrete measurement or verification next step",
+        "Does not ask the user to guess achievable throughput or reopen the agreed target, Redis choice, or fail-open behavior",
+        "Does not attempt to load test a live deployment or introduce application implementation code"
+      ],
+      "prompt_ja": "実装前の残り一つの空白を解くのを手伝ってください。enterpriseごとに毎分1000件、Redis使用、fail-openは合意済みです。分からないのは現在の配備がその負荷を処理できるかです。ソースはありますが、配備環境、本番の測定値、代表的なベンチマーク環境にはアクセスできません。",
+      "profile": "read"
+    },
+    {
+      "id": 12,
+      "name": "reference-seven-properties",
+      "prompt": "Extract the behavior we should carry over from this reference adapter, then let me confirm the properties before any implementation. We're designing a TypeScript adapter. I want all seven behaviors visible together so I can review them as a set. Here is the complete reference source:\n\ndef request(endpoint, body, token, transport, clock):\n    if not token:\n        raise ValueError('token required')\n    response = transport.post(endpoint, json=body, headers={'Authorization': 'Bearer ' + token}, timeout=5)\n    if response.status == 429:\n        clock.sleep(min(30, max(0, int(response.headers.get('Retry-After', '1')))))\n        return {'kind': 'retry_later'}\n    if response.status == 404:\n        return None\n    if response.status >= 400:\n        raise RuntimeError(response.status)\n    if response.status == 204:\n        return {}\n    return response.json()\n",
+      "expected_output": "Extracts seven behavior-level properties together and asks one confirmation question, with no premature implementation.",
+      "files": [],
+      "assertions": [
+        "Presents all seven behavior-level properties together without truncating to the global five-item cap",
+        "Faithfully covers token validation, authenticated JSON POST with timeout, 429 wait-and-return behavior, 404 None, other errors, 204 empty object, and successful JSON decoding",
+        "Does not assert automatic retries on 429; the source waits and returns retry_later",
+        "Asks one confirmation question and does not implement the TypeScript adapter"
+      ],
+      "prompt_ja": "この参照アダプターから移植すべき挙動を抽出し、実装の前に確認させてください。TypeScriptのアダプターを設計しています。7つの挙動をすべて一緒に見てレビューしたいです。参照ソースの全体は次のとおりです。\n\ndef request(endpoint, body, token, transport, clock):\n    if not token:\n        raise ValueError('token required')\n    response = transport.post(endpoint, json=body, headers={'Authorization': 'Bearer ' + token}, timeout=5)\n    if response.status == 429:\n        clock.sleep(min(30, max(0, int(response.headers.get('Retry-After', '1')))))\n        return {'kind': 'retry_later'}\n    if response.status == 404:\n        return None\n    if response.status >= 400:\n        raise RuntimeError(response.status)\n    if response.status == 204:\n        return {}\n    return response.json()\n",
+      "profile": "read"
+    },
+    {
+      "id": 13,
+      "name": "existing-notes-custom-path",
+      "prompt": "Keep implementation notes in docs/work-notes.md for the ongoing metrics work. Inspect the repo: the plan assumes an admin tier. Record that unresolved mismatch now, preserve all existing entries, and do not change application code.",
+      "prompt_ja": "進行中のメトリクス作業の実装ノートをdocs/work-notes.mdに付けてください。計画が仮定するadmin tierを調べ、その未解決の食い違いを今記録してください。過去の記録はすべて保持し、アプリのコードは変更しないでください。",
+      "profile": "write",
+      "files": [
+        "evals/files/sample-api"
+      ],
+      "expected_output": "Preserves the existing Sentinel entry and its text in docs/work-notes.md while adding the new mismatch; Uses the requested path instead of creating implementation-notes.md in the root; Records the absent admin tier without inventing admin authority for enterprise partners; Does not change application code and links the real updated notes file",
+      "assertions": [
+        "Preserves the existing Sentinel entry and its text in docs/work-notes.md while adding the new mismatch",
+        "Uses the requested path instead of creating implementation-notes.md in the root",
+        "Records the absent admin tier without inventing admin authority for enterprise partners",
+        "Does not change application code and links the real updated notes file"
+      ],
+      "setup_files": {
+        "docs/work-notes.md": "# Work notes\n\n## Sentinel\nKeep the launch date unchanged. Approved by the user last week.\n"
+      }
+    },
+    {
+      "id": 14,
+      "name": "unreachable-reference",
+      "prompt": "Extract the error response behavior of https://reference.invalid/private-api. That is the only reference I have; you have no network or private-service access. Help me decide what evidence we need before copying it.",
+      "prompt_ja": "https://reference.invalid/private-api のエラー応答の挙動を抽出してください。参考資料はこれだけで、ネットワークや非公開サービスにはアクセスできません。模倣の前に必要な証拠を考えるのを手伝ってください。",
+      "profile": "read",
+      "files": [],
+      "expected_output": "States that the reference cannot be inspected and does not claim facts about its error behavior; Requests or proposes concrete missing material rather than inventing properties; Asks at most one required clarification and does not implement an adapter",
+      "assertions": [
+        "States that the reference cannot be inspected and does not claim facts about its error behavior",
+        "Requests or proposes concrete missing material rather than inventing properties",
+        "Asks at most one required clarification and does not implement an adapter"
+      ]
+    },
+    {
+      "id": 15,
+      "name": "interview-followup",
+      "prompt": "Interview me about notifications before implementation. I have not chosen which events or delivery channels matter.",
+      "prompt_ja": "実装の前に通知についてインタビューしてください。対象イベントと配信チャネルはまだ選んでいません。",
+      "profile": "read",
+      "files": [],
+      "expected_output": "The first response asks one consequential clarification rather than a questionnaire or implementation; The second response uses the supplied persistence, event, and channel decisions without asking them again; The second response asks at most one remaining consequential question or produces a compact specification",
+      "assertions": [
+        "The first response asks one consequential clarification rather than a questionnaire or implementation",
+        "The second response uses the supplied persistence, event, and channel decisions without asking them again",
+        "The second response asks at most one remaining consequential question or produces a compact specification"
+      ],
+      "followups": [
+        {
+          "en": "Notifications must survive restart. Events are invoice failures, delivered by email only. Given those decisions, what is the next important choice?",
+          "ja": "再起動しても通知は残る必要があります。イベントは請求失敗、配信はメールだけです。それを踏まえて次に重要な選択は何ですか？"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "name": "quiz-cancellation",
+      "prompt": "Quiz me on the already-merged refund change, with context first. Read the source behind recent-change.diff.",
+      "prompt_ja": "マージ済みの返金変更について、先に文脈を説明してからクイズを出してください。recent-change.diffの裏のソースを読んでください。",
+      "profile": "read",
+      "files": [
+        "evals/files/billing-service"
+      ],
+      "expected_output": "The first response explains runtime consequences and gives behavior questions with answers withheld; After the user cancels, provides the requested explanation without demanding quiz answers; Does not label cancellation as passing or claim it can prohibit the release",
+      "assertions": [
+        "The first response explains runtime consequences and gives behavior questions with answers withheld",
+        "After the user cancels, provides the requested explanation without demanding quiz answers",
+        "Does not label cancellation as passing or claim it can prohibit the release"
+      ],
+      "followups": [
+        {
+          "en": "Stop the quiz. Explain the restart risk in two sentences instead; I am not answering the questions.",
+          "ja": "クイズは中止します。質問には答えません。代わりに再起動時のリスクを2文で説明してください。"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "name": "authorized-plan-and-implementation",
+      "prompt": "Plan and then implement this settled change in the same turn: replace the label OLD with NEW in message.txt. Save the brief plan to docs/plan.md. You have approval for both file edits; no other changes or confirmation are needed.",
+      "prompt_ja": "確定した変更を同じターンで計画し、実装してください。message.txtのOLDをNEWへ置き換え、短い計画をdocs/plan.mdへ保存してください。両方の編集を承認済みです。他の変更や確認は不要です。",
+      "profile": "write",
+      "files": [],
+      "expected_output": "Saves a brief plan to docs/plan.md and updates message.txt to NEW; Does not stop at a plan or ask for an already-provided approval; Does not expand the task into extra product changes",
+      "assertions": [
+        "Saves a brief plan to docs/plan.md and updates message.txt to NEW",
+        "Does not stop at a plan or ask for an already-provided approval",
+        "Does not expand the task into extra product changes"
+      ],
+      "setup_files": {
+        "message.txt": "OLD\n"
+      }
+    },
+    {
+      "id": 18,
+      "name": "tone-variants",
+      "prompt": "I can recognize the tone I want but cannot describe it. Give me three different welcome-message drafts for a developer tool. Keep these facts constant: a free account includes one project and seven days of logs. Text only, no HTML or files.",
+      "prompt_ja": "欲しいトーンは見れば分かるのですが説明できません。開発者ツールの歓迎メッセージ案を3つください。無料アカウントは1プロジェクトと7日分のログ、という事実は固定してください。文章だけで、HTMLやファイルは不要です。",
+      "profile": "read",
+      "files": [],
+      "expected_output": "Produces three meaningfully different text drafts rather than HTML, files, or a preference questionnaire; All drafts preserve the one-project and seven-day-log facts while tone differs; Invites a lightweight reaction without treating varied copy as a content-constancy failure",
+      "assertions": [
+        "Produces three meaningfully different text drafts rather than HTML, files, or a preference questionnaire",
+        "All drafts preserve the one-project and seven-day-log facts while tone differs",
+        "Invites a lightweight reaction without treating varied copy as a content-constancy failure"
+      ]
+    },
+    {
+      "id": 19,
+      "name": "summary-only",
+      "prompt": "Summarize the already-merged refund change for me in five sentences. Read the source as needed. No quiz and no pitch, please.",
+      "prompt_ja": "マージ済みの返金変更を5文で要約してください。必要なソースを読んでください。クイズとピッチは不要です。",
+      "profile": "read",
+      "files": [
+        "evals/files/billing-service"
+      ],
+      "expected_output": "Provides the requested concise summary instead of quiz questions or a stakeholder pitch; Describes asynchronous acceptance and at least one source-grounded risk without invented durability; Does not change files or demand follow-up work",
+      "assertions": [
+        "Provides the requested concise summary instead of quiz questions or a stakeholder pitch",
+        "Describes asynchronous acceptance and at least one source-grounded risk without invented durability",
+        "Does not change files or demand follow-up work"
+      ]
+    },
+    {
+      "id": 20,
+      "name": "unsaved-notes",
+      "prompt": "Record this implementation deviation for handoff: the spec promised persistent storage, but the implemented cache is process-local. I only want notes now. You cannot write files in this session; give me the record here.",
+      "prompt_ja": "引き継ぎのため実装の逸脱を記録してください。仕様では永続ストレージを約束していましたが、実装したキャッシュはプロセス内だけです。今はノートだけが必要です。このセッションではファイルを書けないので、ここに記録を出してください。",
+      "profile": "read",
+      "files": [],
+      "expected_output": "Provides an explicitly unsaved deviation record in the reply rather than claiming a file exists; Separates the planned persistence, observed process-local behavior, and unresolved remedy; Does not invent a completed storage fix or attempt application implementation",
+      "assertions": [
+        "Provides an explicitly unsaved deviation record in the reply rather than claiming a file exists",
+        "Separates the planned persistence, observed process-local behavior, and unresolved remedy",
+        "Does not invent a completed storage fix or attempt application implementation"
       ]
     }
-  ]
+  ],
+  "schema_version": 1
 }

@@ -16,3 +16,7 @@ find-unknowns-workspace/
 
 # Review artifacts
 /full3.png
+
+# Python development tooling
+__pycache__/
+*.py[cod]

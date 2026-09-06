@@ -1,22 +1,122 @@
 [
-  {"query": "before I start: I'm adding SAML SSO to our Rails app and I've never touched the auth code in this repo. can you do a blind spot pass so I know what I'm walking into?", "should_trigger": true},
-  {"query": "ok i need to move our cron jobs to some kind of background queue system (sidekiq? celery? bullmq? no idea) — never done async job stuff before. where do i even start", "should_trigger": true},
-  {"query": "I want to add multiplayer to my game. players should see each other moving around in real time. can you build that?", "should_trigger": true},
-  {"query": "need a landing page for my SaaS. i'm a data engineer, i can't describe what i want visually, but i'll know it when i see it", "should_trigger": true},
-  {"query": "interview me about this feature before you build anything — it's a billing settings page for our Stripe subscriptions and I haven't thought through the details yet", "should_trigger": true},
-  {"query": "every time I ask you for changes to this dashboard I get something I don't want and I can't tell what I'm failing to specify. help me prompt better", "should_trigger": true},
-  {"query": "I have to color grade this promo video for work and I genuinely don't know what color grading even is. teach me enough to direct you properly", "should_trigger": true},
-  {"query": "my boss wants 'analytics' added to our internal tool (flask app in ~/work/insights). that's literally the whole spec lol. what do we do", "should_trigger": true},
-  {"query": "you just rewrote a big chunk of the payments flow — before I merge this I want to be sure I actually understand what changed and why. quiz me or something", "should_trigger": true},
-  {"query": "we're losing users somewhere in onboarding and I'm not sure what the right fix even looks like. can you poke around the codebase and brainstorm intervention points with me?", "should_trigger": true},
-  {"query": "add a rate limiter to src/middleware/: 100 req/min per API key, redis store (use the client in src/redis.js), fail open on redis errors, 429 with Retry-After. use rate-limiter-flexible", "should_trigger": false},
-  {"query": "what's the difference between token bucket and sliding window rate limiting? which does nginx use?", "should_trigger": false},
-  {"query": "tests are failing with ECONNREFUSED 127.0.0.1:6379, redis is definitely running in docker. figure out why and fix it", "should_trigger": false},
-  {"query": "some rows in the users table have the string 'unknown' in the country column — find all the unknown values and replace them with NULL, there's a migration folder in db/", "should_trigger": false},
-  {"query": "write me interview questions for next week's user research sessions about our onboarding flow, ~30 min sessions, 6 participants", "should_trigger": false},
-  {"query": "rename parseDataAndValidateStuff in utils/parser.ts to something better and update the call sites", "should_trigger": false},
-  {"query": "our driving assistance app needs a blind spot detection feature using the rear camera feed — opencv is already in the project", "should_trigger": false},
-  {"query": "here's the spec we already agreed on (docs/spec.md) — implement phase 1 exactly as written please, no need to re-litigate the decisions, I'm in a hurry", "should_trigger": false},
-  {"query": "add unit tests for utils/date.ts, make sure DST edge cases and leap years are covered", "should_trigger": false},
-  {"query": "i don't know why prettier and eslint keep fighting over semicolons in this repo, just make them agree with each other", "should_trigger": false}
+  {
+    "query": "before I start: I'm adding SAML SSO to our Rails app and I've never touched the auth code in this repo. can you do a blind spot pass so I know what I'm walking into?",
+    "should_trigger": true,
+    "id": 0,
+    "query_ja": "着手前に確認したいです。RailsアプリにSAML SSOを追加しますが、このリポジトリの認証コードは初めて触ります。盲点を調べて、何に注意すべきか教えてください。"
+  },
+  {
+    "query": "ok i need to move our cron jobs to some kind of background queue system (sidekiq? celery? bullmq? no idea) — never done async job stuff before. where do i even start",
+    "should_trigger": true,
+    "id": 1,
+    "query_ja": "cronジョブをバックグラウンドキューに移したいです。Sidekiq、Celery、BullMQのどれがよいかも分からず、非同期ジョブは初めてです。何から始めればよいですか。"
+  },
+  {
+    "query": "I want to add multiplayer to my game. players should see each other moving around in real time. can you build that?",
+    "should_trigger": true,
+    "id": 2,
+    "query_ja": "ゲームをマルチプレイにしたいです。プレイヤー同士の動きがリアルタイムに見えるように作ってもらえますか。"
+  },
+  {
+    "query": "need a landing page for my SaaS. i'm a data engineer, i can't describe what i want visually, but i'll know it when i see it",
+    "should_trigger": true,
+    "id": 3,
+    "query_ja": "SaaSのランディングページが必要です。私はデータエンジニアで、見た目の希望を言葉にできませんが、見れば判断できると思います。"
+  },
+  {
+    "query": "interview me about this feature before you build anything — it's a billing settings page for our Stripe subscriptions and I haven't thought through the details yet",
+    "should_trigger": true,
+    "id": 4,
+    "query_ja": "実装する前に、この機能について私にインタビューしてください。Stripeサブスクリプションの請求設定ページで、詳細はまだ考えていません。"
+  },
+  {
+    "query": "every time I ask you for changes to this dashboard I get something I don't want and I can't tell what I'm failing to specify. help me prompt better",
+    "should_trigger": true,
+    "id": 5,
+    "query_ja": "このダッシュボードの変更を頼むたびに意図と違うものができ、何を指定し損ねているか分かりません。指示の仕方を改善したいです。"
+  },
+  {
+    "query": "I have to color grade this promo video for work and I genuinely don't know what color grading even is. teach me enough to direct you properly",
+    "should_trigger": true,
+    "id": 6,
+    "query_ja": "仕事の宣伝動画でカラーグレーディングが必要ですが、その意味すら分かりません。適切に指示できる程度に教えてください。"
+  },
+  {
+    "query": "my boss wants 'analytics' added to our internal tool (flask app in ~/work/insights). that's literally the whole spec lol. what do we do",
+    "should_trigger": true,
+    "id": 7,
+    "query_ja": "上司から社内ツール（~/work/insights のFlaskアプリ）に「分析機能」を付けてと言われました。仕様はそれだけです。どう進めましょう。"
+  },
+  {
+    "query": "you just rewrote a big chunk of the payments flow — before I merge this I want to be sure I actually understand what changed and why. quiz me or something",
+    "should_trigger": true,
+    "id": 8,
+    "query_ja": "先ほど決済フローを大きく書き換えてもらいました。マージ前に変更内容と理由を本当に理解したいので、クイズなどで確認してください。"
+  },
+  {
+    "query": "we're losing users somewhere in onboarding and I'm not sure what the right fix even looks like. can you poke around the codebase and brainstorm intervention points with me?",
+    "should_trigger": true,
+    "id": 9,
+    "query_ja": "オンボーディングのどこかでユーザーが離脱しています。よい解決策が思い浮かびません。コードを調べ、改善できる箇所を一緒にブレストしてください。"
+  },
+  {
+    "query": "add a rate limiter to src/middleware/: 100 req/min per API key, redis store (use the client in src/redis.js), fail open on redis errors, 429 with Retry-After. use rate-limiter-flexible",
+    "should_trigger": false,
+    "id": 10,
+    "query_ja": "src/middleware/ にAPIキーごと毎分100リクエストの制限を追加してください。src/redis.js のクライアントを使い、Redis障害時は通過、超過時は429とRetry-After。rate-limiter-flexibleを使ってください。"
+  },
+  {
+    "query": "what's the difference between token bucket and sliding window rate limiting? which does nginx use?",
+    "should_trigger": false,
+    "id": 11,
+    "query_ja": "トークンバケット方式とスライディングウィンドウ方式のレート制限は何が違いますか。nginxはどちらですか。"
+  },
+  {
+    "query": "tests are failing with ECONNREFUSED 127.0.0.1:6379, redis is definitely running in docker. figure out why and fix it",
+    "should_trigger": false,
+    "id": 12,
+    "query_ja": "テストがECONNREFUSED 127.0.0.1:6379で失敗します。RedisはDockerで確実に動いています。原因を調べて直してください。"
+  },
+  {
+    "query": "some rows in the users table have the string 'unknown' in the country column — find all the unknown values and replace them with NULL, there's a migration folder in db/",
+    "should_trigger": false,
+    "id": 13,
+    "query_ja": "usersテーブルのcountry列に文字列unknownが入った行があります。すべて探してNULLに置き換えてください。db/にマイグレーションがあります。"
+  },
+  {
+    "query": "write me interview questions for next week's user research sessions about our onboarding flow, ~30 min sessions, 6 participants",
+    "should_trigger": false,
+    "id": 14,
+    "query_ja": "来週のオンボーディングに関するユーザー調査で使うインタビュー質問を作ってください。1回30分程度、参加者は6人です。"
+  },
+  {
+    "query": "rename parseDataAndValidateStuff in utils/parser.ts to something better and update the call sites",
+    "should_trigger": false,
+    "id": 15,
+    "query_ja": "utils/parser.tsのparseDataAndValidateStuffを分かりやすい名前に変え、呼び出し箇所も更新してください。"
+  },
+  {
+    "query": "our driving assistance app needs a blind spot detection feature using the rear camera feed — opencv is already in the project",
+    "should_trigger": false,
+    "id": 16,
+    "query_ja": "運転支援アプリに後方カメラ映像を使う死角検知機能が必要です。OpenCVは導入済みです。"
+  },
+  {
+    "query": "here's the spec we already agreed on (docs/spec.md) — implement phase 1 exactly as written please, no need to re-litigate the decisions, I'm in a hurry",
+    "should_trigger": false,
+    "id": 17,
+    "query_ja": "docs/spec.mdが合意済みの仕様です。そのとおり第1段階を実装してください。急いでいるので決定済みの内容を議論し直す必要はありません。"
+  },
+  {
+    "query": "add unit tests for utils/date.ts, make sure DST edge cases and leap years are covered",
+    "should_trigger": false,
+    "id": 18,
+    "query_ja": "utils/date.tsにユニットテストを追加してください。夏時間の境界と閏年を網羅してください。"
+  },
+  {
+    "query": "i don't know why prettier and eslint keep fighting over semicolons in this repo, just make them agree with each other",
+    "should_trigger": false,
+    "id": 19,
+    "query_ja": "このリポジトリでPrettierとESLintがセミコロンについて競合する理由は分かりませんが、設定を揃えてください。"
+  }
 ]
