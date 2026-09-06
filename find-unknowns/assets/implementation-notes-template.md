@@ -1,11 +1,10 @@
 # Implementation notes
 
 <!--
-Copy this file into the working repository as `implementation-notes.md` at the
-start of implementation. Fill Context in immediately; add Deviations and Open
-questions entries the moment they happen, not at the end of the session.
-This file is input for the next planning round — write for the human who
-reads it after the session.
+Starting structure for new notes. Default: implementation-notes.md; honor a requested path.
+Inspect existing notes first; append without overwriting prior records.
+Fill Context immediately and record deviations when they occur. If writing is unavailable,
+provide the record as explicitly unsaved text.
 -->
 
 ## Context
@@ -27,7 +26,6 @@ contact with reality, replace this comment with: "None — plan survived contact
 
 ## Open questions
 
-<!-- Questions only the user can answer. Log here and keep going, unless the
-answer changes something expensive to reverse — then stop and ask. -->
+<!-- Ask for unresolved consequential choices or missing permission. Continue independent authorized work; do not re-request existing approval. -->
 
 - <!-- question — and what was done provisionally in the meantime -->

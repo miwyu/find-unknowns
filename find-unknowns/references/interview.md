@@ -1,5 +1,7 @@
 # Interview (known unknowns)
 
+Counts, formats, stop conditions, and self-checks are defaults subject to Step 4 of `SKILL.md`.
+
 The user has a spec with gaps they could fill if asked. Ask questions **one at a time** — each answer should inform the next question. A questionnaire forfeits the thing that makes interviewing work: your second question gets to be smarter because of their first answer.
 
 ## When to apply
@@ -8,7 +10,7 @@ The user has a spec with gaps they could fill if asked. Ask questions **one at a
 - The user says "interview me" or "ask me about anything ambiguous".
 - A blind spot pass or brainstorm has finished and residual decisions remain that only the user can make.
 
-Redirects: if the user *couldn't* answer your questions (unfamiliar domain) → blind spot pass. If they could only answer by seeing options → brainstorm & prototype. If they named an existing example → reference hunting.
+Redirects: if evidence or measurement is needed, or the domain is unfamiliar → blind spot pass; do not ask the user to guess an empirical result. If they could only answer by seeing options → brainstorm & prototype. If they named an existing example → reference hunting.
 
 ## Inputs
 
@@ -17,7 +19,7 @@ Redirects: if the user *couldn't* answer your questions (unfamiliar domain) → 
 
 ## Procedure
 
-1. List the open questions privately and rank by architectural leverage: which answer would most change what gets built?
+1. First inspect available context and remove questions answered by evidence or earlier user decisions. List the remaining user choices privately and rank by architectural leverage: which answer would most change what gets built?
 2. First reply: exactly **one required question** — the top-ranked one — with a one-line reason it comes first ("this decides whether we need a queue at all").
 3. Optionally offer the territory shortcut in the same reply: "if you can share the repo, I'll infer most of this myself; if not, just answer this one." That offer is not a second question.
 4. After each answer, re-rank and ask the next single question, visibly informed by the previous answer. Cosmetic details come last or never.
@@ -37,7 +39,7 @@ The confirmed spec from the final playback — phrased so the user can say "yes,
 ## Stop conditions
 
 - Stop asking when the remaining ambiguities wouldn't change what you'd build — then deliver the playback.
-- Stop the turn after each question; never batch questions to save round-trips.
+- Await the answer before dependent follow-up questions. If the user delegates remaining choices or requests continuation, proceed within that scope; do not insist on another confirmation of settled answers.
 
 ## Good vs. bad example
 

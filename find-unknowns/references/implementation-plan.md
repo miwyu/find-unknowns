@@ -1,5 +1,7 @@
 # Implementation plan
 
+Counts, formats, stop conditions, and self-checks are defaults subject to Step 4 of `SKILL.md`.
+
 Write the plan to surface decisions, not to demonstrate thoroughness. The user reviewing the plan is the point: order it so their attention lands where their input matters — they can only veto what they can see.
 
 ## When to apply
@@ -7,7 +9,7 @@ Write the plan to surface decisions, not to demonstrate thoroughness. The user r
 - Discovery is done (or was never needed), requirements are settled, and the user wants decisions surfaced before code is written.
 - The user asks for a plan, or for "what should I review before you start".
 
-Redirects: if remaining ambiguities would change the architecture → interview first; the plan is the exit from discovery, not the entry. Settled requirements are inputs — do not re-open them with required questions.
+Redirects: consequential choices only the user can settle → interview. Missing empirical evidence → blind spot pass or a conditional plan with a verification step. Preserve settled requirements unless new evidence invalidates an affected premise.
 
 ## Inputs
 
@@ -24,15 +26,15 @@ Redirects: if remaining ambiguities would change the architecture → interview 
 
 ## First-turn contract
 
-Deliver the plan document itself (markdown in chat, or a file if asked) in this exact section order:
+Deliver the plan document itself (markdown in chat, or a file if asked) in this default order:
 
 1. **Decisions for your review** — **3–5 items**, each: what I chose / what I rejected / why, grounded in the actual code.
 2. **Sequence** — the build order, one line per step.
-3. **Mechanical work** — compressed to **at most 6 lines**, at the bottom, phrased as outcomes ("extract the validation helper"), not step-by-step instructions: the builder is trusted here and needs room to pivot when the territory disagrees.
-4. **Known residual unknowns** — what will only surface mid-build + the implementation-notes instruction.
+3. **Known residual unknowns** — what will only surface mid-build + the implementation-notes instruction.
+4. **Mechanical work** — compressed to **at most 6 lines**, after residual unknowns at the bottom, phrased as outcomes ("extract the validation helper"), not step-by-step instructions: the builder is trusted here and needs room to pivot when the territory disagrees.
 5. One closing line suggesting the fresh-session handoff with this plan as the artifact.
 
-No required questions before the plan, and no implementation code — short illustrative interface or config sketches inside the plan are fine; files written to the repo are not.
+Deliver the plan without re-interviewing settled requirements. Saving the requested plan file is allowed; illustrative sketches are allowed. A plan-only request does not authorize implementation code.
 
 ## Deliverable
 
@@ -40,12 +42,12 @@ The plan document, ready for the user to veto line by line. If they'd scroll pas
 
 ## Stop conditions
 
-- Stop at the delivered plan; do not start implementing in the same turn, even if the plan feels obvious.
-- If reading the code reveals an ambiguity that would change the architecture, stop and ask that one question instead of shipping a plan built on a guess.
+- For a plan-only request, stop at the delivered plan. If the user has already requested planning followed by implementation, continue within that authorization once no consequential user choices remain.
+- If reading the code reveals an ambiguity that would change the architecture, identify whether a user choice or evidence is missing. Ask for a necessary user choice; otherwise investigate or mark a conditional plan and the verification needed.
 
 ## Good vs. bad example
 
-**Good** (top of the plan):
+**Good** (illustrative future design, not a claim about the refund fixture):
 
 > **Decisions for your review** (most likely to change under your eyes):
 >

@@ -1,5 +1,7 @@
 # Brainstorm & prototype (unknown knowns)
 
+Counts, formats, stop conditions, and self-checks are defaults subject to Step 4 of `SKILL.md`.
+
 When the user only knows what they want by reacting to it, generate things to react to. The point is to surface taste and requirements they can't articulate — cheaply, before implementation makes them expensive. Unknown knowns discovered mid-implementation force rework; discovered here they cost one rejected sketch. The same pattern opens a session whose scope isn't chosen yet: a wide, cheap sweep of options lets the user pick a direction before anything is built.
 
 ## When to apply
@@ -13,14 +15,14 @@ Redirects: if the user **named** an existing example ("like X") → reference hu
 ## Inputs
 
 - The user's request and any rejected attempts or reactions they've already reported.
-- The dimension of taste in question (layout? density? tone? approach?) — if unclear, that's this pattern's one allowed question, asked alongside the candidates or in the same turn.
+- The dimension of taste in question (layout? density? tone? approach?) — infer a useful dimension when possible. If a required clarification is needed, defer the reaction question until it is answered.
 - Which mode fits: **mock mode** (taste — layouts, tone, ergonomics; the user needs something to look at) or **list mode** (scope — where to intervene, what to build first; the user needs a ranked list).
 
 ## Procedure
 
-1. Fix the dimension the candidates will vary on. Everything else stays constant so the reaction isolates taste. In mock mode "constant" is countable: **the same headline, the same feature blurbs, the same CTA text, and the same fake data, verbatim, in every candidate** — only layout, typography, color, density, and ordering vary. If what you want to vary is the copy or tone itself, say so and hold the layout constant instead; never vary both at once.
+1. Fix the dimension the candidates will vary on. Everything else stays constant so the reaction isolates taste. In mock mode "constant" is countable: **the same headline, the same feature blurbs, the same CTA text, and the same fake data, verbatim, in every candidate** — only layout, typography, color, density, and ordering vary. If varying copy or tone, say so and hold layout and factual content constant instead. The verbatim-copy check applies only to visual comparisons.
 2. Produce genuinely different directions — different layouts, metaphors, or ambition levels, not variations on one idea. Variations waste the user's reaction on things they'd have converged to anyway. **Mock mode: 3–5 directions. List mode: 5–10 one-line candidates, ordered cheapest to most ambitious**, each tied to something you found in the codebase when there is one (search it first).
-3. Keep every candidate cheap by construction: a single self-contained HTML file with hard-coded fake data (mock mode), or one line to one paragraph per candidate (list mode). No backend, no build step, no real integration — if a candidate needs one, describe it instead of building it.
+3. Keep every candidate cheap by construction: an artifact matching the dimension (a self-contained HTML page with fake data for visual UI, text variants for tone, usage sketches for an API), or one line to one paragraph per candidate (list mode). No backend, no build step, no real integration — if a candidate needs one, describe it instead of building it.
 4. Ask the user to react: pick, reject, mix — one sentence is enough.
 5. After they react, translate the reactions into explicit requirements ("you rejected all the dense layouts, so information density is a real constraint") and confirm them. This translation is the deliverable; the mocks are scaffolding.
 
@@ -37,7 +39,7 @@ First turn: the candidate set. After reactions: a confirmable list of revealed r
 
 ## Stop conditions
 
-- Stop generating at 5 mocks or 10 list candidates; more dilutes the reaction.
+- Use up to 5 mocks or 10 list candidates by default; honor explicit counts and do not pad a smaller useful set.
 - Stop the pattern when the user's reactions have been played back as requirements and confirmed — then hand off to interview (if user-only decisions remain) or to planning. If the user names an existing example mid-pattern, switch to reference hunting.
 
 ## Good vs. bad example
@@ -75,7 +77,7 @@ The bad version commits to one direction chosen by generic best practice, wires 
 ## Self-check
 
 - Do I have 3–5 mocks (mock mode) or 5–10 one-line candidates ordered cheapest-first (list mode), each a genuinely different direction rather than a variation?
-- Mock mode: are the headline, feature blurbs, CTA text, and fake data verbatim-identical across candidates, with only the chosen visual dimension varying?
+- For visual comparisons, is content verbatim-identical? For copy/tone comparisons, are layout and factual content constant?
 - Is every candidate fake-data, no real wiring, no build step?
 - Can the user react in one sentence?
 - Did I avoid making abstract taste questions a required step?

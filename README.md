@@ -19,7 +19,7 @@ The quality of agentic coding is bottlenecked by _unknowns_: the gap between wha
 | Work done, needs buy-in                         | **Pitch / explainer** — one artifact retracing the decisions for reviewers                              |
 | Work done, about to merge                       | **Quiz** — a comprehension quiz you should pass before signing off                                      |
 
-The skill aims to keep discovery lightweight: prioritize the decisions that matter, ask clarifying questions one at a time, and avoid unrequested fill-in templates. It states the starting point inferred from your message and ends with an actionable next step. The current runtime still has conflicting global and pattern-specific limits; resolving those is the next migration stage, described in [design and provenance](docs/design.md).
+The skill aims to keep discovery lightweight: prioritize the decisions that matter, ask clarifying questions one at a time, and avoid unrequested fill-in templates. It states the starting point inferred from your message and ends with an actionable next step. Shared defaults now distinguish clarifications from requested artifacts and respect explicit scope and counts. The revision still needs behavioral verification; see [stage 2 validation](docs/stage-2-validation.md).
 
 ## How it's structured
 
@@ -94,7 +94,7 @@ The description deliberately avoids interrupting fully specified or routine work
 | Claude Code | Historical behavior evaluations on earlier skill revisions | Current-revision installation and full behavior verification |
 | Other Agent Skills hosts | Common format is the intended portability boundary | Host-specific discovery, tool access, and behavior verification |
 
-For hosts without native skills, manually providing the instructions and necessary references is an alternative, not equivalent native support. File access, web access, and artifact rendering vary by host; capability fallbacks remain part of the planned runtime revision.
+For hosts without native skills, manually providing the instructions and necessary references is an alternative, not equivalent native support. File access, web access, and artifact rendering vary by host; the revised runtime describes capability fallbacks, whose behavior remains unverified.
 
 The tracked suite contains **nine behavior scenarios with 46 assertions**, plus **20 trigger queries** (ten positive, ten negative). Definitions and fixtures are in [evals/](evals/).
 

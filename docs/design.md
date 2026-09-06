@@ -41,13 +41,13 @@ Cross-host portability comes first. Existing examples and fixtures are predomina
 | Stage | Scope | Status |
 | --- | --- | --- |
 | 1 | Shared repository guidance, English/Japanese READMEs, provenance, honest compatibility and benchmark descriptions | Documentation prepared; no runtime changes |
-| 2 | Resolve runtime contradictions, add capability fallbacks, mirror English/Japanese behavior | Pending |
+| 2 | Resolve runtime contradictions, add capability fallbacks, mirror English/Japanese behavior | Revised; static checks pass, behavior verification blocked by environment |
 | 3 | Reproducible host-separated execution with common evaluation definitions and additional cases | Pending |
 | 4 | Clean installation and behavioral verification in both hosts, versioned distribution and license | Pending |
 
 Stage 1 moves historical Claude tooling instructions to [legacy-claude-evaluation.md](legacy-claude-evaluation.md), without claiming to make those tools portable. README installation examples are documentation-based and still need clean-host validation.
 
-## Issues queued for stage 2
+## Changes implemented in stage 2
 
 - Move explicit user intent ahead of lifecycle defaults, allowing requested discovery during or after implementation without reopening unrelated settled decisions.
 - Distinguish conservative automatic selection from behavior after explicit invocation, especially for implementation notes.
@@ -59,12 +59,12 @@ Stage 1 moves historical Claude tooling instructions to [legacy-claude-evaluatio
 - Respect existing authorization and user-directed continuation or cancellation. Clarify plan-artifact writes, quiz stopping, and optional fresh-session handoffs.
 - Correct or clearly distinguish illustrative examples whose infrastructure and performance claims do not match evaluation fixtures.
 
-These are planned changes. The current runtime still contains the old rules.
+These changes are implemented in both language trees. Existing assertions were aligned for mock content, authorization semantics, quiz recommendations, and inferred pitch rationale. The suite remains nine cases / 46 assertions. See [validation evidence and limits](stage-2-validation.md); no model behavior pass is claimed.
 
 ## Evaluation work queued for stage 3
 
 Preserve the nine tracked cases and deliberate fixture defects. Review and promote the four local iteration-9 proposals: mid-build explicit brainstorm, post-merge explicit blind spot pass, empirical capacity uncertainty, and seven reference properties. Those attempted runs failed authentication; they are not evidence of behavior.
 
-Add multi-turn and Japanese coverage, missing-capability and existing-notes cases, and scope/authorization boundaries. Reconcile assertions with intended behavior, including mock-content constancy and authorization semantics when the planned admin tier is absent.
+Add multi-turn and Japanese coverage, missing-capability and existing-notes cases, and scope/authorization boundaries. The stage 2 assertion changes cover mock-content constancy and the absent admin tier; verify them in the expanded suite and add regression cases for the remaining boundaries.
 
 Separate discovery, explicit invocation, behavioral quality, and with/without-skill comparisons. Keep graders' expectations and this repository's fixture guidance out of evaluated agent inputs. Publish execution metadata and evidence sufficient to distinguish skill revisions, subsets, models, hosts, and infrastructure errors. Automate structural checks separately from model-based evaluation.

@@ -1,5 +1,7 @@
 # Reference hunting
 
+Counts, formats, stop conditions, and self-checks are defaults subject to Step 4 of `SKILL.md`.
+
 When the user struggles to describe what they want, an existing example — a library that does it right, a design they like, a similar feature elsewhere in the repo — says it better than they can. Find the reference, extract its transferable semantics, and confirm which properties actually matter.
 
 ## When to apply
@@ -11,13 +13,13 @@ Redirects: if no example exists anywhere, or the missing piece is taste with no 
 
 ## Inputs
 
-- The named or suspected reference: source code, docs, a product, a feature in this repo. Prefer **source code** over any other form — even in another language, code carries edge-case handling, state shapes, and ordering guarantees that screenshots and prose can't.
+- The named or suspected reference: source code, docs, a product, a feature in this repo. Use the primary material appropriate to the property: source code for runtime behavior, images for appearance, prose for tone, audio/video for those media. Do not infer hidden behavior from appearance.
 - The user's context (their stack, the place the behavior will live), for separating transferable from incidental.
 
 ## Procedure
 
 1. If no reference is named yet: ask **one question** — does an example exist? — and suggest 2–3 concrete places one might live (a library, a product they admire, a similar feature in this repo). Stop there; that's the whole turn.
-2. Once you have a reference, read it — the actual source or docs, not your memory of its reputation, whenever it's reachable.
+2. Once you have a reference, read the actual material, not your memory of its reputation. If unreachable, extract only from supplied evidence and label the gaps; ask for the missing material only when necessary.
 3. Extract the **transferable semantics**: the behaviors, invariants, and structure worth reimplementing. Set aside the incidental: language idioms, naming conventions, the reference's own tech-stack constraints.
 4. Play the extraction back as **3–7 properties, each phrased as behavior** ("retries use full jitter, capped at 30s"), not as a code tour.
 5. Ask the user which properties are essential vs. incidental — the reference is *their* proxy spec, so they arbitrate. Carry the confirmed list forward as the spec.
@@ -34,7 +36,7 @@ The confirmed property list — the user's proxy spec made explicit. It feeds th
 ## Stop conditions
 
 - Stop extracting at 7 properties; if more seem essential, the extra ones go in a one-line deferral.
-- Stop the turn at the confirmation ask — don't implement against unconfirmed properties.
+- Await confirmation when the user has not selected the properties. If they already specified the required semantics and requested implementation, preserve those choices and continue without an extra approval round.
 - If the user says no example exists, switch to brainstorm & prototype instead of pressing for one.
 
 ## Good vs. bad example

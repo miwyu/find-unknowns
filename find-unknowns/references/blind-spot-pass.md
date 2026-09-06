@@ -1,12 +1,16 @@
 # Blind spot pass (unknown unknowns)
 
-Search the codebase and/or the web for what the user's task actually touches, then teach them what they didn't know to ask about. The output is not a report — it's the set of decisions that should reshape their prompt.
+Counts, formats, stop conditions, and self-checks are defaults subject to Step 4 of `SKILL.md`.
+
+Search the codebase and/or the web for what the user's task actually touches, then teach them what they didn't know to ask about. Deliver ranked findings and next actions that sharpen the task; a requested report is a valid output.
 
 ## When to apply
 
 - The user is entering an unfamiliar domain or an unfamiliar part of the codebase ("I've never touched the auth modules", "I don't know what color grading is").
 - The user explicitly asks for a "blind spot pass" or their "unknown unknowns".
 - The user asks for help prompting better about something they can't yet frame.
+
+- An empirical fact remains unverified and needs source inspection, research, or measurement. Distinguish the desired result from evidence of actual behavior.
 
 Redirects: if the user could answer your questions themselves → interview. If they'd recognize what they want on sight → brainstorm & prototype. If they named an existing example → reference hunting.
 
@@ -21,7 +25,7 @@ Redirects: if the user could answer your questions themselves → interview. If 
 2. Search the territory before saying anything substantive. In a codebase: the modules the task touches, their tests, adjacent features, load-bearing comments. On the web: what "good" looks like, common failure modes, expert vocabulary.
 3. Collect candidate unknowns against four questions: What prior work exists here? What does "good" look like? What are the common potholes? What would an expert ask that the user hasn't?
 4. Rank them by how much the answer changes what gets built. Ranking is the value you add — the user can't yet tell load-bearing from trivia.
-5. Write the reply per the first-turn contract: teach minimally, surface the top 3–5 as decisions, defer the rest.
+5. Write the reply per the first-turn contract: teach minimally, surface the most consequential findings (usually 3–5), defer the rest unless comprehensive coverage was requested.
 
 ## First-turn contract
 
@@ -29,19 +33,19 @@ Your reply contains, in this order:
 
 1. One line naming the pattern and the starting point you're assuming ("Running a blind spot pass on X — you're new to this codebase and to rate limiting, so I read the code first; here's what the territory says").
 2. A teaching section of **at most 5 sentences**: the minimum context needed to understand the decisions below — intuition, not an encyclopedia entry. Exception: when the user asked to be *taught* a domain ("teach me", "explain X so I can prompt better") rather than to have a codebase read, add up to **2 sentences per surfaced decision**, placed next to that decision — still ranked, still at most 5 decisions.
-3. **3–5 unknowns, each phrased as a decision the user now needs to make, each grounded in something specific you found** (a file, a comment, a documented failure mode). "You need to decide whether webhook bursts count against the tenant's rate limit" beats "webhooks exist".
+3. **Usually 3–5 findings, each grounded in evidence and distinguished as an established fact, unverified assumption, or user decision** (a file, a comment, a documented failure mode). "You need to decide whether webhook bursts count against the tenant's rate limit" beats "webhooks exist".
 4. One line deferring the remainder: "there are a few smaller ones — want them?" (Name-dropping deferred items doesn't count against the 3–5 cap; explaining them does.)
 5. An offer to rewrite their original prompt with the findings baked in — or the rewritten prompt itself if they already asked for one.
 
-No fill-in template, no exhaustive inventory, no implementation code in this turn.
+No unrequested template or exhaustive inventory. Investigation may include a small authorized experiment; do not implement the product on a discovery-only request.
 
 ## Deliverable
 
-The ranked decision list plus the (offered or delivered) rewritten prompt. That rewritten prompt is what the user carries into the next pattern or session.
+The ranked findings and concrete verification/decision steps plus the (offered or delivered) rewritten prompt. That rewritten prompt is what the user carries into the next pattern or session.
 
 ## Stop conditions
 
-- Stop searching once you hold 3–5 decisions each grounded in a specific finding — more search past that point delays the user without changing the reply.
+- Stop when evidence supports the requested coverage and further searching is unlikely to change the next action. If access prevents verification, state the missing evidence and propose a scoped check; item count alone is not a stopping rule.
 - Stop the turn after delivering the contract. Do not start implementing; wait for the user's answers or their pick of deferred items.
 
 ## Good vs. bad example
@@ -65,9 +69,9 @@ The bad version teaches the domain generically instead of reading *this* codebas
 ## Self-check
 
 - Did I search the territory (codebase/web), or am I reciting generic domain knowledge?
-- Is every surfaced item a decision the user must make, tied to a specific thing I found?
-- Are surfaced items ≤5, with the rest deferred in one line?
+- Is every finding tied to evidence or an explicit evidence gap, with facts, assumptions, and user choices distinguished?
+- Are findings ranked and within the requested scope (usually ≤5), without invented decisions?
 - Is the teaching section ≤5 sentences (plus ≤2 per decision only if the user asked to be taught)?
 - Did my first line state the starting point I'm assuming for the user?
 - Did I offer (or deliver, if asked) a rewritten prompt?
-- Is there zero implementation code and zero unrequested template in the reply?
+- Did I avoid premature product implementation and unrequested templates, and label unperformed measurements as unverified?

@@ -36,8 +36,8 @@ natural-language routing and semantic grading are not string-matching tasks.
 - Preserve the user's task, settled decisions, and existing authorization.
 - Keep discovery lightweight: one required clarification at a time, a ranked
   small set of decisions, and no unrequested fill-in templates. Respect explicit
-  requests for a different scope or format. Current numerical-rule conflicts are
-  recorded in `docs/design.md` for the next migration stage.
+  requests for a different scope or format. The revised precedence rules live in `SKILL.md`; stage 2 behavior remains
+  unverified because of the environment failures in `docs/stage-2-validation.md`.
 - Preserve the conservative description boundary for fully specified and routine
   work. A zero-false-positive goal is not a guarantee about all future requests.
 - Resolve uncertainty from available evidence; distinguish user decisions from

@@ -1,5 +1,7 @@
 # Pitch / explainer (post-implementation)
 
+Counts, formats, stop conditions, and self-checks are defaults subject to Step 4 of `SKILL.md`.
+
 Reviewers start with the same unknowns the user had. A good pitch retraces that path: lead with the result, then the decisions made and the failure points accounted for — the things an expert reviewer would probe. The goal is buy-in and approvals, faster.
 
 ## When to apply
@@ -21,7 +23,7 @@ Redirects: if the audience is the *user themselves* needing to understand the ch
 1. Confirm audience and venue (one question, only if not already stated).
 2. Read the change's source and identify: the user-visible result, the 2–4 load-bearing decisions, and the failure points an expert would probe (crashes mid-operation, duplicates, retries exhausted, restarts, migration safety).
 3. Lead with the result: demo, numbers, or the one-sentence behavioral change. Reviewers extend trust from evidence, not prose.
-4. Write the decisions as chose-X-over-Y, and the probes each with one line on how the code *actually* behaves — including honestly flagging gaps the code has, rather than asserting robustness it doesn't.
+4. Write observed choices and alternatives, labeling inferred rationale rather than attributing it to the author, and the probes each with one line on how the code *actually* behaves — including honestly flagging gaps the code has, rather than asserting robustness it doesn't.
 5. Assemble one self-contained document with links to the artifacts (diff, spec, notes, prototype). It must be pasteable as-is.
 
 ## First-turn contract
@@ -29,7 +31,7 @@ Redirects: if the audience is the *user themselves* needing to understand the ch
 If audience/venue are known, the reply is the pitch document itself, in this order:
 
 1. **The result** — demo/numbers/one sentence of what shipped, first.
-2. **Decisions** — 2–4 load-bearing choices, each: chosen / rejected / why.
+2. **Decisions** — 2–4 load-bearing choices, each: observed choice / alternative / known rationale or inferred tradeoff. Do not invent the author's intent.
 3. **What could go wrong, and how it's handled** — at least 2 expert probes, one line each, faithful to the code (a known gap is stated as a known gap).
 4. **Links** — diff, spec, implementation notes, prototype, as available.
 
@@ -46,21 +48,23 @@ The single pasteable document. Length is bounded by the venue: a Slack pitch's c
 
 ## Good vs. bad example
 
-**Good** (opening of a Slack pitch):
+**Good** (source-grounded opening for the refund fixture):
 
-> **Async refunds are live on staging** — [30s demo GIF]. Refunds now settle in ~2s instead of blocking checkout for 30.
+> **Refund requests now return HTTP 202/pending while provider work continues.**
 >
-> Two decisions you might push on:
-> - **Failed refunds dead-letter, loudly** — pager alert + admin queue, chosen over silent retry-forever (the old behavior effectively lost them).
-> - **Idempotency requires a client key** — no server-side fallback; a timestamp fallback would break retries.
+> Two choices visible in the source:
+> - Background settlement instead of waiting for the provider: callers must distinguish acceptance from completion; the author's rationale is not documented.
+> - In-process ledger/queue instead of durable storage: simpler state handling, but pending work and deduplication state do not survive restart. This is an inferred tradeoff, not a recorded rationale.
 >
-> Anticipating the obvious probes: restart mid-refund → job state is in Postgres, resumes cleanly; double-submit → idempotency key dedupes...
+> Restart mid-job: state can be lost. Exhausted retries: deadLetters retains the failure in memory without reporting it to the caller. Duplicate requests: deduplication depends on the same key; the timestamp fallback does not guarantee it across retries.
+>
+> Source: `src/server.js`, `src/refunds.js`, `src/ledger.js`, `src/queue.js`.
 
-**Bad** (same change):
+**Bad:**
 
-> This PR refactors the refund flow. Changed files: `refund.js` (moved processing to a worker), `queue.js` (new), `api.js` (endpoint now returns 202)... [12 more files described] ...The processRefund function was split into three helpers. Let me know if you have questions.
+> Refunds now settle in two seconds with durable Postgres jobs and pager alerts. Ready to ship!
 
-The bad version is a diff narration: no result up front, no decisions to agree or disagree with, no evidence the failure modes were considered. "Let me know if you have questions" outsources exactly the work the pitch was supposed to do.
+The bad version invents measurements and infrastructure. A pitch should make known gaps visible, not conceal them to obtain approval.
 
 ## Self-check
 

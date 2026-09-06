@@ -1,6 +1,8 @@
 # Quiz (post-implementation)
 
-After a long session — or someone else's change — the diff understates what changed, because behavior depends on existing code paths the diff doesn't show. Give the user context and intuition for what was done and why, then quiz them on it. The bar worth repeating to the user: **don't merge until you pass.**
+Counts, formats, stop conditions, and self-checks are defaults subject to Step 4 of `SKILL.md`.
+
+After a long session — or someone else's change — the diff understates what changed, because behavior depends on existing code paths the diff doesn't show. Give the user context and intuition for what was done and why, then quiz them on it. Recommend passing the comprehension check before sign-off; this is advice, not a new approval requirement.
 
 ## When to apply
 
@@ -21,7 +23,7 @@ Redirects: if the audience is other people who need convincing → pitch/explain
 2. Map the change's real risk surface: error paths, fallbacks, state that doesn't survive restarts, silent behavior changes to existing callers.
 3. Write the report: context (why the change exists), intuition (how it works, in the system's existing concepts — this is where off-diff paths get explained), what was done, what to watch for. The quiz is only fair if the user could pass it after reading the report.
 4. Write **4–7 questions about behavior, not trivia** — the questions a sharp reviewer would ask. At least one whose answer lives outside the diff, and at least one about a failure path. "What happens to a refund if the worker restarts mid-job?" beats "what's the new module called?".
-5. When answers come back: grade honestly, point misses back into the code, re-ask variants until they pass.
+5. When answers come back: grade honestly, point misses back into the code, re-ask variants while the user wants to continue. If they ask for answers, provide explanations and state that understanding has not been independently checked.
 
 ## First-turn contract
 
@@ -40,13 +42,13 @@ The report + quiz artifact, then (in later turns) the graded answers. What certi
 ## Stop conditions
 
 - Stop the first turn after delivering the quiz with answers withheld — don't answer your own questions.
-- The pattern ends when the user passes; until then, re-ask variants rather than lowering the bar.
+- End when the user passes, cancels, or requests a different format. Do not treat stopping as passing. Recommend understanding before sign-off; the quiz does not create a new approval authority.
 
 ## Good vs. bad example
 
 **Good** (two quiz questions for an async-refund change):
 
-> 3. A refund job is picked up by the worker, the payment provider call succeeds, and the process crashes before the DB write. The customer retries. **Do they get refunded twice? Walk through why.**
+> 3. A refund job is picked up by the worker, the payment provider call succeeds, and the process crashes before the ledger update. The customer retries. **Do they get refunded twice? Walk through why.**
 > 4. `recent-change.diff` shows `queue.js` as a stub. In the actual source, **what happens to a job that fails validation — and who finds out?** (Hint: check what the catch block does with it.)
 
 **Bad** (same change):
@@ -64,4 +66,4 @@ The bad questions are trivia — answerable by skimming the diff, memorizable wi
 - Does ≥1 question require knowledge from outside the diff, and ≥1 cover a failure path?
 - Are the answers withheld in the first turn?
 - Could the user plausibly pass after reading my report?
-- Did I state the don't-merge-until-you-pass bar?
+- Did I recommend understanding before sign-off without overriding cancellation or claiming an unearned pass?
