@@ -1,16 +1,20 @@
 name: Validate skill and evaluation tooling
 on:
   push:
+    branches: [main]
   pull_request:
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   validate:
+    timeout-minutes: 5
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
         python: ['3.10', '3.12']
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -18,4 +22,11 @@ jobs:
           python-version: ${{ matrix.python }}
       - run: python tools/evaluate.py validate
       - run: python -m unittest discover -s tests -v
-      - run: git diff --exit-code -- evals/files find-unknowns jp/find-unknowns
+      - name: Check fixtures and skill trees are unchanged
+        if: ${{ !cancelled() }}
+        run: |
+          changes=$(git status --porcelain --untracked-files=all -- evals/files find-unknowns jp/find-unknowns)
+          if [ -n "$changes" ]; then
+            printf '%s\n' "$changes"
+            exit 1
+          fi

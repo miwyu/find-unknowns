@@ -2,6 +2,8 @@
 
 # find-unknowns
 
+[![CI](https://img.shields.io/github/actions/workflow/status/miwyu/find-unknowns/validate.yml?branch=main&event=push&style=flat&label=CI)](https://github.com/miwyu/find-unknowns/actions/workflows/validate.yml?query=branch%3Amain+event%3Apush)
+
 自分のタスクについて「自分が何を分かっていないか」を、実装の前、最中、後に見つけるためのAIエージェント向けスキルです。Agent Skills形式を使い、まずCodexとClaude Codeを対応対象にしています。
 
 ## このスキルがやること
@@ -96,6 +98,8 @@ Claude Codeでは `$find-unknowns` を `/find-unknowns` に置き換えます。
 自動選択の説明文は、仕様が確定した作業や定型作業に割り込まないよう慎重にしています。過去のClaude単独セッションでは自動選択の再現率が低く、誤発動ゼロも設計目標であって保証ではありません。明示的な呼び出しを推奨します。特定プロジェクトで選択を促したい場合は、Codexでは `AGENTS.md`、Claude Codeでは `CLAUDE.md` に「依頼が曖昧なときは find-unknowns スキルを使うこと」と追記します。
 
 ## 対応状況と検証
+
+CIバッジは構造検証と評価ツールのテスト結果を示します。モデルの行動評価は含みません。
 
 | 環境 | 現在の確認範囲 | 未確認の範囲 |
 | --- | --- | --- |

@@ -2,6 +2,8 @@
 
 # find-unknowns
 
+[![CI](https://img.shields.io/github/actions/workflow/status/miwyu/find-unknowns/validate.yml?branch=main&event=push&style=flat&label=CI)](https://github.com/miwyu/find-unknowns/actions/workflows/validate.yml?query=branch%3Amain+event%3Apush)
+
 An Agent Skills workflow for AI agents, initially targeting Codex and Claude Code, that helps you discover what you don't know about your own task — before, during, and after implementation.
 
 ## What it does
@@ -87,6 +89,8 @@ To update, preserve any local edits, then replace the installed skill directory 
 The description deliberately avoids interrupting fully specified or routine work. Historical bare Claude sessions showed low automatic-selection recall; zero false positives is a design goal, not a guarantee. Explicit invocation is the recommended path. To encourage selection in a specific project, add “When my request is underspecified, use the find-unknowns skill” to its `AGENTS.md` for Codex or `CLAUDE.md` for Claude Code.
 
 ## Compatibility and validation
+
+The CI badge reports structural validation and evaluation-tool tests. It does not include model behavior evaluations.
 
 | Environment | Current evidence | Still pending |
 | --- | --- | --- |

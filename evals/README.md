@@ -10,7 +10,7 @@ python3 -m unittest discover -s tests -v
 python3 tools/evaluate.py run --host claude --model MODEL_ID --output find-unknowns-workspace/preview --language en ja --variant with_skill without_skill --dry-run
 ```
 
-Use a new output directory each time. Dry runs check CLI version and generate first-turn inputs, but do not call a model or invent followup answers. CI runs structural validation and runner tests on Linux/macOS with Python 3.10/3.12; it does not run models.
+Use a new output directory each time. Dry runs check CLI version and generate first-turn inputs, but do not call a model or invent followup answers. CI runs structural validation and runner tests on Ubuntu with Python 3.10/3.12; it does not run models.
 
 ## Behavior runs
 

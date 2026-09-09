@@ -10,7 +10,7 @@ python3 -m unittest discover -s tests -v
 python3 tools/evaluate.py run --host claude --model MODEL_ID --output find-unknowns-workspace/preview --language en ja --variant with_skill without_skill --dry-run
 ```
 
-出力先は毎回新しいディレクトリにします。dry-runはCLIバージョンと初回入力の生成を確認します。モデルを呼ばず、後続ターンの応答も捏造しません。CIはLinux/macOS、Python 3.10/3.12で構造検証と実行基盤のテストを行います。モデルは実行しません。
+出力先は毎回新しいディレクトリにします。dry-runはCLIバージョンと初回入力の生成を確認します。モデルを呼ばず、後続ターンの応答も捏造しません。CIはUbuntu、Python 3.10/3.12で構造検証と実行基盤のテストを行います。モデルは実行しません。
 
 ## 行動評価
 
