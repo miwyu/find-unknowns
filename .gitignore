@@ -22,3 +22,8 @@ find-unknowns-workspace/
 # Python development tooling
 __pycache__/
 *.py[cod]
+
+# Local environment / credentials
+.env
+.env.*
+!.env.example

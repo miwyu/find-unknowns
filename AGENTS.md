@@ -11,6 +11,14 @@ Keep common runtime instructions in the skill trees and host-specific setup and
 evaluation instructions outside them, except optional host metadata. Do not fork
 the workflow by model or host.
 
+Distribution of this skill as a ZIP archive is not planned.
+
+## Sensitive information and local paths
+
+Do not write confidential information, personal information, or paths specific to
+the user's PC in files or commit messages. Generic installation paths and fictional
+example paths are allowed.
+
 ## Layout
 
 - `find-unknowns/`: English skill. `SKILL.md` routes to eight pattern references.
