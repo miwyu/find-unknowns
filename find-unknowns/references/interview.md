@@ -1,69 +1,49 @@
 # Interview (known unknowns)
 
-Counts, formats, stop conditions, and self-checks are defaults subject to Step 4 of `SKILL.md`.
+Defaults for counts, format, stopping, and self-check follow Step 4 of `SKILL.md`.
 
-The user has a spec with gaps they could fill if asked. Ask questions **one at a time** — each answer should inform the next question. A questionnaire forfeits the thing that makes interviewing work: your second question gets to be smarter because of their first answer.
+Ask one decision at a time. Each answer must inform the next; do not make the user complete a questionnaire.
 
 ## When to apply
 
-- A spec or firm intention exists, but with gaps the user is aware of and could answer.
-- The user says "interview me" or "ask me about anything ambiguous".
-- A blind spot pass or brainstorm has finished and residual decisions remain that only the user can make.
+- A firm spec has gaps the user can answer, they ask for an interview, or earlier discovery leaves user-only choices.
 
-Redirects: if evidence or measurement is needed, or the domain is unfamiliar → blind spot pass; do not ask the user to guess an empirical result. If they could only answer by seeing options → brainstorm & prototype. If they named an existing example → reference hunting.
+Need evidence → blind spot pass; need options to react to → brainstorm & prototype; named example → reference hunting.
 
 ## Inputs
 
-- The stated spec or intention, plus anything earlier patterns established.
-- The codebase, if shared — it answers questions the user shouldn't have to.
+- Stated intent and prior pattern outputs.
+- The shared codebase, which answers questions the user should not have to.
 
 ## Procedure
 
-1. First inspect available context and remove questions answered by evidence or earlier user decisions. List the remaining user choices privately and rank by architectural leverage: which answer would most change what gets built?
-2. First reply: exactly **one required question** — the top-ranked one — with a one-line reason it comes first ("this decides whether we need a queue at all").
-3. Optionally offer the territory shortcut in the same reply: "if you can share the repo, I'll infer most of this myself; if not, just answer this one." That offer is not a second question.
-4. After each answer, re-rank and ask the next single question, visibly informed by the previous answer. Cosmetic details come last or never.
-5. When remaining ambiguities wouldn't change what you'd build, stop asking and play back everything learned as a compact spec the user can confirm with one word or correct in one line. The playback records only the decisions that change the build; everything else is marked "your call" so the builder keeps room to pivot — an over-specified spec gets followed even when it's wrong.
+1. Inspect context and remove answered questions; privately rank remaining choices by architectural leverage.
+2. Ask exactly one required question, with a one-line reason it comes first.
+3. Optionally offer repo sharing and name future topics without asking them.
+4. After each answer, re-rank and ask the next question visibly informed by that answer.
+5. When remaining choices are non-load-bearing, play back a compact confirmable spec; leave them “your call.”
 
 ## First-turn contract
 
-- One line naming the pattern.
-- One required question + one-line reason it's first.
-- Optionally: the repo-share shortcut, and a one-line sketch of what future questions hinge on (named, not asked).
-- **No** spec template, **no** numbered question list, **no** second required question.
+One line naming the pattern, one required highest-leverage question and its reason, optionally the repo shortcut. No template, numbered question list, or second required question.
 
 ## Deliverable
 
-The confirmed spec from the final playback — phrased so the user can say "yes, build that". Offer to carry it into an implementation plan or a fresh implementation session.
+A confirmed spec the user can accept or correct, offered for an implementation plan or fresh session.
 
 ## Stop conditions
 
-- Stop asking when the remaining ambiguities wouldn't change what you'd build — then deliver the playback.
-- Await the answer before dependent follow-up questions. If the user delegates remaining choices or requests continuation, proceed within that scope; do not insist on another confirmation of settled answers.
+Stop asking when answers would no longer change the build and deliver the playback. Await dependent answers; if the user delegates choices or authorizes continuation, proceed without re-confirming settled decisions.
 
 ## Good vs. bad example
 
-**Good** (user: "Interview me about the notification feature spec"):
+Good: “Do notifications survive restart, or is best-effort enough? This decides whether a persistent queue is needed. Depending on that, I’ll ask about ordering.”
 
-> Interviewing — one question at a time, starting with the one that would most change the architecture:
->
-> **Do notifications need to survive a server restart, or is best-effort delivery acceptable?** This decides whether we need a persistent queue or can dispatch in-process.
->
-> (If you can point me at the repo I can infer the infra side myself — optional. Depending on your answer, I'll follow up on delivery ordering and read-state, but those can wait.)
-
-**Bad** (same request):
-
-> Great! Please answer the following:
-> 1. Persistent or best-effort? 2. Email, push, or in-app? 3. Batching window? 4. Read receipts? 5. Retention period? 6. i18n? 7. Rate limits? 8. Admin controls?
-> Also, here's a spec template to fill out while you're at it.
-
-The bad version asks everything at once, so answers can't inform later questions — question 3 might be moot depending on question 1 — and the template turns your job into their homework.
+Bad: Asking about persistence, channels, batching, receipts, retention, and rate limits all at once.
 
 ## Self-check
 
-- Does my first turn contain exactly **one** required question? (The optional repo-share offer doesn't count; a second required question does.)
-- Is it the question whose answer would most change the architecture — not the easiest to ask?
-- Is my reply free of templates, checklists, and numbered question lists? (Name-dropping future topics is fine; asking them isn't.)
-- On later turns: does this question depend on their last answer, or was it pre-scripted?
-- At the end: did I play back a confirmable spec, or just stop asking?
-- Does the playback leave non-load-bearing choices explicitly open, rather than freezing every detail?
+- Is there exactly one required question on the first turn?
+- Is it the highest-leverage question, grounded in available evidence?
+- Are prior decisions preserved and non-load-bearing details left open?
+- Did the final playback state a confirmable spec?

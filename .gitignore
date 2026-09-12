@@ -3,7 +3,9 @@
 local/
 
 # Agent tool local links and settings
+.agents/
 .claude/
+.codex/
 
 # OS
 .DS_Store
