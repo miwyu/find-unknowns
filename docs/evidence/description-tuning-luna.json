@@ -1,0 +1,2823 @@
+{
+  "date": "2026-09-13",
+  "source_revision": "e8aa03db5c02e88e20c8d181f6db8cb235650e4e",
+  "model_requested": "gpt-5.6-luna",
+  "resolved_model_version": "not exposed",
+  "host": "Codex collaboration.spawn_agent; fresh fork_turns=none for every run",
+  "host_version": "not exposed",
+  "reasoning_effort": "inherited default; not separately pinned",
+  "invocation": "Description-only batched selection simulations; separate explicit-path behavior probes. Not native host discovery or CLI runner results.",
+  "available_tools": "Inherited session tools (exec, file operations, web, collaboration, UI); prompts scoped permitted reads/writes to isolated input and output artifacts and prohibited network for behavior probes. Not a security sandbox.",
+  "raw_tool_traces": "Not returned to parent; artifacts and self-reports retained; no assertion of traced native invocation.",
+  "grading_method": "Parent semantic review of reasons and responses; deterministic comparison with frozen selection labels. Labels/assertions withheld from executors.",
+  "checklist": [
+    "[critical] Match each withheld selection label (one requirement per query).",
+    "Return every query ID once with boolean decision and reason.",
+    "Report ambiguities, discretionary assumptions and retries."
+  ],
+  "holdout_expected": {
+    "en-h0": true,
+    "en-h1": true,
+    "en-h2": true,
+    "en-h3": false,
+    "en-h4": false,
+    "en-h5": false,
+    "ja-h0": true,
+    "ja-h1": true,
+    "ja-h2": true,
+    "ja-h3": false,
+    "ja-h4": false,
+    "ja-h5": false
+  },
+  "expected": {
+    "en-0": true,
+    "en-1": true,
+    "en-2": true,
+    "en-3": true,
+    "en-4": true,
+    "en-5": true,
+    "en-6": true,
+    "en-7": true,
+    "en-8": true,
+    "en-9": true,
+    "en-10": false,
+    "en-11": false,
+    "en-12": false,
+    "en-13": false,
+    "en-14": false,
+    "en-15": false,
+    "en-16": false,
+    "en-17": false,
+    "en-18": false,
+    "en-19": false,
+    "ja-0": true,
+    "ja-1": true,
+    "ja-2": true,
+    "ja-3": true,
+    "ja-4": true,
+    "ja-5": true,
+    "ja-6": true,
+    "ja-7": true,
+    "ja-8": true,
+    "ja-9": true,
+    "ja-10": false,
+    "ja-11": false,
+    "ja-12": false,
+    "ja-13": false,
+    "ja-14": false,
+    "ja-15": false,
+    "ja-16": false,
+    "ja-17": false,
+    "ja-18": false,
+    "ja-19": false
+  },
+  "queries": {
+    "en-9": {
+      "id": "en-9",
+      "language": "en",
+      "query": "we're losing users somewhere in onboarding and I'm not sure what the right fix even looks like. can you poke around the codebase and brainstorm intervention points with me?"
+    },
+    "en-3": {
+      "id": "en-3",
+      "language": "en",
+      "query": "need a landing page for my SaaS. i'm a data engineer, i can't describe what i want visually, but i'll know it when i see it"
+    },
+    "en-10": {
+      "id": "en-10",
+      "language": "en",
+      "query": "add a rate limiter to src/middleware/: 100 req/min per API key, redis store (use the client in src/redis.js), fail open on redis errors, 429 with Retry-After. use rate-limiter-flexible"
+    },
+    "ja-16": {
+      "id": "ja-16",
+      "language": "ja",
+      "query": "運転支援アプリに後方カメラ映像を使う死角検知機能が必要です。OpenCVは導入済みです。"
+    },
+    "ja-5": {
+      "id": "ja-5",
+      "language": "ja",
+      "query": "このダッシュボードの変更を頼むたびに意図と違うものができ、何を指定し損ねているか分かりません。指示の仕方を改善したいです。"
+    },
+    "ja-4": {
+      "id": "ja-4",
+      "language": "ja",
+      "query": "実装する前に、この機能について私にインタビューしてください。Stripeサブスクリプションの請求設定ページで、詳細はまだ考えていません。"
+    },
+    "ja-10": {
+      "id": "ja-10",
+      "language": "ja",
+      "query": "src/middleware/ にAPIキーごと毎分100リクエストの制限を追加してください。src/redis.js のクライアントを使い、Redis障害時は通過、超過時は429とRetry-After。rate-limiter-flexibleを使ってください。"
+    },
+    "en-11": {
+      "id": "en-11",
+      "language": "en",
+      "query": "what's the difference between token bucket and sliding window rate limiting? which does nginx use?"
+    },
+    "en-4": {
+      "id": "en-4",
+      "language": "en",
+      "query": "interview me about this feature before you build anything — it's a billing settings page for our Stripe subscriptions and I haven't thought through the details yet"
+    },
+    "ja-12": {
+      "id": "ja-12",
+      "language": "ja",
+      "query": "テストがECONNREFUSED 127.0.0.1:6379で失敗します。RedisはDockerで確実に動いています。原因を調べて直してください。"
+    },
+    "ja-1": {
+      "id": "ja-1",
+      "language": "ja",
+      "query": "cronジョブをバックグラウンドキューに移したいです。Sidekiq、Celery、BullMQのどれがよいかも分からず、非同期ジョブは初めてです。何から始めればよいですか。"
+    },
+    "ja-8": {
+      "id": "ja-8",
+      "language": "ja",
+      "query": "先ほど決済フローを大きく書き換えてもらいました。マージ前に変更内容と理由を本当に理解したいので、クイズなどで確認してください。"
+    },
+    "ja-3": {
+      "id": "ja-3",
+      "language": "ja",
+      "query": "SaaSのランディングページが必要です。私はデータエンジニアで、見た目の希望を言葉にできませんが、見れば判断できると思います。"
+    },
+    "en-18": {
+      "id": "en-18",
+      "language": "en",
+      "query": "add unit tests for utils/date.ts, make sure DST edge cases and leap years are covered"
+    },
+    "en-12": {
+      "id": "en-12",
+      "language": "en",
+      "query": "tests are failing with ECONNREFUSED 127.0.0.1:6379, redis is definitely running in docker. figure out why and fix it"
+    },
+    "ja-14": {
+      "id": "ja-14",
+      "language": "ja",
+      "query": "来週のオンボーディングに関するユーザー調査で使うインタビュー質問を作ってください。1回30分程度、参加者は6人です。"
+    },
+    "ja-15": {
+      "id": "ja-15",
+      "language": "ja",
+      "query": "utils/parser.tsのparseDataAndValidateStuffを分かりやすい名前に変え、呼び出し箇所も更新してください。"
+    },
+    "ja-6": {
+      "id": "ja-6",
+      "language": "ja",
+      "query": "仕事の宣伝動画でカラーグレーディングが必要ですが、その意味すら分かりません。適切に指示できる程度に教えてください。"
+    },
+    "en-13": {
+      "id": "en-13",
+      "language": "en",
+      "query": "some rows in the users table have the string 'unknown' in the country column — find all the unknown values and replace them with NULL, there's a migration folder in db/"
+    },
+    "ja-2": {
+      "id": "ja-2",
+      "language": "ja",
+      "query": "ゲームをマルチプレイにしたいです。プレイヤー同士の動きがリアルタイムに見えるように作ってもらえますか。"
+    },
+    "ja-0": {
+      "id": "ja-0",
+      "language": "ja",
+      "query": "着手前に確認したいです。RailsアプリにSAML SSOを追加しますが、このリポジトリの認証コードは初めて触ります。盲点を調べて、何に注意すべきか教えてください。"
+    },
+    "ja-11": {
+      "id": "ja-11",
+      "language": "ja",
+      "query": "トークンバケット方式とスライディングウィンドウ方式のレート制限は何が違いますか。nginxはどちらですか。"
+    },
+    "ja-17": {
+      "id": "ja-17",
+      "language": "ja",
+      "query": "docs/spec.mdが合意済みの仕様です。そのとおり第1段階を実装してください。急いでいるので決定済みの内容を議論し直す必要はありません。"
+    },
+    "ja-9": {
+      "id": "ja-9",
+      "language": "ja",
+      "query": "オンボーディングのどこかでユーザーが離脱しています。よい解決策が思い浮かびません。コードを調べ、改善できる箇所を一緒にブレストしてください。"
+    },
+    "en-19": {
+      "id": "en-19",
+      "language": "en",
+      "query": "i don't know why prettier and eslint keep fighting over semicolons in this repo, just make them agree with each other"
+    },
+    "en-16": {
+      "id": "en-16",
+      "language": "en",
+      "query": "our driving assistance app needs a blind spot detection feature using the rear camera feed — opencv is already in the project"
+    },
+    "ja-19": {
+      "id": "ja-19",
+      "language": "ja",
+      "query": "このリポジトリでPrettierとESLintがセミコロンについて競合する理由は分かりませんが、設定を揃えてください。"
+    },
+    "ja-13": {
+      "id": "ja-13",
+      "language": "ja",
+      "query": "usersテーブルのcountry列に文字列unknownが入った行があります。すべて探してNULLに置き換えてください。db/にマイグレーションがあります。"
+    },
+    "en-2": {
+      "id": "en-2",
+      "language": "en",
+      "query": "I want to add multiplayer to my game. players should see each other moving around in real time. can you build that?"
+    },
+    "en-0": {
+      "id": "en-0",
+      "language": "en",
+      "query": "before I start: I'm adding SAML SSO to our Rails app and I've never touched the auth code in this repo. can you do a blind spot pass so I know what I'm walking into?"
+    },
+    "ja-18": {
+      "id": "ja-18",
+      "language": "ja",
+      "query": "utils/date.tsにユニットテストを追加してください。夏時間の境界と閏年を網羅してください。"
+    },
+    "ja-7": {
+      "id": "ja-7",
+      "language": "ja",
+      "query": "上司から社内ツール（~/work/insights のFlaskアプリ）に「分析機能」を付けてと言われました。仕様はそれだけです。どう進めましょう。"
+    },
+    "en-5": {
+      "id": "en-5",
+      "language": "en",
+      "query": "every time I ask you for changes to this dashboard I get something I don't want and I can't tell what I'm failing to specify. help me prompt better"
+    },
+    "en-6": {
+      "id": "en-6",
+      "language": "en",
+      "query": "I have to color grade this promo video for work and I genuinely don't know what color grading even is. teach me enough to direct you properly"
+    },
+    "en-8": {
+      "id": "en-8",
+      "language": "en",
+      "query": "you just rewrote a big chunk of the payments flow — before I merge this I want to be sure I actually understand what changed and why. quiz me or something"
+    },
+    "en-14": {
+      "id": "en-14",
+      "language": "en",
+      "query": "write me interview questions for next week's user research sessions about our onboarding flow, ~30 min sessions, 6 participants"
+    },
+    "en-15": {
+      "id": "en-15",
+      "language": "en",
+      "query": "rename parseDataAndValidateStuff in utils/parser.ts to something better and update the call sites"
+    },
+    "en-17": {
+      "id": "en-17",
+      "language": "en",
+      "query": "here's the spec we already agreed on (docs/spec.md) — implement phase 1 exactly as written please, no need to re-litigate the decisions, I'm in a hurry"
+    },
+    "en-1": {
+      "id": "en-1",
+      "language": "en",
+      "query": "ok i need to move our cron jobs to some kind of background queue system (sidekiq? celery? bullmq? no idea) — never done async job stuff before. where do i even start"
+    },
+    "en-7": {
+      "id": "en-7",
+      "language": "en",
+      "query": "my boss wants 'analytics' added to our internal tool (flask app in ~/work/insights). that's literally the whole spec lol. what do we do"
+    },
+    "en-h0": {
+      "id": "en-h0",
+      "language": "en",
+      "query": "The export format is settled. Keep implementation notes as you work; do not revisit the decisions."
+    },
+    "en-h1": {
+      "id": "en-h1",
+      "language": "en",
+      "query": "We merged yesterday. Please do a blind spot pass on our assumptions before we plan the next version."
+    },
+    "en-h2": {
+      "id": "en-h2",
+      "language": "en",
+      "query": "I need to prepare a print-ready brochure but have never worked with printing. Help me understand what I need to decide."
+    },
+    "en-h3": {
+      "id": "en-h3",
+      "language": "en",
+      "query": "What does CMYK stand for?"
+    },
+    "en-h4": {
+      "id": "en-h4",
+      "language": "en",
+      "query": "Write six quiz questions about world capitals for my classroom."
+    },
+    "en-h5": {
+      "id": "en-h5",
+      "language": "en",
+      "query": "The agreed welcome text is Hello. Replace Welcome with Hello in home.html."
+    },
+    "ja-h0": {
+      "id": "ja-h0",
+      "language": "ja",
+      "query": "仕様は確定済みです。実装中の逸脱を実装ノートに記録してください。決定は蒸し返さないでください。"
+    },
+    "ja-h1": {
+      "id": "ja-h1",
+      "language": "ja",
+      "query": "昨日マージしました。次の計画の前に、仮定の盲点を調べてください。"
+    },
+    "ja-h2": {
+      "id": "ja-h2",
+      "language": "ja",
+      "query": "印刷用パンフレットが必要ですが、印刷の仕事は初めてです。何を決める必要があるか理解したいです。"
+    },
+    "ja-h3": {
+      "id": "ja-h3",
+      "language": "ja",
+      "query": "CMYKは何の略ですか。"
+    },
+    "ja-h4": {
+      "id": "ja-h4",
+      "language": "ja",
+      "query": "授業用に世界の首都のクイズを6問作ってください。"
+    },
+    "ja-h5": {
+      "id": "ja-h5",
+      "language": "ja",
+      "query": "歓迎文はHelloに決定済みです。home.htmlのWelcomeをHelloに変えてください。"
+    }
+  },
+  "selection_runs": [
+    {
+      "name": "baseline",
+      "descriptions": {
+        "en": "Help users discover blind spots, unstated requirements, and unarticulated preferences in their task. Use for requests such as \"blind spot pass\", \"find my unknowns\", \"interview me\", \"quiz me\", or \"keep implementation notes\", and for unfamiliar territory or underspecified work where implementation would require guessing important requirements. Do NOT automatically use it for fully specified tasks, implementing an agreed spec without revisiting decisions, factual questions, or routine debugging and small edits. An explicit request for a discovery pattern or implementation notes is still supported with settled requirements.",
+        "ja": "タスクの盲点、言語化されていない要件や好みを発見する。「ブラインドスポットパス」「未知の未知」「インタビューして」「クイズを出して」「実装ノートを付けて」などの依頼、不慣れな領域、重要な要件を推測しないと実装できない曖昧な作業に使う。仕様が確定した作業、合意済み仕様を蒸し返さず実装する依頼、事実確認、定型的なデバッグや小さな修正には自動適用しない。ただし、要件が確定していても発見パターンや実装ノートの明示依頼には対応する。"
+      },
+      "query_ids": [
+        "en-9",
+        "en-3",
+        "en-10",
+        "ja-16",
+        "ja-5",
+        "ja-4",
+        "ja-10",
+        "en-11",
+        "en-4",
+        "ja-12",
+        "ja-1",
+        "ja-8",
+        "ja-3",
+        "en-18",
+        "en-12",
+        "ja-14",
+        "ja-15",
+        "ja-6",
+        "en-13",
+        "ja-2",
+        "ja-0",
+        "ja-11",
+        "ja-17",
+        "ja-9",
+        "en-19",
+        "en-16",
+        "ja-19",
+        "ja-13",
+        "en-2",
+        "en-0",
+        "ja-18",
+        "ja-7",
+        "en-5",
+        "en-6",
+        "en-8",
+        "en-14",
+        "en-15",
+        "en-17",
+        "en-1",
+        "en-7"
+      ],
+      "output": {
+        "decisions": [
+          {
+            "id": "en-9",
+            "selected": true,
+            "reason": "Unclear onboarding loss and fix; asks to brainstorm intervention points."
+          },
+          {
+            "id": "en-3",
+            "selected": true,
+            "reason": "Visual preferences are unarticulated, so discovery is needed."
+          },
+          {
+            "id": "en-10",
+            "selected": false,
+            "reason": "Fully specified implementation with settled requirements."
+          },
+          {
+            "id": "ja-16",
+            "selected": true,
+            "reason": "A specialized feature is requested without enough requirements; important details would require guessing."
+          },
+          {
+            "id": "ja-5",
+            "selected": true,
+            "reason": "Explicitly asks to discover what was omitted and improve instructions."
+          },
+          {
+            "id": "ja-4",
+            "selected": true,
+            "reason": "Explicit request to be interviewed before building an underspecified feature."
+          },
+          {
+            "id": "ja-10",
+            "selected": false,
+            "reason": "Fully specified implementation with settled requirements."
+          },
+          {
+            "id": "en-11",
+            "selected": false,
+            "reason": "This is a factual question, which the description excludes."
+          },
+          {
+            "id": "en-4",
+            "selected": true,
+            "reason": "Explicit request to be interviewed before building an underspecified feature."
+          },
+          {
+            "id": "ja-12",
+            "selected": false,
+            "reason": "Routine debugging and fixing request."
+          },
+          {
+            "id": "ja-1",
+            "selected": true,
+            "reason": "Async jobs are unfamiliar and the technology choice and starting requirements are unclear."
+          },
+          {
+            "id": "ja-8",
+            "selected": true,
+            "reason": "Explicit request for a quiz to verify understanding of a large change."
+          },
+          {
+            "id": "ja-3",
+            "selected": true,
+            "reason": "Visual preferences are unarticulated, so discovery is needed."
+          },
+          {
+            "id": "en-18",
+            "selected": false,
+            "reason": "Requirements for the requested tests are fully specified."
+          },
+          {
+            "id": "en-12",
+            "selected": false,
+            "reason": "Routine debugging and fixing request."
+          },
+          {
+            "id": "ja-14",
+            "selected": false,
+            "reason": "Requests research interview questions, not discovery of the user’s task requirements."
+          },
+          {
+            "id": "ja-15",
+            "selected": false,
+            "reason": "Routine small refactor with a clear requested change."
+          },
+          {
+            "id": "ja-6",
+            "selected": true,
+            "reason": "Color grading is unfamiliar territory and the user asks to learn enough to direct it."
+          },
+          {
+            "id": "en-13",
+            "selected": false,
+            "reason": "Fully specified data change with a clear migration location."
+          },
+          {
+            "id": "ja-2",
+            "selected": true,
+            "reason": "The multiplayer implementation is underspecified and requires discovering important requirements."
+          },
+          {
+            "id": "ja-0",
+            "selected": true,
+            "reason": "Explicit blind spot request for unfamiliar authentication code."
+          },
+          {
+            "id": "ja-11",
+            "selected": false,
+            "reason": "This is a factual question, which the description excludes."
+          },
+          {
+            "id": "ja-17",
+            "selected": false,
+            "reason": "Explicitly asks to implement an already agreed specification without revisiting it."
+          },
+          {
+            "id": "ja-9",
+            "selected": true,
+            "reason": "Unclear onboarding problem and explicit request to investigate and brainstorm."
+          },
+          {
+            "id": "en-19",
+            "selected": false,
+            "reason": "Routine configuration debugging and alignment."
+          },
+          {
+            "id": "en-16",
+            "selected": true,
+            "reason": "A specialized feature is underspecified; implementation would require guessing important requirements."
+          },
+          {
+            "id": "ja-19",
+            "selected": false,
+            "reason": "Routine configuration debugging and alignment."
+          },
+          {
+            "id": "ja-13",
+            "selected": false,
+            "reason": "Fully specified data change with a clear migration location."
+          },
+          {
+            "id": "en-2",
+            "selected": true,
+            "reason": "The multiplayer implementation is underspecified and requires discovering important requirements."
+          },
+          {
+            "id": "en-0",
+            "selected": true,
+            "reason": "Explicit blind spot request for unfamiliar authentication code."
+          },
+          {
+            "id": "ja-18",
+            "selected": false,
+            "reason": "Requirements for the requested tests are fully specified."
+          },
+          {
+            "id": "ja-7",
+            "selected": true,
+            "reason": "The only requirement is broad “analytics,” so implementation would require guessing important requirements."
+          },
+          {
+            "id": "en-5",
+            "selected": true,
+            "reason": "Explicitly asks to uncover missing specifications and improve prompting."
+          },
+          {
+            "id": "en-6",
+            "selected": true,
+            "reason": "Color grading is unfamiliar territory and the user asks to learn enough to direct it."
+          },
+          {
+            "id": "en-8",
+            "selected": true,
+            "reason": "Explicit request for a quiz to verify understanding of a large change."
+          },
+          {
+            "id": "en-14",
+            "selected": false,
+            "reason": "Requests research interview questions, not discovery of the user’s task requirements."
+          },
+          {
+            "id": "en-15",
+            "selected": false,
+            "reason": "Routine small refactor with a clear requested change."
+          },
+          {
+            "id": "en-17",
+            "selected": false,
+            "reason": "Explicitly asks to implement an already agreed specification without revisiting it."
+          },
+          {
+            "id": "en-1",
+            "selected": true,
+            "reason": "Async jobs are unfamiliar and the technology choice and starting requirements are unclear."
+          },
+          {
+            "id": "en-7",
+            "selected": true,
+            "reason": "The only requirement is broad “analytics,” so implementation would require guessing important requirements."
+          }
+        ],
+        "self_report": {
+          "requirements": "Returned every query ID exactly once with a boolean selection and short reason; applied the matching-language description independently.",
+          "ambiguities": [],
+          "discretion": [
+            "Treated requests to write user-research interview questions as outside the skill; treated vague specialized feature requests as underspecified discovery work."
+          ],
+          "retries": 0
+        }
+      },
+      "grading": {
+        "en": {
+          "tp": 10,
+          "fp": 1,
+          "fn": 0,
+          "tn": 9,
+          "accuracy": 0.95,
+          "success": "×",
+          "failed_critical": [
+            "en-16"
+          ]
+        },
+        "ja": {
+          "tp": 10,
+          "fp": 1,
+          "fn": 0,
+          "tn": 9,
+          "accuracy": 0.95,
+          "success": "×",
+          "failed_critical": [
+            "ja-16"
+          ]
+        }
+      },
+      "tool_uses": null,
+      "duration_ms": null
+    },
+    {
+      "name": "compact",
+      "descriptions": {
+        "en": "Discover unstated requirements and preferences in unfamiliar or underspecified work. Use for explicit discovery, interviews, quizzes, or implementation notes; otherwise skip settled tasks, factual questions, routine debugging, and small edits.",
+        "ja": "不慣れ・要件が曖昧な作業で、未言語化の要件や好みを発見する。発見・インタビュー・クイズ・実装ノートの明示依頼にも使う。それ以外の仕様確定済み作業、事実確認、定型デバッグ、小修正には使わない。"
+      },
+      "query_ids": [
+        "en-9",
+        "en-3",
+        "en-10",
+        "ja-16",
+        "ja-5",
+        "ja-4",
+        "ja-10",
+        "en-11",
+        "en-4",
+        "ja-12",
+        "ja-1",
+        "ja-8",
+        "ja-3",
+        "en-18",
+        "en-12",
+        "ja-14",
+        "ja-15",
+        "ja-6",
+        "en-13",
+        "ja-2",
+        "ja-0",
+        "ja-11",
+        "ja-17",
+        "ja-9",
+        "en-19",
+        "en-16",
+        "ja-19",
+        "ja-13",
+        "en-2",
+        "en-0",
+        "ja-18",
+        "ja-7",
+        "en-5",
+        "en-6",
+        "en-8",
+        "en-14",
+        "en-15",
+        "en-17",
+        "en-1",
+        "en-7"
+      ],
+      "output": {
+        "decisions": [
+          {
+            "id": "en-9",
+            "selected": true,
+            "reason": "Unfamiliar, underspecified onboarding problem explicitly invites code exploration and brainstorming."
+          },
+          {
+            "id": "en-3",
+            "selected": true,
+            "reason": "Landing page requirements and visual preferences are explicitly underspecified."
+          },
+          {
+            "id": "en-10",
+            "selected": false,
+            "reason": "Implementation requirements are settled and specific."
+          },
+          {
+            "id": "ja-16",
+            "selected": true,
+            "reason": "A new feature is requested with sparse requirements, so unstated needs must be discovered."
+          },
+          {
+            "id": "ja-5",
+            "selected": true,
+            "reason": "Explicitly asks to discover missing requirements and improve instructions."
+          },
+          {
+            "id": "ja-4",
+            "selected": true,
+            "reason": "Explicitly requests an interview before implementation for an undefined feature."
+          },
+          {
+            "id": "ja-10",
+            "selected": false,
+            "reason": "Implementation requirements are settled and specific."
+          },
+          {
+            "id": "en-11",
+            "selected": false,
+            "reason": "This is a factual comparison question."
+          },
+          {
+            "id": "en-4",
+            "selected": true,
+            "reason": "Explicitly requests an interview before building an underspecified feature."
+          },
+          {
+            "id": "ja-12",
+            "selected": false,
+            "reason": "This is routine debugging with a concrete failure."
+          },
+          {
+            "id": "ja-1",
+            "selected": true,
+            "reason": "The user is new to asynchronous jobs and has not chosen a queue system."
+          },
+          {
+            "id": "ja-8",
+            "selected": true,
+            "reason": "Explicitly requests a quiz to verify understanding of a recent change."
+          },
+          {
+            "id": "ja-3",
+            "selected": true,
+            "reason": "Landing page requirements and visual preferences are explicitly underspecified."
+          },
+          {
+            "id": "en-18",
+            "selected": false,
+            "reason": "The testing task has specific settled coverage requirements."
+          },
+          {
+            "id": "en-12",
+            "selected": false,
+            "reason": "This is routine debugging with a concrete failure."
+          },
+          {
+            "id": "ja-14",
+            "selected": true,
+            "reason": "Explicitly requests interview questions for user research."
+          },
+          {
+            "id": "ja-15",
+            "selected": false,
+            "reason": "This is a small, clearly specified rename edit."
+          },
+          {
+            "id": "ja-6",
+            "selected": true,
+            "reason": "The user is unfamiliar with color grading and asks to learn enough to direct the work."
+          },
+          {
+            "id": "en-13",
+            "selected": false,
+            "reason": "The data replacement operation is concrete and specified."
+          },
+          {
+            "id": "ja-2",
+            "selected": true,
+            "reason": "The multiplayer feature request leaves major product and technical requirements unspecified."
+          },
+          {
+            "id": "ja-0",
+            "selected": true,
+            "reason": "Explicitly requests a blind-spot discovery pass before unfamiliar auth work."
+          },
+          {
+            "id": "ja-11",
+            "selected": false,
+            "reason": "This is a factual comparison question."
+          },
+          {
+            "id": "ja-17",
+            "selected": false,
+            "reason": "The user explicitly says the specification is agreed and should be implemented as written."
+          },
+          {
+            "id": "ja-9",
+            "selected": true,
+            "reason": "Explicitly invites code exploration and brainstorming for an uncertain onboarding problem."
+          },
+          {
+            "id": "en-19",
+            "selected": false,
+            "reason": "This is routine configuration debugging with a concrete requested fix."
+          },
+          {
+            "id": "en-16",
+            "selected": true,
+            "reason": "The feature request is broad and leaves important detection requirements unspecified."
+          },
+          {
+            "id": "ja-19",
+            "selected": false,
+            "reason": "This is routine configuration debugging with a concrete requested fix."
+          },
+          {
+            "id": "ja-13",
+            "selected": false,
+            "reason": "The data replacement operation is concrete and specified."
+          },
+          {
+            "id": "en-2",
+            "selected": true,
+            "reason": "The multiplayer feature request leaves major product and technical requirements unspecified."
+          },
+          {
+            "id": "en-0",
+            "selected": true,
+            "reason": "Explicitly requests a blind-spot discovery pass for unfamiliar repository auth code."
+          },
+          {
+            "id": "ja-18",
+            "selected": false,
+            "reason": "The testing task has specific settled coverage requirements."
+          },
+          {
+            "id": "ja-7",
+            "selected": true,
+            "reason": "The request has only a vague analytics goal and needs requirements discovery."
+          },
+          {
+            "id": "en-5",
+            "selected": true,
+            "reason": "Explicitly asks to identify omitted requirements and improve prompting."
+          },
+          {
+            "id": "en-6",
+            "selected": true,
+            "reason": "The user is unfamiliar with color grading and asks to learn enough to direct the work."
+          },
+          {
+            "id": "en-8",
+            "selected": true,
+            "reason": "Explicitly requests a quiz to verify understanding of a recent change."
+          },
+          {
+            "id": "en-14",
+            "selected": true,
+            "reason": "Explicitly requests interview questions for user research."
+          },
+          {
+            "id": "en-15",
+            "selected": false,
+            "reason": "This is a small, clearly specified rename edit."
+          },
+          {
+            "id": "en-17",
+            "selected": false,
+            "reason": "The user explicitly says the specification is agreed and should be implemented as written."
+          },
+          {
+            "id": "en-1",
+            "selected": true,
+            "reason": "The user is new to asynchronous jobs and has not chosen a queue system."
+          },
+          {
+            "id": "en-7",
+            "selected": true,
+            "reason": "The request has only a vague analytics goal and needs requirements discovery."
+          }
+        ],
+        "self_report": {
+          "requirements": [
+            "Applied the matching-language description independently to every query.",
+            "Included every ID exactly once with a boolean selection and short reason.",
+            "Reported ambiguities, discretion, and retries honestly."
+          ],
+          "ambiguities": [],
+          "discretion": [
+            "Selected broad feature requests with materially unspecified product requirements (en-2, en-16, ja-2, ja-16) because the description covers underspecified work."
+          ],
+          "retries": 0
+        }
+      },
+      "grading": {
+        "en": {
+          "tp": 10,
+          "fp": 2,
+          "fn": 0,
+          "tn": 8,
+          "accuracy": 0.9,
+          "success": "×",
+          "failed_critical": [
+            "en-16",
+            "en-14"
+          ]
+        },
+        "ja": {
+          "tp": 10,
+          "fp": 2,
+          "fn": 0,
+          "tn": 8,
+          "accuracy": 0.9,
+          "success": "×",
+          "failed_critical": [
+            "ja-16",
+            "ja-14"
+          ]
+        }
+      },
+      "tool_uses": null,
+      "duration_ms": null
+    },
+    {
+      "name": "minimal",
+      "descriptions": {
+        "en": "Discover unclear requirements or preferences. Use for discovery, interviews, quizzes, or implementation notes; skip routine or fully specified work unless explicitly requested.",
+        "ja": "曖昧な要件や好みを発見する。発見・インタビュー・クイズ・実装ノートに使う。定型・仕様確定済み作業では明示依頼時のみ使う。"
+      },
+      "query_ids": [
+        "en-9",
+        "en-3",
+        "en-10",
+        "ja-16",
+        "ja-5",
+        "ja-4",
+        "ja-10",
+        "en-11",
+        "en-4",
+        "ja-12",
+        "ja-1",
+        "ja-8",
+        "ja-3",
+        "en-18",
+        "en-12",
+        "ja-14",
+        "ja-15",
+        "ja-6",
+        "en-13",
+        "ja-2",
+        "ja-0",
+        "ja-11",
+        "ja-17",
+        "ja-9",
+        "en-19",
+        "en-16",
+        "ja-19",
+        "ja-13",
+        "en-2",
+        "en-0",
+        "ja-18",
+        "ja-7",
+        "en-5",
+        "en-6",
+        "en-8",
+        "en-14",
+        "en-15",
+        "en-17",
+        "en-1",
+        "en-7"
+      ],
+      "output": {
+        "decisions": [
+          {
+            "id": "en-9",
+            "selected": true,
+            "reason": "Unclear onboarding problem and requested codebase discovery and brainstorming."
+          },
+          {
+            "id": "en-3",
+            "selected": true,
+            "reason": "Visual preferences are explicitly unclear and need discovery through examples."
+          },
+          {
+            "id": "en-10",
+            "selected": false,
+            "reason": "Implementation requirements are fully specified."
+          },
+          {
+            "id": "ja-16",
+            "selected": true,
+            "reason": "A broad feature request leaves requirements and behavior to discover."
+          },
+          {
+            "id": "ja-5",
+            "selected": true,
+            "reason": "The user wants to identify missing specifications and improve prompting."
+          },
+          {
+            "id": "ja-4",
+            "selected": true,
+            "reason": "The user explicitly requests an interview before implementation with details undecided."
+          },
+          {
+            "id": "ja-10",
+            "selected": false,
+            "reason": "Implementation requirements are fully specified."
+          },
+          {
+            "id": "en-11",
+            "selected": false,
+            "reason": "This is a factual comparison question, not discovery, interviewing, quizzing, or implementation notes."
+          },
+          {
+            "id": "en-4",
+            "selected": true,
+            "reason": "The user explicitly requests an interview before implementation with details undecided."
+          },
+          {
+            "id": "ja-12",
+            "selected": false,
+            "reason": "This is a concrete diagnosis and fix request rather than discovery of requirements or preferences."
+          },
+          {
+            "id": "ja-1",
+            "selected": true,
+            "reason": "The user is new to asynchronous jobs and has not chosen among alternatives, so discovery is needed."
+          },
+          {
+            "id": "ja-8",
+            "selected": true,
+            "reason": "The user explicitly requests a quiz to confirm understanding of a change."
+          },
+          {
+            "id": "ja-3",
+            "selected": true,
+            "reason": "Visual preferences are explicitly unclear and need discovery through examples."
+          },
+          {
+            "id": "en-18",
+            "selected": false,
+            "reason": "The test scope and required edge cases are fully specified."
+          },
+          {
+            "id": "en-12",
+            "selected": false,
+            "reason": "This is a concrete diagnosis and fix request rather than discovery of requirements or preferences."
+          },
+          {
+            "id": "ja-14",
+            "selected": true,
+            "reason": "The user explicitly requests interview questions for user research."
+          },
+          {
+            "id": "ja-15",
+            "selected": false,
+            "reason": "This is a routine, fully specified rename and call-site update."
+          },
+          {
+            "id": "ja-6",
+            "selected": false,
+            "reason": "This is a request to learn a concept, outside the description's listed discovery, interview, quiz, and implementation-note uses."
+          },
+          {
+            "id": "en-13",
+            "selected": false,
+            "reason": "The requested data replacement is fully specified and routine."
+          },
+          {
+            "id": "ja-2",
+            "selected": true,
+            "reason": "The broad multiplayer request leaves substantial product and technical requirements unclear."
+          },
+          {
+            "id": "ja-0",
+            "selected": true,
+            "reason": "The user explicitly requests a blind-spot discovery pass before unfamiliar implementation work."
+          },
+          {
+            "id": "ja-11",
+            "selected": false,
+            "reason": "This is a factual comparison question, not discovery, interviewing, quizzing, or implementation notes."
+          },
+          {
+            "id": "ja-17",
+            "selected": false,
+            "reason": "The specification is agreed and the user explicitly requests exact implementation without revisiting decisions."
+          },
+          {
+            "id": "ja-9",
+            "selected": true,
+            "reason": "The user describes an unclear onboarding problem and requests investigation and brainstorming."
+          },
+          {
+            "id": "en-19",
+            "selected": false,
+            "reason": "This is a routine configuration fix with a concrete desired outcome."
+          },
+          {
+            "id": "en-16",
+            "selected": true,
+            "reason": "A broad feature request leaves requirements and behavior to discover."
+          },
+          {
+            "id": "ja-19",
+            "selected": false,
+            "reason": "This is a routine configuration fix with a concrete desired outcome."
+          },
+          {
+            "id": "ja-13",
+            "selected": false,
+            "reason": "The requested data replacement is fully specified and routine."
+          },
+          {
+            "id": "en-2",
+            "selected": true,
+            "reason": "The broad multiplayer request leaves substantial product and technical requirements unclear."
+          },
+          {
+            "id": "en-0",
+            "selected": true,
+            "reason": "The user explicitly requests a blind-spot discovery pass before unfamiliar implementation work."
+          },
+          {
+            "id": "ja-18",
+            "selected": false,
+            "reason": "The test scope and required edge cases are fully specified."
+          },
+          {
+            "id": "ja-7",
+            "selected": true,
+            "reason": "The only stated specification is analytics, so requirements are substantially unclear."
+          },
+          {
+            "id": "en-5",
+            "selected": true,
+            "reason": "The user wants to identify missing specifications and improve prompting."
+          },
+          {
+            "id": "en-6",
+            "selected": false,
+            "reason": "This is a request to learn a concept, outside the description's listed discovery, interview, quiz, and implementation-note uses."
+          },
+          {
+            "id": "en-8",
+            "selected": true,
+            "reason": "The user explicitly requests a quiz to confirm understanding of a change."
+          },
+          {
+            "id": "en-14",
+            "selected": true,
+            "reason": "The user explicitly requests interview questions for user research."
+          },
+          {
+            "id": "en-15",
+            "selected": false,
+            "reason": "This is a routine, fully specified rename and call-site update."
+          },
+          {
+            "id": "en-17",
+            "selected": false,
+            "reason": "The specification is agreed and the user explicitly requests exact implementation without revisiting decisions."
+          },
+          {
+            "id": "en-1",
+            "selected": true,
+            "reason": "The user is new to asynchronous jobs and has not chosen among alternatives, so discovery is needed."
+          },
+          {
+            "id": "en-7",
+            "selected": true,
+            "reason": "The only stated specification is analytics, so requirements are substantially unclear."
+          }
+        ],
+        "self_report": {
+          "requirements": "Completed all requirements: read only the provided description, evaluated each query independently, returned every ID once, and wrote the requested JSON artifact.",
+          "ambiguities": [
+            "Broad feature requests such as blind-spot detection and multiplayer could be treated as implementation requests, but their requirements are materially underspecified."
+          ],
+          "discretion": [
+            "Applied the description's discovery criterion to underspecified feature requests; treated general concept-teaching questions as outside its explicitly listed uses."
+          ],
+          "retries": 0
+        }
+      },
+      "grading": {
+        "en": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 1,
+          "tn": 8,
+          "accuracy": 0.85,
+          "success": "×",
+          "failed_critical": [
+            "en-16",
+            "en-6",
+            "en-14"
+          ]
+        },
+        "ja": {
+          "tp": 9,
+          "fp": 2,
+          "fn": 1,
+          "tn": 8,
+          "accuracy": 0.85,
+          "success": "×",
+          "failed_critical": [
+            "ja-16",
+            "ja-14",
+            "ja-6"
+          ]
+        }
+      },
+      "tool_uses": null,
+      "duration_ms": null
+    },
+    {
+      "name": "refined",
+      "descriptions": {
+        "en": "Find blind spots in unfamiliar or underspecified tasks. Use for \"interview me\", \"quiz me\", or implementation notes. Otherwise skip settled tasks, factual questions, and routine fixes.",
+        "ja": "不慣れ・要件が曖昧なタスクの盲点を発見する。「私にインタビューして」「理解度をクイズで確認して」や実装ノートにも使う。それ以外の仕様確定済み作業、事実確認、定型修正には使わない。"
+      },
+      "query_ids": [
+        "en-9",
+        "en-3",
+        "en-10",
+        "ja-16",
+        "ja-5",
+        "ja-4",
+        "ja-10",
+        "en-11",
+        "en-4",
+        "ja-12",
+        "ja-1",
+        "ja-8",
+        "ja-3",
+        "en-18",
+        "en-12",
+        "ja-14",
+        "ja-15",
+        "ja-6",
+        "en-13",
+        "ja-2",
+        "ja-0",
+        "ja-11",
+        "ja-17",
+        "ja-9",
+        "en-19",
+        "en-16",
+        "ja-19",
+        "ja-13",
+        "en-2",
+        "en-0",
+        "ja-18",
+        "ja-7",
+        "en-5",
+        "en-6",
+        "en-8",
+        "en-14",
+        "en-15",
+        "en-17",
+        "en-1",
+        "en-7"
+      ],
+      "output": {
+        "decisions": [
+          {
+            "id": "en-9",
+            "selected": true,
+            "reason": "Unclear onboarding problem invites blind-spot discovery and brainstorming."
+          },
+          {
+            "id": "en-3",
+            "selected": true,
+            "reason": "Visual requirements are underspecified and the user cannot articulate them."
+          },
+          {
+            "id": "en-10",
+            "selected": false,
+            "reason": "Implementation requirements are fully specified."
+          },
+          {
+            "id": "ja-16",
+            "selected": true,
+            "reason": "The feature request lacks key requirements for an unfamiliar vision task."
+          },
+          {
+            "id": "ja-5",
+            "selected": true,
+            "reason": "The user explicitly wants to find omitted details and improve prompting."
+          },
+          {
+            "id": "ja-4",
+            "selected": true,
+            "reason": "The user explicitly requests an interview before an underspecified build."
+          },
+          {
+            "id": "ja-10",
+            "selected": false,
+            "reason": "Implementation requirements are fully specified."
+          },
+          {
+            "id": "en-11",
+            "selected": false,
+            "reason": "This is a factual comparison question."
+          },
+          {
+            "id": "en-4",
+            "selected": true,
+            "reason": "The user explicitly requests an interview for an underspecified feature."
+          },
+          {
+            "id": "ja-12",
+            "selected": false,
+            "reason": "This is a routine diagnosis and fix request."
+          },
+          {
+            "id": "ja-1",
+            "selected": true,
+            "reason": "The user is new to async jobs and is unsure of both scope and technology."
+          },
+          {
+            "id": "ja-8",
+            "selected": true,
+            "reason": "The user explicitly requests a quiz to verify understanding."
+          },
+          {
+            "id": "ja-3",
+            "selected": true,
+            "reason": "Visual requirements are underspecified and the user cannot articulate them."
+          },
+          {
+            "id": "en-18",
+            "selected": false,
+            "reason": "This is a routine, clearly scoped test task."
+          },
+          {
+            "id": "en-12",
+            "selected": false,
+            "reason": "This is a routine diagnosis and fix request."
+          },
+          {
+            "id": "ja-14",
+            "selected": false,
+            "reason": "The requested interview-question artifact has concrete scope and does not ask for discovery."
+          },
+          {
+            "id": "ja-15",
+            "selected": false,
+            "reason": "This is a routine, clearly scoped rename."
+          },
+          {
+            "id": "ja-6",
+            "selected": true,
+            "reason": "The user is unfamiliar with the subject and requests teaching for informed direction."
+          },
+          {
+            "id": "en-13",
+            "selected": false,
+            "reason": "This is a specific data migration task."
+          },
+          {
+            "id": "ja-2",
+            "selected": true,
+            "reason": "The multiplayer request is broad and technically underspecified."
+          },
+          {
+            "id": "ja-0",
+            "selected": true,
+            "reason": "The user explicitly requests a blind-spot pass for unfamiliar auth code."
+          },
+          {
+            "id": "ja-11",
+            "selected": false,
+            "reason": "This is a factual comparison question."
+          },
+          {
+            "id": "ja-17",
+            "selected": false,
+            "reason": "The specification and implementation scope are settled explicitly."
+          },
+          {
+            "id": "ja-9",
+            "selected": true,
+            "reason": "Unclear onboarding problem invites blind-spot discovery and brainstorming."
+          },
+          {
+            "id": "en-19",
+            "selected": false,
+            "reason": "This is a routine configuration fix."
+          },
+          {
+            "id": "en-16",
+            "selected": true,
+            "reason": "The feature request lacks key requirements for an unfamiliar vision task."
+          },
+          {
+            "id": "ja-19",
+            "selected": false,
+            "reason": "This is a routine configuration fix."
+          },
+          {
+            "id": "ja-13",
+            "selected": false,
+            "reason": "This is a specific data migration task."
+          },
+          {
+            "id": "en-2",
+            "selected": true,
+            "reason": "The multiplayer request is broad and technically underspecified."
+          },
+          {
+            "id": "en-0",
+            "selected": true,
+            "reason": "The user explicitly requests a blind-spot pass for unfamiliar auth code."
+          },
+          {
+            "id": "ja-18",
+            "selected": false,
+            "reason": "This is a routine, clearly scoped test task."
+          },
+          {
+            "id": "ja-7",
+            "selected": true,
+            "reason": "The request is explicitly underspecified, with only a vague feature name."
+          },
+          {
+            "id": "en-5",
+            "selected": true,
+            "reason": "The user explicitly wants to find omitted details and improve prompting."
+          },
+          {
+            "id": "en-6",
+            "selected": true,
+            "reason": "The user is unfamiliar with the subject and requests teaching for informed direction."
+          },
+          {
+            "id": "en-8",
+            "selected": true,
+            "reason": "The user explicitly requests a quiz to verify understanding."
+          },
+          {
+            "id": "en-14",
+            "selected": false,
+            "reason": "The requested interview-question artifact has concrete scope and does not ask for discovery."
+          },
+          {
+            "id": "en-15",
+            "selected": false,
+            "reason": "This is a routine, clearly scoped rename."
+          },
+          {
+            "id": "en-17",
+            "selected": false,
+            "reason": "The specification and implementation scope are settled explicitly."
+          },
+          {
+            "id": "en-1",
+            "selected": true,
+            "reason": "The user is new to async jobs and is unsure of both scope and technology."
+          },
+          {
+            "id": "en-7",
+            "selected": true,
+            "reason": "The request is explicitly underspecified, with only a vague feature name."
+          }
+        ],
+        "self_report": {
+          "requirements": "All 40 query IDs are included exactly once with a boolean selection and short reason.",
+          "ambiguities": [
+            "The vision-feature requests are underspecified but do not explicitly state user unfamiliarity; selected because the description covers underspecified tasks."
+          ],
+          "discretion": [
+            "Treated requests to create user-research interview questions as ordinary scoped writing tasks, while treating explicit requests to interview the requester as selection triggers."
+          ],
+          "retries": 0
+        }
+      },
+      "grading": {
+        "en": {
+          "tp": 10,
+          "fp": 1,
+          "fn": 0,
+          "tn": 9,
+          "accuracy": 0.95,
+          "success": "×",
+          "failed_critical": [
+            "en-16"
+          ]
+        },
+        "ja": {
+          "tp": 10,
+          "fp": 1,
+          "fn": 0,
+          "tn": 9,
+          "accuracy": 0.95,
+          "success": "×",
+          "failed_critical": [
+            "ja-16"
+          ]
+        }
+      },
+      "tool_uses": null,
+      "duration_ms": null
+    },
+    {
+      "name": "shorter",
+      "descriptions": {
+        "en": "Find blind spots in unfamiliar or underspecified tasks; also use when asked to interview/quiz the user or keep implementation notes. Skip other settled or routine tasks.",
+        "ja": "不慣れ・要件が曖昧なタスクの盲点を発見する。ユーザーへのインタビュー・理解度クイズ・実装ノートの依頼にも使う。それ以外の仕様確定済み・定型作業には使わない。"
+      },
+      "query_ids": [
+        "en-9",
+        "en-3",
+        "en-10",
+        "ja-16",
+        "ja-5",
+        "ja-4",
+        "ja-10",
+        "en-11",
+        "en-4",
+        "ja-12",
+        "ja-1",
+        "ja-8",
+        "ja-3",
+        "en-18",
+        "en-12",
+        "ja-14",
+        "ja-15",
+        "ja-6",
+        "en-13",
+        "ja-2",
+        "ja-0",
+        "ja-11",
+        "ja-17",
+        "ja-9",
+        "en-19",
+        "en-16",
+        "ja-19",
+        "ja-13",
+        "en-2",
+        "en-0",
+        "ja-18",
+        "ja-7",
+        "en-5",
+        "en-6",
+        "en-8",
+        "en-14",
+        "en-15",
+        "en-17",
+        "en-1",
+        "en-7"
+      ],
+      "output": {
+        "decisions": [
+          {
+            "id": "en-9",
+            "selected": true,
+            "reason": "The problem and possible interventions are open-ended, so blind-spot discovery fits."
+          },
+          {
+            "id": "en-3",
+            "selected": true,
+            "reason": "The visual requirements are explicitly unclear and need discovery."
+          },
+          {
+            "id": "en-10",
+            "selected": false,
+            "reason": "The implementation requirements are specific and routine."
+          },
+          {
+            "id": "ja-16",
+            "selected": true,
+            "reason": "The requested detection feature is underspecified and needs blind-spot discovery."
+          },
+          {
+            "id": "ja-5",
+            "selected": true,
+            "reason": "The user wants help finding missing specifications and improving instructions."
+          },
+          {
+            "id": "ja-4",
+            "selected": true,
+            "reason": "The user explicitly requests an interview before implementation and lacks details."
+          },
+          {
+            "id": "ja-10",
+            "selected": false,
+            "reason": "The implementation requirements are specific and routine."
+          },
+          {
+            "id": "en-11",
+            "selected": false,
+            "reason": "This is a settled factual comparison, not an underspecified task."
+          },
+          {
+            "id": "en-4",
+            "selected": true,
+            "reason": "The user explicitly requests an interview and says the details are unsettled."
+          },
+          {
+            "id": "ja-12",
+            "selected": false,
+            "reason": "This is a concrete diagnosis and fix request."
+          },
+          {
+            "id": "ja-1",
+            "selected": true,
+            "reason": "The user is new to asynchronous jobs and has not chosen a queue system."
+          },
+          {
+            "id": "ja-8",
+            "selected": true,
+            "reason": "The user explicitly requests a quiz to confirm understanding."
+          },
+          {
+            "id": "ja-3",
+            "selected": true,
+            "reason": "The visual requirements are explicitly unclear and need discovery."
+          },
+          {
+            "id": "en-18",
+            "selected": false,
+            "reason": "The testing scope and edge cases are specified."
+          },
+          {
+            "id": "en-12",
+            "selected": false,
+            "reason": "This is a concrete diagnosis and fix request."
+          },
+          {
+            "id": "ja-14",
+            "selected": false,
+            "reason": "The user asks to write a defined research interview guide, not interview the user."
+          },
+          {
+            "id": "ja-15",
+            "selected": false,
+            "reason": "The rename and call-site update are specific and routine."
+          },
+          {
+            "id": "ja-6",
+            "selected": true,
+            "reason": "The user lacks basic domain knowledge and asks to learn enough to direct the work."
+          },
+          {
+            "id": "en-13",
+            "selected": false,
+            "reason": "The requested data replacement is explicit and routine."
+          },
+          {
+            "id": "ja-2",
+            "selected": true,
+            "reason": "The multiplayer feature is broad and leaves key requirements unspecified."
+          },
+          {
+            "id": "ja-0",
+            "selected": true,
+            "reason": "The user is unfamiliar with the auth code and explicitly requests a blind-spot pass."
+          },
+          {
+            "id": "ja-11",
+            "selected": false,
+            "reason": "This is a settled factual comparison, not an underspecified task."
+          },
+          {
+            "id": "ja-17",
+            "selected": false,
+            "reason": "The user explicitly says the specification is agreed and should be implemented as written."
+          },
+          {
+            "id": "ja-9",
+            "selected": true,
+            "reason": "The problem and possible interventions are open-ended, so blind-spot discovery fits."
+          },
+          {
+            "id": "en-19",
+            "selected": false,
+            "reason": "The requested configuration fix is specific and routine."
+          },
+          {
+            "id": "en-16",
+            "selected": true,
+            "reason": "The requested detection feature is underspecified and needs blind-spot discovery."
+          },
+          {
+            "id": "ja-19",
+            "selected": false,
+            "reason": "The requested configuration fix is specific and routine."
+          },
+          {
+            "id": "ja-13",
+            "selected": false,
+            "reason": "The requested data replacement is explicit and routine."
+          },
+          {
+            "id": "en-2",
+            "selected": true,
+            "reason": "The multiplayer feature is broad and leaves key requirements unspecified."
+          },
+          {
+            "id": "en-0",
+            "selected": true,
+            "reason": "The user is unfamiliar with the auth code and explicitly requests a blind-spot pass."
+          },
+          {
+            "id": "ja-18",
+            "selected": false,
+            "reason": "The testing scope and edge cases are specified."
+          },
+          {
+            "id": "ja-7",
+            "selected": true,
+            "reason": "The requested analytics feature has almost no specification."
+          },
+          {
+            "id": "en-5",
+            "selected": true,
+            "reason": "The user wants help finding missing specifications and improving instructions."
+          },
+          {
+            "id": "en-6",
+            "selected": true,
+            "reason": "The user lacks basic domain knowledge and asks to learn enough to direct the work."
+          },
+          {
+            "id": "en-8",
+            "selected": true,
+            "reason": "The user explicitly requests a quiz to confirm understanding."
+          },
+          {
+            "id": "en-14",
+            "selected": false,
+            "reason": "The user asks to write a defined research interview guide, not interview the user."
+          },
+          {
+            "id": "en-15",
+            "selected": false,
+            "reason": "The rename and call-site update are specific and routine."
+          },
+          {
+            "id": "en-17",
+            "selected": false,
+            "reason": "The user explicitly says the specification is agreed and should be implemented as written."
+          },
+          {
+            "id": "en-1",
+            "selected": true,
+            "reason": "The user is new to asynchronous jobs and has not chosen a queue system."
+          },
+          {
+            "id": "en-7",
+            "selected": true,
+            "reason": "The requested analytics feature has almost no specification."
+          }
+        ],
+        "self_report": {
+          "requirements": "Applied the matching-language description independently to all 40 queries, returned each ID once, and used boolean selections with short reasons.",
+          "ambiguities": [],
+          "discretion": [
+            "Treated requests to write user-research interview questions as content creation rather than a request to interview the user; treated broad feature requests as underspecified."
+          ],
+          "retries": 0
+        }
+      },
+      "grading": {
+        "en": {
+          "tp": 10,
+          "fp": 1,
+          "fn": 0,
+          "tn": 9,
+          "accuracy": 0.95,
+          "success": "×",
+          "failed_critical": [
+            "en-16"
+          ]
+        },
+        "ja": {
+          "tp": 10,
+          "fp": 1,
+          "fn": 0,
+          "tn": 9,
+          "accuracy": 0.95,
+          "success": "×",
+          "failed_critical": [
+            "ja-16"
+          ]
+        }
+      },
+      "tool_uses": null,
+      "duration_ms": null
+    },
+    {
+      "name": "baseline-holdout",
+      "descriptions": {
+        "en": "Help users discover blind spots, unstated requirements, and unarticulated preferences in their task. Use for requests such as \"blind spot pass\", \"find my unknowns\", \"interview me\", \"quiz me\", or \"keep implementation notes\", and for unfamiliar territory or underspecified work where implementation would require guessing important requirements. Do NOT automatically use it for fully specified tasks, implementing an agreed spec without revisiting decisions, factual questions, or routine debugging and small edits. An explicit request for a discovery pattern or implementation notes is still supported with settled requirements.",
+        "ja": "タスクの盲点、言語化されていない要件や好みを発見する。「ブラインドスポットパス」「未知の未知」「インタビューして」「クイズを出して」「実装ノートを付けて」などの依頼、不慣れな領域、重要な要件を推測しないと実装できない曖昧な作業に使う。仕様が確定した作業、合意済み仕様を蒸し返さず実装する依頼、事実確認、定型的なデバッグや小さな修正には自動適用しない。ただし、要件が確定していても発見パターンや実装ノートの明示依頼には対応する。"
+      },
+      "query_ids": [
+        "en-h0",
+        "en-h1",
+        "en-h2",
+        "en-h3",
+        "en-h4",
+        "en-h5",
+        "ja-h0",
+        "ja-h1",
+        "ja-h2",
+        "ja-h3",
+        "ja-h4",
+        "ja-h5"
+      ],
+      "output": {
+        "decisions": [
+          {
+            "id": "en-h0",
+            "selected": true,
+            "reason": "Explicitly asks to keep implementation notes, which the description supports even when requirements are settled."
+          },
+          {
+            "id": "en-h1",
+            "selected": true,
+            "reason": "Explicitly requests a blind spot pass on assumptions."
+          },
+          {
+            "id": "en-h2",
+            "selected": true,
+            "reason": "The user is unfamiliar with printing and needs help identifying important decisions."
+          },
+          {
+            "id": "en-h3",
+            "selected": false,
+            "reason": "This is a factual question."
+          },
+          {
+            "id": "en-h4",
+            "selected": false,
+            "reason": "Writing classroom quiz questions is content creation, not asking the agent to discover the user's unknowns."
+          },
+          {
+            "id": "en-h5",
+            "selected": false,
+            "reason": "This is a fully specified routine small edit with settled requirements."
+          },
+          {
+            "id": "ja-h0",
+            "selected": true,
+            "reason": "実装ノートの記録を明示的に依頼しており、仕様確定済みでも対応対象です。"
+          },
+          {
+            "id": "ja-h1",
+            "selected": true,
+            "reason": "仮定の盲点を調べることを明示的に依頼しています。"
+          },
+          {
+            "id": "ja-h2",
+            "selected": true,
+            "reason": "印刷に不慣れで、重要な決定事項の整理を求める曖昧な作業です。"
+          },
+          {
+            "id": "ja-h3",
+            "selected": false,
+            "reason": "事実確認の質問です。"
+          },
+          {
+            "id": "ja-h4",
+            "selected": false,
+            "reason": "授業用クイズの作成依頼であり、未知の要件を発見する依頼ではありません。"
+          },
+          {
+            "id": "ja-h5",
+            "selected": false,
+            "reason": "要件が確定した定型的な小さな修正です。"
+          }
+        ],
+        "self_report": {
+          "requirements": "Applied the matching-language description independently to all 12 queries, returned each ID exactly once, and recorded the required JSON artifact.",
+          "ambiguities": [],
+          "discretion": [
+            "Treated requests to write quiz questions as content generation rather than the description's 'quiz me' discovery pattern."
+          ],
+          "retries": 0
+        }
+      },
+      "grading": {
+        "en": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "tn": 3,
+          "accuracy": 1.0,
+          "success": "○",
+          "failed_critical": []
+        },
+        "ja": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "tn": 3,
+          "accuracy": 1.0,
+          "success": "○",
+          "failed_critical": []
+        }
+      },
+      "tool_uses": null,
+      "duration_ms": null
+    },
+    {
+      "name": "refined-holdout",
+      "descriptions": {
+        "en": "Find blind spots in unfamiliar or underspecified tasks. Use for \"interview me\", \"quiz me\", or implementation notes. Otherwise skip settled tasks, factual questions, and routine fixes.",
+        "ja": "不慣れ・要件が曖昧なタスクの盲点を発見する。「私にインタビューして」「理解度をクイズで確認して」や実装ノートにも使う。それ以外の仕様確定済み作業、事実確認、定型修正には使わない。"
+      },
+      "query_ids": [
+        "en-h0",
+        "en-h1",
+        "en-h2",
+        "en-h3",
+        "en-h4",
+        "en-h5",
+        "ja-h0",
+        "ja-h1",
+        "ja-h2",
+        "ja-h3",
+        "ja-h4",
+        "ja-h5"
+      ],
+      "output": {
+        "decisions": [
+          {
+            "id": "en-h0",
+            "selected": true,
+            "reason": "Explicitly asks to keep implementation notes, which the description names as a use case."
+          },
+          {
+            "id": "en-h1",
+            "selected": true,
+            "reason": "Explicitly requests a blind-spot pass on assumptions before planning."
+          },
+          {
+            "id": "en-h2",
+            "selected": true,
+            "reason": "The user is inexperienced and asks what decisions are needed for an underspecified print task."
+          },
+          {
+            "id": "en-h3",
+            "selected": false,
+            "reason": "This is a settled factual question."
+          },
+          {
+            "id": "en-h4",
+            "selected": false,
+            "reason": "This asks to generate quiz content; it does not ask the user to be quizzed or identify task blind spots."
+          },
+          {
+            "id": "en-h5",
+            "selected": false,
+            "reason": "This is a fully specified routine text replacement."
+          },
+          {
+            "id": "ja-h0",
+            "selected": true,
+            "reason": "実装ノートへの記録を明示的に求めており、説明文の用途に該当する。"
+          },
+          {
+            "id": "ja-h1",
+            "selected": true,
+            "reason": "計画前に仮定の盲点を調べることを明示的に求めている。"
+          },
+          {
+            "id": "ja-h2",
+            "selected": true,
+            "reason": "初心者で、要件が未確定な印刷タスクで何を決めるかを尋ねている。"
+          },
+          {
+            "id": "ja-h3",
+            "selected": false,
+            "reason": "確定した事実を尋ねる質問である。"
+          },
+          {
+            "id": "ja-h4",
+            "selected": false,
+            "reason": "クイズ内容の作成依頼であり、ユーザー自身へのクイズや盲点の発見を求めていない。"
+          },
+          {
+            "id": "ja-h5",
+            "selected": false,
+            "reason": "仕様が確定した定型的な文字列置換である。"
+          }
+        ],
+        "self_report": {
+          "requirements": "Applied the matching-language description independently to all 12 queries, returned each ID exactly once with a boolean and short reason, and reported ambiguities, discretion, and retries.",
+          "ambiguities": [],
+          "discretion": [
+            "Treated requests to create quiz questions as content generation rather than the description's 'quiz me' use case."
+          ],
+          "retries": 0
+        }
+      },
+      "grading": {
+        "en": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "tn": 3,
+          "accuracy": 1.0,
+          "success": "○",
+          "failed_critical": []
+        },
+        "ja": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "tn": 3,
+          "accuracy": 1.0,
+          "success": "○",
+          "failed_critical": []
+        }
+      },
+      "tool_uses": null,
+      "duration_ms": null
+    },
+    {
+      "name": "shorter-repeat",
+      "descriptions": {
+        "en": "Find blind spots in unfamiliar or underspecified tasks; also use when asked to interview/quiz the user or keep implementation notes. Skip other settled or routine tasks.",
+        "ja": "不慣れ・要件が曖昧なタスクの盲点を発見する。ユーザーへのインタビュー・理解度クイズ・実装ノートの依頼にも使う。それ以外の仕様確定済み・定型作業には使わない。"
+      },
+      "query_ids": [
+        "en-9",
+        "en-3",
+        "en-10",
+        "ja-16",
+        "ja-5",
+        "ja-4",
+        "ja-10",
+        "en-11",
+        "en-4",
+        "ja-12",
+        "ja-1",
+        "ja-8",
+        "ja-3",
+        "en-18",
+        "en-12",
+        "ja-14",
+        "ja-15",
+        "ja-6",
+        "en-13",
+        "ja-2",
+        "ja-0",
+        "ja-11",
+        "ja-17",
+        "ja-9",
+        "en-19",
+        "en-16",
+        "ja-19",
+        "ja-13",
+        "en-2",
+        "en-0",
+        "ja-18",
+        "ja-7",
+        "en-5",
+        "en-6",
+        "en-8",
+        "en-14",
+        "en-15",
+        "en-17",
+        "en-1",
+        "en-7",
+        "en-h0",
+        "en-h1",
+        "en-h2",
+        "en-h3",
+        "en-h4",
+        "en-h5",
+        "ja-h0",
+        "ja-h1",
+        "ja-h2",
+        "ja-h3",
+        "ja-h4",
+        "ja-h5"
+      ],
+      "output": {
+        "decisions": [
+          {
+            "id": "en-9",
+            "selected": true,
+            "reason": "Unfamiliar, open-ended onboarding problem asks for codebase exploration and brainstorming."
+          },
+          {
+            "id": "en-3",
+            "selected": true,
+            "reason": "Visual requirements are explicitly underspecified."
+          },
+          {
+            "id": "en-10",
+            "selected": false,
+            "reason": "The rate-limiter behavior and implementation constraints are settled and routine."
+          },
+          {
+            "id": "ja-16",
+            "selected": true,
+            "reason": "The blind-spot feature is underspecified and technically unfamiliar in scope."
+          },
+          {
+            "id": "ja-5",
+            "selected": true,
+            "reason": "The user asks to uncover missing intent and improve how they specify work."
+          },
+          {
+            "id": "ja-4",
+            "selected": true,
+            "reason": "The user explicitly requests an interview before implementation."
+          },
+          {
+            "id": "ja-10",
+            "selected": false,
+            "reason": "The rate-limiter behavior and implementation constraints are settled and routine."
+          },
+          {
+            "id": "en-11",
+            "selected": false,
+            "reason": "This is a straightforward conceptual information question."
+          },
+          {
+            "id": "en-4",
+            "selected": true,
+            "reason": "The user explicitly requests an interview before implementation."
+          },
+          {
+            "id": "ja-12",
+            "selected": false,
+            "reason": "This is a concrete debugging and repair task with a specific reported failure."
+          },
+          {
+            "id": "ja-1",
+            "selected": true,
+            "reason": "The user is new to async jobs and has not decided among approaches."
+          },
+          {
+            "id": "ja-8",
+            "selected": true,
+            "reason": "The user explicitly requests a quiz to check understanding."
+          },
+          {
+            "id": "ja-3",
+            "selected": true,
+            "reason": "Visual requirements are explicitly underspecified."
+          },
+          {
+            "id": "en-18",
+            "selected": false,
+            "reason": "The requested test scope and cases are sufficiently specified and routine."
+          },
+          {
+            "id": "en-12",
+            "selected": false,
+            "reason": "This is a concrete debugging and repair task with a specific reported failure."
+          },
+          {
+            "id": "ja-14",
+            "selected": false,
+            "reason": "It asks for research interview questions, not an interview of the user or task blind-spot discovery."
+          },
+          {
+            "id": "ja-15",
+            "selected": false,
+            "reason": "This is a fully specified routine rename and call-site update."
+          },
+          {
+            "id": "ja-6",
+            "selected": true,
+            "reason": "The user is unfamiliar with color grading and needs guidance to direct the work."
+          },
+          {
+            "id": "en-13",
+            "selected": false,
+            "reason": "This is a concrete, specified data migration task."
+          },
+          {
+            "id": "ja-2",
+            "selected": true,
+            "reason": "The multiplayer feature request leaves major design and implementation decisions open."
+          },
+          {
+            "id": "ja-0",
+            "selected": true,
+            "reason": "The user explicitly requests a blind-spot pass for an unfamiliar authentication area."
+          },
+          {
+            "id": "ja-11",
+            "selected": false,
+            "reason": "This is a straightforward conceptual information question."
+          },
+          {
+            "id": "ja-17",
+            "selected": false,
+            "reason": "The specification and requested implementation are explicitly settled."
+          },
+          {
+            "id": "ja-9",
+            "selected": true,
+            "reason": "The user describes an uncertain onboarding problem and requests investigation and brainstorming."
+          },
+          {
+            "id": "en-19",
+            "selected": false,
+            "reason": "This is a concrete routine configuration alignment task."
+          },
+          {
+            "id": "en-16",
+            "selected": true,
+            "reason": "The blind-spot feature is underspecified and technically unfamiliar in scope."
+          },
+          {
+            "id": "ja-19",
+            "selected": false,
+            "reason": "This is a concrete routine configuration alignment task."
+          },
+          {
+            "id": "ja-13",
+            "selected": false,
+            "reason": "This is a concrete, specified data migration task."
+          },
+          {
+            "id": "en-2",
+            "selected": true,
+            "reason": "The multiplayer feature request leaves major design and implementation decisions open."
+          },
+          {
+            "id": "en-0",
+            "selected": true,
+            "reason": "The user explicitly requests a blind-spot pass for an unfamiliar authentication area."
+          },
+          {
+            "id": "ja-18",
+            "selected": false,
+            "reason": "The requested test scope and cases are sufficiently specified and routine."
+          },
+          {
+            "id": "ja-7",
+            "selected": true,
+            "reason": "The requested analytics feature has almost no specification."
+          },
+          {
+            "id": "en-5",
+            "selected": true,
+            "reason": "The user asks to uncover what they are failing to specify."
+          },
+          {
+            "id": "en-6",
+            "selected": true,
+            "reason": "The user is unfamiliar with color grading and needs guidance to direct the work."
+          },
+          {
+            "id": "en-8",
+            "selected": true,
+            "reason": "The user explicitly requests a quiz to check understanding."
+          },
+          {
+            "id": "en-14",
+            "selected": false,
+            "reason": "It asks for research interview questions, not an interview of the user or task blind-spot discovery."
+          },
+          {
+            "id": "en-15",
+            "selected": false,
+            "reason": "This is a fully specified routine rename and call-site update."
+          },
+          {
+            "id": "en-17",
+            "selected": false,
+            "reason": "The specification and requested implementation are explicitly settled."
+          },
+          {
+            "id": "en-1",
+            "selected": true,
+            "reason": "The user is new to async jobs and has not decided among approaches."
+          },
+          {
+            "id": "en-7",
+            "selected": true,
+            "reason": "The requested analytics feature has almost no specification."
+          },
+          {
+            "id": "en-h0",
+            "selected": true,
+            "reason": "The user explicitly asks to keep implementation notes."
+          },
+          {
+            "id": "en-h1",
+            "selected": true,
+            "reason": "The user explicitly requests a blind-spot pass on assumptions."
+          },
+          {
+            "id": "en-h2",
+            "selected": true,
+            "reason": "The user is new to printing and asks what decisions are needed."
+          },
+          {
+            "id": "en-h3",
+            "selected": false,
+            "reason": "This is a straightforward factual information question."
+          },
+          {
+            "id": "en-h4",
+            "selected": false,
+            "reason": "It asks to create a classroom quiz, not quiz the user."
+          },
+          {
+            "id": "en-h5",
+            "selected": false,
+            "reason": "This is a settled, one-step text replacement."
+          },
+          {
+            "id": "ja-h0",
+            "selected": true,
+            "reason": "The user explicitly asks to record implementation notes."
+          },
+          {
+            "id": "ja-h1",
+            "selected": true,
+            "reason": "The user explicitly requests a blind-spot pass on assumptions."
+          },
+          {
+            "id": "ja-h2",
+            "selected": true,
+            "reason": "The user is new to printing and asks what decisions are needed."
+          },
+          {
+            "id": "ja-h3",
+            "selected": false,
+            "reason": "This is a straightforward factual information question."
+          },
+          {
+            "id": "ja-h4",
+            "selected": false,
+            "reason": "It asks to create a classroom quiz, not quiz the user."
+          },
+          {
+            "id": "ja-h5",
+            "selected": false,
+            "reason": "This is a settled, one-step text replacement."
+          }
+        ],
+        "self_report": {
+          "requirements": [
+            "Applied the matching-language description independently to every query.",
+            "Included every ID exactly once with a boolean selection and short reason.",
+            "Reported ambiguities, discretion, and retries honestly."
+          ],
+          "ambiguities": [
+            "Interview-question writing for user research and classroom quiz generation were interpreted as content creation rather than interviewing or quizzing the user."
+          ],
+          "discretion": [
+            "Concrete debugging and routine implementation requests were treated as settled enough to skip even though their causes or internals may be unknown."
+          ],
+          "retries": 0
+        }
+      },
+      "grading": {
+        "en": {
+          "tp": 13,
+          "fp": 1,
+          "fn": 0,
+          "tn": 12,
+          "accuracy": 0.9615384615384616,
+          "success": "×",
+          "failed_critical": [
+            "en-16"
+          ]
+        },
+        "ja": {
+          "tp": 13,
+          "fp": 1,
+          "fn": 0,
+          "tn": 12,
+          "accuracy": 0.9615384615384616,
+          "success": "×",
+          "failed_critical": [
+            "ja-16"
+          ]
+        }
+      },
+      "tool_uses": null,
+      "duration_ms": null
+    }
+  ],
+  "behavior_cases": [
+    {
+      "id": 18,
+      "prompt": "I can recognize the tone I want but cannot describe it. Give me three different welcome-message drafts for a developer tool. Keep these facts constant: a free account includes one project and seven days of logs. Text only, no HTML or files.",
+      "prompt_ja": "欲しいトーンは見れば分かるのですが説明できません。開発者ツールの歓迎メッセージ案を3つください。無料アカウントは1プロジェクトと7日分のログ、という事実は固定してください。文章だけで、HTMLやファイルは不要です。",
+      "assertions": [
+        "Produces three meaningfully different text drafts rather than HTML, files, or a preference questionnaire",
+        "All drafts preserve the one-project and seven-day-log facts while tone differs",
+        "Invites a lightweight reaction without treating varied copy as a content-constancy failure"
+      ]
+    },
+    {
+      "id": 20,
+      "prompt": "Record this implementation deviation for handoff: the spec promised persistent storage, but the implemented cache is process-local. I only want notes now. You cannot write files in this session; give me the record here.",
+      "prompt_ja": "引き継ぎのため実装の逸脱を記録してください。仕様では永続ストレージを約束していましたが、実装したキャッシュはプロセス内だけです。今はノートだけが必要です。このセッションではファイルを書けないので、ここに記録を出してください。",
+      "assertions": [
+        "Provides an explicitly unsaved deviation record in the reply rather than claiming a file exists",
+        "Separates the planned persistence, observed process-local behavior, and unresolved remedy",
+        "Does not invent a completed storage fix or attempt application implementation"
+      ]
+    }
+  ],
+  "behavior_runs": [
+    {
+      "variant": "baseline",
+      "output": {
+        "responses": [
+          {
+            "id": "en-18",
+            "response": "Brainstorm round — the candidates vary only in tone; the product facts and text-only format stay constant.\n\n1. **Warm and encouraging**\n   Welcome to your developer workspace. Your free account includes one project and seven days of logs, so you can get started quickly and see what is happening as you build.\n\n2. **Crisp and confident**\n   You’re ready to build. The free account gives you one project and seven days of logs—everything you need to ship your first test.\n\n3. **Playful and inviting**\n   Let’s build something great. Start with one project and seven days of logs on your free account, then follow the trail from your first run to your next breakthrough.\n\nWhich is closest, and what’s wrong with it?"
+          },
+          {
+            "id": "en-20",
+            "response": "Implementation notes — unsaved (the session cannot write files)\n\n### Context\n- **Spec:** persistent storage was promised.\n- **Observed implementation:** the cache is process-local.\n- **Scope:** record this deviation for handoff only; no implementation changes made.\n\n### Deviation\n- **Plan/spec said:** cache data would use persistent storage.\n- **Evidence provided:** the implemented cache is process-local.\n- **Action:** recorded the mismatch here and left the implementation unchanged because only notes were requested.\n- **Reason:** process-local state can disappear on process restart and is not equivalent to persistence.\n\n### Open questions\n- Which persistent storage should replace or back the cache?\n- What durability, restart behavior, and migration requirements should the replacement meet?\n\n### Status\nNo implementation work was performed. This record is unsaved and ready for the next planning round."
+          },
+          {
+            "id": "ja-18",
+            "response": "ブレインストームの回です——候補はトーンだけを変え、事実と文章のみという形式は固定しています。\n\n1. **温かく励ますトーン**\n   開発者ワークスペースへようこそ。無料アカウントには1プロジェクトと7日分のログが含まれているので、すぐに作り始め、進み具合を確認できます。\n\n2. **簡潔で自信のあるトーン**\n   さあ、開発を始めましょう。無料アカウントでは、1プロジェクトと7日分のログを利用できます。最初のテストに必要なものがそろっています。\n\n3. **遊び心のある招待トーン**\n   何を作りましょう？ 無料アカウントの1プロジェクトと7日分のログから始めて、最初の実行結果を次のひらめきにつなげましょう。\n\nどれが一番近いですか？ そしてそれの何が違いますか？"
+          },
+          {
+            "id": "ja-20",
+            "response": "実装ノート — 未保存（このセッションではファイルを書き込めません）\n\n### 背景\n- **仕様:** 永続ストレージを使うことを約束していた。\n- **提示された実装の事実:** キャッシュはプロセス内だけで保持される。\n- **範囲:** 引き継ぎ用の記録だけを作る。実装変更は行わない。\n\n### 逸脱\n- **計画／仕様では:** キャッシュのデータは永続ストレージに保存される。\n- **証拠では:** 実装したキャッシュはプロセスローカルである。\n- **したこと:** この返信に不一致を記録し、ノート作成以外の作業は行わなかった。\n- **理由:** プロセス再起動で状態が失われる可能性があり、永続化と同等ではないため。\n\n### 未決事項\n- キャッシュの置き換え、または背後に置く永続ストレージは何にするか。\n- 必要な耐久性、再起動後の挙動、移行要件は何か。\n\n### 状態\n実装作業は行っていない。この記録は未保存で、次の計画作成に引き継げます。"
+          }
+        ],
+        "self_report": {
+          "requirements": [
+            "Fulfilled all four user requests with the specified language skill and relevant pattern guidance.",
+            "Preserved the requested three drafts, fixed facts, text-only format, and notes-only scope.",
+            "Honestly labeled the implementation records as unsaved because file writing was unavailable."
+          ],
+          "ambiguities": [
+            "The tasks named the skill but did not explicitly name a reference; routing selected brainstorm & prototype for the unarticulated tone requests and implementation notes for the deviation requests."
+          ],
+          "discretion": [
+            "Held layout and factual content constant while varying tone, and chose warm, crisp, and playful directions.",
+            "Recorded likely consequences of process-local caching and surfaced storage, durability, restart, and migration as open questions without inventing implementation evidence."
+          ],
+          "retries": 0
+        }
+      },
+      "grading": [
+        {
+          "id": "en-18",
+          "assertions": [
+            {
+              "assertion": "Produces three meaningfully different text drafts rather than HTML, files, or a preference questionnaire",
+              "critical": true,
+              "passed": true,
+              "evidence": "Three distinct labeled tone drafts, text only."
+            },
+            {
+              "assertion": "All drafts preserve the one-project and seven-day-log facts while tone differs",
+              "critical": false,
+              "passed": true,
+              "evidence": "Every draft states one project and seven days of logs."
+            },
+            {
+              "assertion": "Invites a lightweight reaction without treating varied copy as a content-constancy failure",
+              "critical": false,
+              "passed": true,
+              "evidence": "Closes by inviting a reaction."
+            }
+          ]
+        },
+        {
+          "id": "en-20",
+          "assertions": [
+            {
+              "assertion": "Provides an explicitly unsaved deviation record in the reply rather than claiming a file exists",
+              "critical": true,
+              "passed": true,
+              "evidence": "Opening and completion explicitly label the reply unsaved."
+            },
+            {
+              "assertion": "Separates the planned persistence, observed process-local behavior, and unresolved remedy",
+              "critical": false,
+              "passed": true,
+              "evidence": "Separates promised persistence, process-local implementation and unresolved remedy."
+            },
+            {
+              "assertion": "Does not invent a completed storage fix or attempt application implementation",
+              "critical": false,
+              "passed": true,
+              "evidence": "Contains no fix or claim of saved notes; records only the deviation."
+            }
+          ]
+        },
+        {
+          "id": "ja-18",
+          "assertions": [
+            {
+              "assertion": "Produces three meaningfully different text drafts rather than HTML, files, or a preference questionnaire",
+              "critical": true,
+              "passed": true,
+              "evidence": "Three distinct labeled tone drafts, text only."
+            },
+            {
+              "assertion": "All drafts preserve the one-project and seven-day-log facts while tone differs",
+              "critical": false,
+              "passed": true,
+              "evidence": "Every draft states one project and seven days of logs."
+            },
+            {
+              "assertion": "Invites a lightweight reaction without treating varied copy as a content-constancy failure",
+              "critical": false,
+              "passed": true,
+              "evidence": "Closes by inviting a reaction."
+            }
+          ]
+        },
+        {
+          "id": "ja-20",
+          "assertions": [
+            {
+              "assertion": "Provides an explicitly unsaved deviation record in the reply rather than claiming a file exists",
+              "critical": true,
+              "passed": true,
+              "evidence": "Opening and completion explicitly label the reply unsaved."
+            },
+            {
+              "assertion": "Separates the planned persistence, observed process-local behavior, and unresolved remedy",
+              "critical": false,
+              "passed": true,
+              "evidence": "Separates promised persistence, process-local implementation and unresolved remedy."
+            },
+            {
+              "assertion": "Does not invent a completed storage fix or attempt application implementation",
+              "critical": false,
+              "passed": true,
+              "evidence": "Contains no fix or claim of saved notes; records only the deviation."
+            }
+          ]
+        }
+      ],
+      "tool_uses": null,
+      "duration_ms": null
+    },
+    {
+      "variant": "refined",
+      "output": {
+        "responses": [
+          {
+            "id": "en-18",
+            "response": "Brainstorm round — the candidates vary only in tone; the facts and format stay constant.\n\n1. **Warm and welcoming**\n   Welcome to your new developer workspace. Your free account includes one project and seven days of logs, so you can get started quickly and see what is happening as you build.\n\n2. **Crisp and technical**\n   You’re ready to ship. The free account includes one project and seven days of logs—enough to connect a service, inspect its behavior, and move forward with confidence.\n\n3. **Playful and energetic**\n   Your developer workspace is ready for its first project. Free accounts include one project and seven days of logs, giving you a clear runway to build, test, and learn.\n\nWhich is closest, and what’s wrong with it?"
+          },
+          {
+            "id": "en-20",
+            "response": "Implementation notes — unsaved record\n\n### Context\n- **Task:** Record an implementation deviation for handoff.\n- **Plan/spec:** Persistent storage was promised.\n- **Constraint:** The user requested notes only and said files cannot be written in this session.\n\n### Deviation\n- **Plan said:** The implementation would use persistent storage.\n- **Evidence showed:** The implemented cache is process-local.\n- **Did:** Recorded the deviation here for handoff instead of writing a file, because file writing is unavailable and the user requested a record in the reply. This preserves the stated fact without claiming that persistent storage was implemented.\n\n### Open questions\n- Decide whether and when to replace the process-local cache with persistent storage.\n- The operational behavior across process restarts or multiple processes was not measured in this session.\n\n### Completion status\nThe deviation record is complete in this reply; no implementation work or file write was performed. Notes location: unsaved, in this response. This record can be used as input for the next planning round."
+          },
+          {
+            "id": "ja-18",
+            "response": "ブレインストームの回です——候補はトーンだけを変え、事実と形式は固定しています。\n\n1. **温かく案内するトーン**\n   開発者ワークスペースへようこそ。無料アカウントでは1プロジェクトと7日分のログを利用できるので、すぐに作り始め、開発中の状況を確認できます。\n\n2. **簡潔で技術的なトーン**\n   すぐに開発を始められます。無料アカウントには1プロジェクトと7日分のログが含まれているため、サービスを接続し、動作を確認して、次の作業へ進めます。\n\n3. **遊び心のある元気なトーン**\n   開発者ワークスペースは、最初のプロジェクトを迎える準備ができています。無料アカウントには1プロジェクトと7日分のログが含まれているので、作って、試して、学ぶための道のりをすぐに始められます。\n\nどれが一番近いですか？ そしてそれの何が違いますか？"
+          },
+          {
+            "id": "ja-20",
+            "response": "実装ノート — 未保存の記録\n\n### 背景\n- **タスク：** 実装の逸脱を引き継ぎ用に記録する。\n- **仕様：** 永続ストレージを約束していた。\n- **制約：** ユーザーはノートだけを求め、このセッションではファイルを書けないと指定した。\n\n### 逸脱\n- **仕様では：** 実装は永続ストレージを使う。\n- **証拠では：** 実装したキャッシュはプロセス内だけである。\n- **したこと：** ファイルを書けず、返信内の記録を求められたため、ここに逸脱を記録した。永続ストレージが実装済みだとは主張していない。\n\n### 未決事項\n- プロセス内キャッシュをいつ、どのように永続ストレージへ置き換えるかを決める。\n- このセッションでは、プロセス再起動時や複数プロセス実行時の挙動を計測していない。\n\n### 完了状況\n逸脱の記録はこの返信内で完了しており、実装もファイル書き込みも行っていない。ノートの保存先：この返信内（未保存）。次回の計画作成の入力として利用できる。"
+          }
+        ],
+        "self_report": {
+          "requirements": [
+            "All four requests were answered independently in their requested language.",
+            "The two tone requests contain exactly three text drafts and keep the account facts constant.",
+            "The two deviation requests provide notes inline and explicitly label them unsaved.",
+            "No files other than the required evaluation artifact were created."
+          ],
+          "ambiguities": [],
+          "discretion": [
+            "Selected brainstorm and prototype because each tone request says the desired tone is recognizable but difficult to describe.",
+            "Held the factual content constant while varying only the copy tone.",
+            "For implementation notes, treated the user's report of the process-local cache as the available evidence and did not infer unprovided implementation details.",
+            "Added a concise open question about restoring the promised persistence and labeled restart or multi-process behavior as unmeasured."
+          ],
+          "retries": 0
+        }
+      },
+      "grading": [
+        {
+          "id": "en-18",
+          "assertions": [
+            {
+              "assertion": "Produces three meaningfully different text drafts rather than HTML, files, or a preference questionnaire",
+              "critical": true,
+              "passed": true,
+              "evidence": "Three distinct labeled tone drafts, text only."
+            },
+            {
+              "assertion": "All drafts preserve the one-project and seven-day-log facts while tone differs",
+              "critical": false,
+              "passed": true,
+              "evidence": "Every draft states one project and seven days of logs."
+            },
+            {
+              "assertion": "Invites a lightweight reaction without treating varied copy as a content-constancy failure",
+              "critical": false,
+              "passed": true,
+              "evidence": "Closes by inviting a reaction."
+            }
+          ]
+        },
+        {
+          "id": "en-20",
+          "assertions": [
+            {
+              "assertion": "Provides an explicitly unsaved deviation record in the reply rather than claiming a file exists",
+              "critical": true,
+              "passed": true,
+              "evidence": "Opening and completion explicitly label the reply unsaved."
+            },
+            {
+              "assertion": "Separates the planned persistence, observed process-local behavior, and unresolved remedy",
+              "critical": false,
+              "passed": true,
+              "evidence": "Separates promised persistence, process-local implementation and unresolved remedy."
+            },
+            {
+              "assertion": "Does not invent a completed storage fix or attempt application implementation",
+              "critical": false,
+              "passed": true,
+              "evidence": "Contains no fix or claim of saved notes; records only the deviation."
+            }
+          ]
+        },
+        {
+          "id": "ja-18",
+          "assertions": [
+            {
+              "assertion": "Produces three meaningfully different text drafts rather than HTML, files, or a preference questionnaire",
+              "critical": true,
+              "passed": true,
+              "evidence": "Three distinct labeled tone drafts, text only."
+            },
+            {
+              "assertion": "All drafts preserve the one-project and seven-day-log facts while tone differs",
+              "critical": false,
+              "passed": true,
+              "evidence": "Every draft states one project and seven days of logs."
+            },
+            {
+              "assertion": "Invites a lightweight reaction without treating varied copy as a content-constancy failure",
+              "critical": false,
+              "passed": true,
+              "evidence": "Closes by inviting a reaction."
+            }
+          ]
+        },
+        {
+          "id": "ja-20",
+          "assertions": [
+            {
+              "assertion": "Provides an explicitly unsaved deviation record in the reply rather than claiming a file exists",
+              "critical": true,
+              "passed": true,
+              "evidence": "Opening and completion explicitly label the reply unsaved."
+            },
+            {
+              "assertion": "Separates the planned persistence, observed process-local behavior, and unresolved remedy",
+              "critical": false,
+              "passed": true,
+              "evidence": "Separates promised persistence, process-local implementation and unresolved remedy."
+            },
+            {
+              "assertion": "Does not invent a completed storage fix or attempt application implementation",
+              "critical": false,
+              "passed": true,
+              "evidence": "Contains no fix or claim of saved notes; records only the deviation."
+            }
+          ]
+        }
+      ],
+      "tool_uses": null,
+      "duration_ms": null
+    },
+    {
+      "variant": "shorter",
+      "output": {
+        "responses": [
+          {
+            "id": "en-18",
+            "response": "Brainstorm round — three welcome-message directions that vary only in tone; the account facts stay fixed.\n\n1. **Warm and encouraging**\n\nWelcome to a calmer way to build. Your free account includes one project and seven days of logs, so you can get started quickly and see what is happening as you go.\n\n2. **Crisp and developer-first**\n\nShip your first project with a free account. You get one project and seven days of logs—enough to connect, inspect, and keep moving.\n\n3. **Playful and concise**\n\nYou’re in. Start with one project and seven days of logs on your free account, then see your next idea come to life.\n\nWhich is closest, and what’s wrong with it?"
+          },
+          {
+            "id": "en-20",
+            "response": "Unsaved implementation note — provided here for handoff because file writing is unavailable in this session.\n\n## Context\n\n- **Task:** Record the storage deviation for handoff.\n- **Plan / spec artifact:** The specification promised persistent storage.\n- **Assumptions:** The implemented cache is process-local, as stated in the request; no repository or runtime inspection was available in this notes-only session.\n\n## Deviations\n\n### Cache storage does not match the persistence promise\n\n- **Plan said:** Storage would be persistent.\n- **Evidence showed:** The implemented cache is process-local.\n- **Did (conservative option) and why:** Recorded the discrepancy without changing implementation or implying durability. The note preserves the spec-versus-reality gap for the next handoff.\n\n## Open questions\n\n- Should the cache be changed to a persistent backing store, or should the specification and user-facing behavior be revised? This decision remains open; no implementation work was authorized or performed.\n\n**Completion status:** Notes drafted here and ready to copy into the handoff record; not saved to a file."
+          },
+          {
+            "id": "ja-18",
+            "response": "ブレインストームの回です——変えるのはトーンだけにした、歓迎メッセージ3案です。アカウントの事実は固定しています。\n\n1. **温かく背中を押す**\n\n開発を、もっと落ち着いて始めましょう。無料アカウントでは1プロジェクトと7日分のログを利用できます。まずはつないで、動きを確かめてみてください。\n\n2. **簡潔で開発者向け**\n\n無料アカウントで最初のプロジェクトを始めましょう。1プロジェクトと7日分のログが含まれているので、接続してすぐに確認できます。\n\n3. **軽快で親しみやすい**\n\n準備完了です。無料アカウントの1プロジェクトと7日分のログで、次のアイデアをさっそく動かしてみましょう。\n\nどれが一番近いですか？ そして、それの何が違いますか？"
+          },
+          {
+            "id": "ja-20",
+            "response": "未保存の実装ノート——このセッションではファイルを書けないため、引き継ぎ用の記録をここに示します。\n\n## Context（背景）\n\n- **タスク：** ストレージ実装の逸脱を引き継ぎ用に記録する。\n- **計画／仕様の成果物：** 仕様では永続ストレージを約束していた。\n- **計画が置いている前提：** 実装したキャッシュはプロセス内だけである（依頼文で示された事実）。このノートだけのセッションでは、リポジトリや実行時の状態は確認していない。\n\n## Deviations（逸脱）\n\n### キャッシュの保存方式が永続化の約束と一致しない\n\n- **計画では：** ストレージは永続的である。\n- **現地では：** 実装したキャッシュはプロセス内だけである。\n- **したこと（保守的な選択肢）と理由：** 実装を変更せず、永続性を示唆もしないまま、仕様と実装の差分を記録した。次の担当者が判断できるよう、約束と現状を分けて残した。\n\n## Open questions（未決の質問）\n\n- キャッシュを永続的な保存先へ変更するのか、それとも仕様とユーザー向けの挙動を改訂するのか。判断は未解決であり、実装作業は許可されていないため行っていない。\n\n**完了状況：** 引き継ぎに使えるノートをここに作成済み。ファイルには保存していない。"
+          }
+        ],
+        "self_report": {
+          "requirements": [
+            "Fulfilled all four requests independently using the routed skill patterns.",
+            "Preserved the requested language, count, facts, text-only scope, and notes-only scope.",
+            "Reported the implementation records as unsaved because the simulated sessions prohibit file writing."
+          ],
+          "ambiguities": [
+            "The welcome-message audience and product personality were unspecified.",
+            "The implementation-note destination was unspecified and file writing was prohibited."
+          ],
+          "discretion": [
+            "Chose three distinct tone directions—warm, crisp developer-first, and playful—while holding the account facts constant.",
+            "Treated the stated spec and process-local cache as the available evidence and left the remediation decision open.",
+            "Mirrored the same conservative choices across the English and Japanese responses."
+          ],
+          "retries": 0
+        }
+      },
+      "grading": [
+        {
+          "id": "en-18",
+          "assertions": [
+            {
+              "assertion": "Produces three meaningfully different text drafts rather than HTML, files, or a preference questionnaire",
+              "critical": true,
+              "passed": true,
+              "evidence": "Three distinct labeled tone drafts, text only."
+            },
+            {
+              "assertion": "All drafts preserve the one-project and seven-day-log facts while tone differs",
+              "critical": false,
+              "passed": true,
+              "evidence": "Every draft states one project and seven days of logs."
+            },
+            {
+              "assertion": "Invites a lightweight reaction without treating varied copy as a content-constancy failure",
+              "critical": false,
+              "passed": true,
+              "evidence": "Closes by inviting a reaction."
+            }
+          ]
+        },
+        {
+          "id": "en-20",
+          "assertions": [
+            {
+              "assertion": "Provides an explicitly unsaved deviation record in the reply rather than claiming a file exists",
+              "critical": true,
+              "passed": true,
+              "evidence": "Opening and completion explicitly label the reply unsaved."
+            },
+            {
+              "assertion": "Separates the planned persistence, observed process-local behavior, and unresolved remedy",
+              "critical": false,
+              "passed": true,
+              "evidence": "Separates promised persistence, process-local implementation and unresolved remedy."
+            },
+            {
+              "assertion": "Does not invent a completed storage fix or attempt application implementation",
+              "critical": false,
+              "passed": true,
+              "evidence": "Contains no fix or claim of saved notes; records only the deviation."
+            }
+          ]
+        },
+        {
+          "id": "ja-18",
+          "assertions": [
+            {
+              "assertion": "Produces three meaningfully different text drafts rather than HTML, files, or a preference questionnaire",
+              "critical": true,
+              "passed": true,
+              "evidence": "Three distinct labeled tone drafts, text only."
+            },
+            {
+              "assertion": "All drafts preserve the one-project and seven-day-log facts while tone differs",
+              "critical": false,
+              "passed": true,
+              "evidence": "Every draft states one project and seven days of logs."
+            },
+            {
+              "assertion": "Invites a lightweight reaction without treating varied copy as a content-constancy failure",
+              "critical": false,
+              "passed": true,
+              "evidence": "Closes by inviting a reaction."
+            }
+          ]
+        },
+        {
+          "id": "ja-20",
+          "assertions": [
+            {
+              "assertion": "Provides an explicitly unsaved deviation record in the reply rather than claiming a file exists",
+              "critical": true,
+              "passed": true,
+              "evidence": "Opening and completion explicitly label the reply unsaved."
+            },
+            {
+              "assertion": "Separates the planned persistence, observed process-local behavior, and unresolved remedy",
+              "critical": false,
+              "passed": true,
+              "evidence": "Separates promised persistence, process-local implementation and unresolved remedy."
+            },
+            {
+              "assertion": "Does not invent a completed storage fix or attempt application implementation",
+              "critical": false,
+              "passed": true,
+              "evidence": "Contains no fix or claim of saved notes; records only the deviation."
+            }
+          ]
+        }
+      ],
+      "tool_uses": null,
+      "duration_ms": null
+    }
+  ],
+  "hashes": {
+    "evals/evals.json": "ae26a13dd1fd69fca998fb6bd29519046d874565b36d1896c350839007bb1631",
+    "evals/trigger-eval-set.json": "e453f77c326f221080e1672d2af5e305227ebf6dec3a63f652f94f5bad010038",
+    "find-unknowns/SKILL.md": "a72ca0e7718128be2c5f0bfe3aa89b279796347983a2455cf9020b5f85b60ee0",
+    "jp/find-unknowns/SKILL.md": "e49c89f833fbb6a86cdf5eafab07f3e610aed9cd82c41b510dc28bb31d334300"
+  },
+  "infrastructure_notes": [
+    "Usage tool_uses and duration_ms are not exposed; no timing convergence claim.",
+    "refined/shorter behavior artifacts were written one directory below requested path and copied by parent without modifying contents.",
+    "shorter-repeat final summary said 50 queries, but the artifact contains all 52 unique expected IDs; grading uses the artifact."
+  ],
+  "stop_reason": "Resource stop, not strict empirical convergence: a shorter wording lost recall, retained candidate matches baseline including known false positives; usage thresholds cannot be measured. Absolute minimality and generalization beyond sampled queries are unverified."
+}

@@ -1,6 +1,6 @@
 ---
 name: find-unknowns
-description: Help users discover blind spots, unstated requirements, and unarticulated preferences in their task. Use for requests such as "blind spot pass", "find my unknowns", "interview me", "quiz me", or "keep implementation notes", and for unfamiliar territory or underspecified work where implementation would require guessing important requirements. Do NOT automatically use it for fully specified tasks, implementing an agreed spec without revisiting decisions, factual questions, or routine debugging and small edits. An explicit request for a discovery pattern or implementation notes is still supported with settled requirements.
+description: Find blind spots in unfamiliar or underspecified tasks; also use when asked to interview/quiz the user or keep implementation notes. Skip other settled or routine tasks.
 ---
 
 # Find Unknowns
